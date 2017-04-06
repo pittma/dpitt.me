@@ -1,0 +1,11 @@
+# Site settings
+title: dpitt.me
+name: dan pittman
+description:
+baseurl: ''
+url: "http://dpitt.me"
+highlighter: pygments
+
+# Build settings
+markdown: kramdown
+permalink: pretty

@@ -1,0 +1,17 @@
+---
+layout: default
+permalink: /weeklys/
+---
+
+<h2>Weekly Readings Archive</h2>
+
+{% for weekly in site.categories.weeklys %}
+  <h4><a href="{{ weekly.url }}">{{ weekly.title }}</a></h4>
+
+  <ul>
+    {% for link in weekly.links %}
+      <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+    {% endfor %}
+  </ul>
+
+{% endfor %}

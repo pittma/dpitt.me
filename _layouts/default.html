@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  {% include head.html %}
+  <body>
+    <nav id="site-nav" class="navbar navbar-default navbar-fixed-top">
+      <div class="container">
+        <div class="navbar-header">
+          <a class="navbar-brand" id="site-title" href="/">dan pittman</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse">
+          <ul class="nav navbar-nav">
+            <li><a href="/about">about</a></li>
+            <li><a href="/archive">blog archive</a></li>
+            <li><a href="/weeklys">weeklys</a></li>
+          </ul>
+          <ul class="nav navbar-nav navbar-right">
+            <li><a class="social-icon" href="https://github.com/danielscottt"><i class="fa fa-github fa-lg" aria-hidden="true"></i></a></li>
+            <li><a class="social-icon" href="https://twitter.com/danielscottt_"><i class="fa fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+            <li><a class="social-icon" href="https://play.spotify.com/user/thisisawkward"><i class="fa fa-spotify fa-lg" aria-hidden="true"></i></a></li>
+            <li><a class="social-icon" href="https://instagram.com/danielscottt_"><i class="fa fa-instagram fa-lg" aria-hidden="true"></i></a></li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <div id="site-container" class='container'>
+      {{ content }}
+    </div>
+  </body>
+</html>
