@@ -30,6 +30,14 @@ a, a:hover {
   color: #afffcc;
 }
 
+.post blockquote {
+  font-style: italic;
+  font-size: smaller;
+  background-color: rgba(139, 167, 193, 0.22);
+  border: none;
+  color: #b5b3b3;
+}
+
 /* Syntax highlighting styles */
 /* ----------------------------------------------------------*/
 
