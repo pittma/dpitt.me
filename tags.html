@@ -1,0 +1,39 @@
+---
+layout: default
+permalink: /tags/
+---
+
+<h2>Posts tagged <span id="title-tag"></span></h2>
+
+{% for tag in site.tags %}
+  {%  assign t = tag | first %}
+  <div class="tag-section" id="{{ t }}-id">
+    {% for post in site.categories.blog %}
+      {% if post.tags contains t %}
+        <div class='index-post'>
+          {{ post.date | date: "%b %-d, %Y" }}: <a href="{{ post.url }}">{{ post.title }}</a>
+        </div>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endfor %}
+
+<script>
+function getParamByName(name, url) {
+    if (!url) url = window.location.href;
+    name = name.replace(/[\[\]]/g, "\\$&");
+    var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+        results = regex.exec(url);
+    if (!results) return null;
+    if (!results[2]) return '';
+    return decodeURIComponent(results[2].replace(/\+/g, " "));
+}
+
+window.onload = function() {
+  var tag = getParamByName("tag");
+  console.log("tag", tag);
+  var tagTitle = document.getElementById("title-tag");
+  tagTitle.innerHTML = tag;
+  document.getElementById(tag + "-id").style.display = "inherit";
+}
+</script>

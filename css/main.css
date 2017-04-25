@@ -38,6 +38,10 @@ a, a:hover {
   color: #b5b3b3;
 }
 
+.tag-section {
+  display: none;
+}
+
 /* Syntax highlighting styles */
 /* ----------------------------------------------------------*/
 

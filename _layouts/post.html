@@ -7,7 +7,14 @@ layout: default
   <header class="post-title">
     <h3><a href="{{ page.url }}">{{ page.title }}</a></h3>
   </header>
-  <p class="meta">{{ page.date | date: "%b %-d, %Y" }}{% if page.author %} • {{ page.author }}{% endif %}{% if page.meta %} • {{ page.meta }}{% endif %}</p>
+  <p class="meta">{{ page.date | date: "%b %-d, %Y" }} |
+    {% for tag in page.tags %}
+      <a href="/tags/?tag={{ tag }}">{{ tag }}</a>
+      {% if tag != page.tags.last %}
+        &middot;
+      {% endif %}
+    {% endfor %}
+  </meta>
 
   <article class="post-content">
     {{ content }}
