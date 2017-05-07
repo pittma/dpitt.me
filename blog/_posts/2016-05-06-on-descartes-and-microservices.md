@@ -66,3 +66,5 @@ An interesting thing about the design of the Go programming language is that the
 So, given this context, when does a service commence existence? Is it at instantiation? Or, when it becomes _useful_, with all its subsystems in line and ready to take on the world?
 
 What do you think?
+
+{% include stats.html %}

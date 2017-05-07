@@ -1,0 +1,54 @@
+==================================================================
+https://keybase.io/danielscottt
+--------------------------------------------------------------------
+
+I hereby claim:
+
+  * I am an admin of https://dpitt.me
+  * I am danielscottt (https://keybase.io/danielscottt) on keybase.
+  * I have a public key ASDKVpN7vOHwd-NHjKSH3wuBYrK-JDbWlGfC4IVE5pbNCgo
+
+To do so, I am signing this object:
+
+{
+    "body": {
+        "key": {
+            "eldest_kid": "010129dc8a23c168996a11cc09fd5fc420cc97d7881a5abdd0c77f928de2a09017a50a",
+            "host": "keybase.io",
+            "kid": "0120ca56937bbce1f077e3478ca487df0b8162b2be2436d69467c2e08544e696cd0a0a",
+            "uid": "6b1b529a641aa983bb4840c61b6f8a19",
+            "username": "danielscottt"
+        },
+        "service": {
+            "hostname": "dpitt.me",
+            "protocol": "https:"
+        },
+        "type": "web_service_binding",
+        "version": 1
+    },
+    "client": {
+        "name": "keybase.io go client",
+        "version": "1.0.21"
+    },
+    "ctime": 1493751404,
+    "expire_in": 504576000,
+    "merkle_root": {
+        "ctime": 1493751357,
+        "hash": "e72518ea1d43e65877e7f1409db6f4d840eb6f3b66371ea1cfbb78b7805946d6871c215a4960e8797dc1518b7402a4b22bb7973d19ecd6ad52b9e37eb717e8c9",
+        "seqno": 1049992
+    },
+    "prev": "1e23bcb9d2d6a57fc9266a2046c52b628a152eb09d58f7dbe406ca6fdd3dae56",
+    "seqno": 21,
+    "tag": "signature"
+}
+
+which yields the signature:
+
+hKRib2R5hqhkZXRhY2hlZMOpaGFzaF90eXBlCqNrZXnEIwEgylaTe7zh8HfjR4ykh98LgWKyviQ21pRnwuCFROaWzQoKp3BheWxvYWTFAvZ7ImJvZHkiOnsia2V5Ijp7ImVsZGVzdF9raWQiOiIwMTAxMjlkYzhhMjNjMTY4OTk2YTExY2MwOWZkNWZjNDIwY2M5N2Q3ODgxYTVhYmRkMGM3N2Y5MjhkZTJhMDkwMTdhNTBhIiwiaG9zdCI6ImtleWJhc2UuaW8iLCJraWQiOiIwMTIwY2E1NjkzN2JiY2UxZjA3N2UzNDc4Y2E0ODdkZjBiODE2MmIyYmUyNDM2ZDY5NDY3YzJlMDg1NDRlNjk2Y2QwYTBhIiwidWlkIjoiNmIxYjUyOWE2NDFhYTk4M2JiNDg0MGM2MWI2ZjhhMTkiLCJ1c2VybmFtZSI6ImRhbmllbHNjb3R0dCJ9LCJzZXJ2aWNlIjp7Imhvc3RuYW1lIjoiZHBpdHQubWUiLCJwcm90b2NvbCI6Imh0dHBzOiJ9LCJ0eXBlIjoid2ViX3NlcnZpY2VfYmluZGluZyIsInZlcnNpb24iOjF9LCJjbGllbnQiOnsibmFtZSI6ImtleWJhc2UuaW8gZ28gY2xpZW50IiwidmVyc2lvbiI6IjEuMC4yMSJ9LCJjdGltZSI6MTQ5Mzc1MTQwNCwiZXhwaXJlX2luIjo1MDQ1NzYwMDAsIm1lcmtsZV9yb290Ijp7ImN0aW1lIjoxNDkzNzUxMzU3LCJoYXNoIjoiZTcyNTE4ZWExZDQzZTY1ODc3ZTdmMTQwOWRiNmY0ZDg0MGViNmYzYjY2MzcxZWExY2ZiYjc4Yjc4MDU5NDZkNjg3MWMyMTVhNDk2MGU4Nzk3ZGMxNTE4Yjc0MDJhNGIyMmJiNzk3M2QxOWVjZDZhZDUyYjllMzdlYjcxN2U4YzkiLCJzZXFubyI6MTA0OTk5Mn0sInByZXYiOiIxZTIzYmNiOWQyZDZhNTdmYzkyNjZhMjA0NmM1MmI2MjhhMTUyZWIwOWQ1OGY3ZGJlNDA2Y2E2ZmRkM2RhZTU2Iiwic2Vxbm8iOjIxLCJ0YWciOiJzaWduYXR1cmUifaNzaWfEQDct0kXlU9U33GHF6EtkQ8FP/eyYrIBvUbjflOe23oHpiLs1ATe0tAK95zM402tbEJRs2bJuugLWa/hvNN0Aeweoc2lnX3R5cGUgpGhhc2iCpHR5cGUIpXZhbHVlxCATR6IVReoWLno0WSgcBxZ0P7twPP2NBB3L/crgKsD706N0YWfNAgKndmVyc2lvbgE=
+
+And finally, I am proving ownership of this host by posting or
+appending to this document.
+
+View my publicly-auditable identity here: https://keybase.io/danielscottt
+
+==================================================================

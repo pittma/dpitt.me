@@ -10,3 +10,5 @@ permalink: /archive/
     {{ post.date | date: "%b %-d, %Y" }}: <a href="{{ post.url }}">{{ post.title }}</a>
   </div>
 {% endfor %}
+
+{% include stats.html %}

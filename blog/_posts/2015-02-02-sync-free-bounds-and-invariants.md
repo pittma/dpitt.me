@@ -29,3 +29,5 @@ This CRDT concept is a bit more complicated than the basic commutative or monoto
 <div style="font-size: 0.8em; color: #555">
 1. Read <a href="http://christophermeiklejohn.com/crdt/2014/07/22/readings-in-crdts.html">a bunch of stuff about CRDTs here</a> if you are so inclined.
 </div>
+
+{% include stats.html %}
