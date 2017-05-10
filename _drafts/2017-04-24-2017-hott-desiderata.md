@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "TBD"
+title: "Homotopy Type Theory Desiderata"
 tags:
   - HoTT
 ---
 
-This is a thing I do. I like to learn things by finding the thing I want to learn, and then work my way down as I encounter unknowns, exposing layers like an epistemological onion. A truth vegetable.
+This is a thing I do. I like to learn things by finding the thing I want to learn, and then work my way down as I encounter unknowns, exposing layers like an epistemological onion — a truth vegetable.
 
 The current outermost layer is Homotopy Type Theory which is put forth by [the HoTT Book](https://homotopytypetheory.org/book/). Per usual, as I dig down beneath the _tunic_ I'm reminded that, for all intents and purposes, I know nothing and I spiral out of control wiki link after wiki link.  My only respite a term I actually understand. It could be argued that this is called "learning", but that label is dubious.
 
@@ -40,3 +40,15 @@ The unit interval is the set of all the real numbers between 0 and 1. We use the
 That, in a nutshell is homotopy. But, as I delved deeper, like anything worth learning, that nascent intuition was simply a prerequisite.
 
 ### Univalence
+
+__Univalence Axiom__: <code>(A = B) &#8771; (A &#8771; B)</code>.
+
+The book says this about Univalence:
+
+> Thinking of types as spaces, [...] the points of which are spaces[. T]o understand its identity type, we must ask, what is a path <code>p : A &#8605; B</code> between spaces in `U`? The univalence axiom says that such paths correspond to homotopy equivalences <code>A &#8771; B</code>[.] (Univalent Foundations of Mathematics, 4)
+
+It goes on to say that Univalence is informally an equivalence, and more specifcally _homotopy equivalence_. Homotopy equivalence is given by an isomorphism between two spaces where the following holds: 
+
+Given spaces X and Y and maps <code>f: X &rarr; Y</code> and <code>g: Y &rarr; X</code>, the composition <code>f &middot; g</code> is homotopic to <code>Id<sub>X</sub></code> and the composition <code>g &middot; f</code> is homotopic to <code>Id<sub>Y</sub></code>.
+
+To put this is another way, and how I actually wrote this down in my notebook when I was searching for the intuition: Univalence is a topological bijection and that bijection is a valid isomorphism in the domain of pure topology.  There's a inside joke about topologists: Toplogists can't tell the difference between an donut and a coffee mug.  This is precisely why!  The torus (donut) is homotopy equivalent, i.e. isomorphic, to a coffee mug.

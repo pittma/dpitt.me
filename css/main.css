@@ -38,6 +38,10 @@ a, a:hover {
   color: #b5b3b3;
 }
 
+.post h3 {
+  color: #afffcc
+}
+
 .tag-section {
   display: none;
 }
