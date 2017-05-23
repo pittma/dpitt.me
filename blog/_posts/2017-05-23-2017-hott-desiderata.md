@@ -52,3 +52,9 @@ It goes on to say that Univalence is informally an equivalence, and more specifc
 Given spaces X and Y and maps <code>f: X &rarr; Y</code> and <code>g: Y &rarr; X</code>, the composition <code>f &middot; g</code> is homotopic to <code>Id<sub>X</sub></code> and the composition <code>g &middot; f</code> is homotopic to <code>Id<sub>Y</sub></code>.
 
 To put this is another way, and how I actually wrote this down in my notebook when I was searching for the intuition: Univalence is a topological bijection and that bijection is a valid isomorphism in the domain of pure topology.  There's a inside joke about topologists: Toplogists can't tell the difference between an donut and a coffee mug.  This is precisely why!  The torus (donut) is homotopy equivalent, i.e. isomorphic, to a coffee mug.
+
+So, when we talk about univalence in the context of Homotopy, we're talking about a form of equality, an isomorphism.
+
+This concludes the initial desiderata for grappling with Homotopy Type Theory, or at least its introduction.  There's more to come, for the both of us.
+
+{% include stats.html %}
