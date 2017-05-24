@@ -7,7 +7,7 @@ tags:
 
 This is a thing I do. I like to learn things by finding the thing I want to learn, and then work my way down as I encounter unknowns, exposing layers like an epistemological onion — a truth vegetable.
 
-The current outermost layer is Homotopy Type Theory which is put forth by [the HoTT Book](https://homotopytypetheory.org/book/). Per usual, as I dig down beneath the _tunic_ I'm reminded that, for all intents and purposes, I know nothing and I spiral out of control wiki link after wiki link.  My only respite a term I actually understand. It could be argued that this is called "learning", but that label is dubious.
+The current outermost layer is Homotopy Type Theory which is put forth by [the HoTT Book](https://homotopytypetheory.org/book/). Per usual, as I dig down beneath the _tunic_ I'm reminded that, for all intents and purposes, I know nothing and I spiral out of control wiki link after wiki link, my only respite a term I actually understand. It could be argued that this is called "learning", but that label is dubious.
 
 ### Homotopy
 
