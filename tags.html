@@ -3,7 +3,7 @@ layout: default
 permalink: /tags/
 ---
 
-<h2>Posts tagged <span id="title-tag"></span></h2>
+<h2>Posts tagged "<span id="title-tag"></span>"</h2>
 
 {% for tag in site.tags %}
   {%  assign t = tag | first %}
@@ -31,7 +31,6 @@ function getParamByName(name, url) {
 
 window.onload = function() {
   var tag = getParamByName("tag");
-  console.log("tag", tag);
   var tagTitle = document.getElementById("title-tag");
   tagTitle.innerHTML = tag;
   document.getElementById(tag + "-id").style.display = "inherit";
