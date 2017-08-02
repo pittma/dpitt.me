@@ -2,6 +2,7 @@
 layout: post
 title: "Homotopy Type Theory Desiderata"
 tags:
+  - math
   - HoTT
 ---
 
