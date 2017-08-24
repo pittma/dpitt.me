@@ -12,16 +12,16 @@ The current outermost layer is Homotopy Type Theory which is put forth by [the H
 
 ### Homotopy
 
-Digressions aside, Homotopy is, in my best attempt at lucidity, a continuous function that can map between two functions, say <code>f,g: A &rarr; B</code> mapping from the same space to another same space. If this function exists, and we'll call it `H`, then those two maps are homotopic. Formally, it looks like this:
+Digressions aside, Homotopy is, in my best attempt at lucidity, a continuous function that can map between two functions, say $f,g: A \rightarrow B$ mapping from the same space to another same space. If this function exists, and we'll call it $H$, then those two maps are homotopic. Formally, it looks like this:
 
-<pre>
-f,g: A &rarr; B
-H: A x [0,1] &rarr; B
-H(x, 0) = f(x)
+$$\
+f, g: A \rightarrow B \\
+H: A \times [0, 1] \rightarrow B \\
+H(x, 0) = f(x) \\
 H(x, 1) = g(x)
-</pre>
+$$
 
-To put this in English: We've convered the first line.  That's our two maps: `f` and `g`. The second line is illustrating the what `H` maps: the _product_ of X and the unit interval to Y. A product in this case means `and`. As a quick explanation of product in this context, we can refer to some Haskell:
+To put this in English: We've convered the first line.  That's our two maps: $f$ and $g$. The second line is illustrating the what $H$ maps: the _product_ of $X$ and the unit interval to $Y$. A product in this case means _and_. As a quick explanation of product in this context, we can refer to some Haskell:
 
 {% highlight haskell %}
 
@@ -36,21 +36,21 @@ data Tuple' a b = (a, b)
 
 The unit interval however, is another scale to the onion.
 
-The unit interval is the set of all the real numbers between 0 and 1. We use the bounds of this interval to be equal to our two maps given some `x`. This means that our `H`, our homotopy, is a function which through a transfinite series of inputs can "bend" `f` into `g`.
+The unit interval is the set of all the real numbers between $0$ and $1$. We use the bounds of this interval to be equal to our two maps given some $x$. This means that our $H$, our homotopy, is a function which through a transfinite series of inputs can "bend" $f$ into $g$.
 
 That, in a nutshell is homotopy. But, as I delved deeper, like anything worth learning, that nascent intuition was simply a prerequisite.
 
 ### Univalence
 
-__Univalence Axiom__: <code>(A = B) &#8771; (A &#8771; B)</code>.
+__Univalence Axiom__: $(A = B) \approx (A \approx B)$.
 
 The book says this about Univalence:
 
-> Thinking of types as spaces, [...] the points of which are spaces[. T]o understand its identity type, we must ask, what is a path <code>p : A &#8605; B</code> between spaces in `U`? The univalence axiom says that such paths correspond to homotopy equivalences <code>A &#8771; B</code>[.] (Univalent Foundations of Mathematics, 4)
+> Thinking of types as spaces, [...] the points of which are spaces[. T]o understand its identity type, we must ask, what is a path $p : A \leadsto B$ between spaces in $U$? The univalence axiom says that such paths correspond to homotopy equivalences $A \approx B$[.] (Univalent Foundations of Mathematics, 4)
 
-It goes on to say that Univalence is informally an equivalence, and more specifcally _homotopy equivalence_. Homotopy equivalence is given by an isomorphism between two spaces where the following holds: 
+It goes on to say that Univalence is informally an equivalence, and more specifcally _homotopy equivalence_. Homotopy equivalence is given by an isomorphism between two spaces where the following holds:
 
-Given spaces X and Y and maps <code>f: X &rarr; Y</code> and <code>g: Y &rarr; X</code>, the composition <code>f &middot; g</code> is homotopic to <code>Id<sub>X</sub></code> and the composition <code>g &middot; f</code> is homotopic to <code>Id<sub>Y</sub></code>.
+Given spaces $X$ and $Y$ and maps $f: X \rightarrow; Y$ and $g: Y \rightarrow X$, the composition $f \circ g$ is homotopic to $Id_X$ and the composition $g \circ f$ is homotopic to $Id_Y$.
 
 To put this is another way, and how I actually wrote this down in my notebook when I was searching for the intuition: Univalence is a topological bijection and that bijection is a valid isomorphism in the domain of pure topology.  There's a inside joke about topologists: Toplogists can't tell the difference between an donut and a coffee mug.  This is precisely why!  The torus (donut) is homotopy equivalent, i.e. isomorphic, to a coffee mug.
 
