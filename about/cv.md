@@ -17,9 +17,16 @@ I like learning about algebra-derivative maths and their adjacencies, programmin
 
 ## Work Experience
 
-### Software Engineer: Intel, Inc. / AI Products Group
+### Principal Platform Engineer: PolySync, Inc.
 
-**June 2017 - Present**
+**November 2017 - Present**
+
+* High assurance software for autonomous vehicles
+* Focussed in the areas of type theory, programming languages, and formal methods.
+
+### Software Engineer: Intel, Inc. / Nervana (AI Products Group)
+
+**June 2017 - November 2017**
 
 * Member of DL Accelerator Enablement team, responsible for making Nervana's DL hardware easier to consume in cloud environments.
 
