@@ -3,8 +3,8 @@
 
 body {
   color: #222;
-  font-family: 'Open Sans', sans-serif;
-  font-size: 16px;
+  font-family: 'EB Garamond', serif;
+  font-size: 17px;
 }
 
 a, a:hover {
@@ -17,6 +17,7 @@ p {
 
 #site-nav {
   background-color: #333;
+  font-family: 'Open Sans', sans-serif;
   border: none;
 }
 
@@ -50,34 +51,6 @@ p {
 
 /* Syntax highlighting styles */
 /* ----------------------------------------------------------*/
-
-.post code {
-  background-color:#f9f2f4;
-  color:#c7254e;
-}
-
-.post pre {
-  background-color:#073642;
-  color:#93a1a1;
-}
-
-.post pre code {
-  border: none;
-  background-color:#073642;
-  color:#93a1a1;
-}
-
-/* terminal */
-.post pre.terminal {
-  border: 1px solid #000;
-  background-color: #333;
-  color: #FFF;
-  -webkit-border-radius: 3px;
-  -moz-border-radius: 3px;
-  border-radius: 3px;
-}
-
-.post pre.terminal code { background-color: #333; }
 
 .highlight .c{color:#586e75 !important;font-style:italic !important}
 .highlight .cm{color:#586e75 !important;font-style:italic !important}
