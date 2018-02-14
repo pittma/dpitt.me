@@ -49,6 +49,10 @@ p {
   display: none;
 }
 
+#about, #about p {
+  text-align: center;
+}
+
 /* Syntax highlighting styles */
 /* ----------------------------------------------------------*/
 
