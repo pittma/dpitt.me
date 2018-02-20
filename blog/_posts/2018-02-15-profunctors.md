@@ -89,7 +89,7 @@ Take it in. Ruminate. What do you see?
 Here's a more formal definition as a hint:
 
 $$
-P : C \times C^{op} \rightarrow D
+P : C^{op} \times C \rightarrow D
 $$
 
 A profunctor is a mapping from a category $C$ and its opposite $C^{op}$ to $D$.  To put this in more practical terms, a profunctor is a bifunctor which is contravariant in one of its parameters. Let's go back for now to the Haskell definition above for an illustration.  A profunctor `p` starts with two functions, and a `p a b`, and ends up with a `p a' b'`.  The functions we're given map from `a' -> a` and `b -> b'`, respectively.  This tells us that `p`'s treatment of the first function, the `a`'s, will be contravariant.  But how is this possible?  How could we end up with a `a'` if that's our starting point?  Let's draw it out!
@@ -143,11 +143,11 @@ And with that, you can see what makes a profunctor tick!
 
 ## In Closing
 
-This sums up the technical section of this this post, as its purpose was to explain what, exactly, a profunctor was, while contemperaneously elucidating a manner such that makes contravariance a tractable thing.  It was through this intuition that I was able to get a handle on how to synthesize contravariance, and I hope it was helpful to anyone who comes across this post.
+This sums up the technical section of this this post, as its purpose was to explain what, exactly, a profunctor was, while simultaneously sharing a manner such that makes contravariance a tractable thing.  It was through this intuition that I personally was able to get a handle on how to synthesize contravariance, and I hope it was helpful to anyone who comes across this post.
 
 ## In Closing Closing
 
-Before I `:wq` on this one, though, I want to also make mention of the structure of the penultimate techincal section of this post.  Drawing out the commutative diagrams one arrow at a time was huge in getting a grasp on these concepts for me, and it's an approach I'll reach for regularly from now on.  If it's not something you've tried before when taking on something dense in the land of category theory, I can certainly attest to its efficacy!  Cheers!
+Before I `:wq` on this one, though, I want to also make mention of the structure of the final technical section of this post.  Drawing out the commutative diagrams one arrow at a time was huge in getting a grasp on these concepts for me, and it's an approach I'll reach for regularly from now on.  If it's not something you've tried before when taking on something dense in the land of category theory, I can certainly attest to its efficacy!  Cheers!
 
 
 #### References
