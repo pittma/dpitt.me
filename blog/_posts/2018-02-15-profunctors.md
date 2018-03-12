@@ -1,6 +1,7 @@
 ---
 layout: post
 title: "On Profunctors, Abruptly"
+summary: "Let's try to understand contravariance"
 tags:
   - math
   - category theory

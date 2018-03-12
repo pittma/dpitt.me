@@ -26,4 +26,15 @@
     });
   </script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
+
+  <!-- Twitter card things -->
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="{{ page.title }}" />
+  <meta name="twitter:image" content="https://dpitt.me/images/chicken%20square.jpg" />
+  <meta name="twitter:url" content="{{ page.url }}" />
+  {% if page.summary %}
+  <meta name="twitter:description" content="{{ page.summary }}" />
+  {% endif %}
+
+
 </head>
