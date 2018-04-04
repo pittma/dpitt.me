@@ -155,4 +155,5 @@ Before I `:wq` on this one, though, I want to also make mention of the structure
 
 1. [A Twitter thread from when I discovered Lambek and Lawvere's explorations of Heraclitus's and/or Hegel's influence on mathematics (I really like opposites).](https://twitter.com/pittma_/status/933569372768972800)
 
+{% include math.html %}
 {% include stats.html %}

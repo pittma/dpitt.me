@@ -58,4 +58,5 @@ So, when we talk about univalence in the context of Homotopy, we're talking abou
 
 This concludes the initial desiderata for grappling with Homotopy Type Theory, or at least its introduction.  There's more to come, for the both of us.
 
+{% include math.html %}
 {% include stats.html %}
