@@ -28,23 +28,24 @@ I recently found myself in an analgous existential argument about when a compone
 
 This component is _dependent_ on another, and my coworker was of the school of thought that this component's constructor should be _decoupled_ from the injection of its dependency. Something like this:
 
-{% highlight go %}
+```go
 func main() {
 	t1 := thing1.New()
 	t2 := thing2.New()
 
 	t1.BindThing2(t2)
 }
-{% endhighlight %}
+```
 
 However, _I_ believed that there was no reason for `t1` to even be constructed if it there was not yet a t2 to meet its dependency.  Like this:
 
-{% highlight go %}
+
+```go
 func main() {
 	t2 := thing2.New()
 	t1 := thing1.New(thing2)
 }
-{% endhighlight %}
+```
 
 My coworker had a compelling argument.  For us to reach optimal clarity on his argument, we first must be _live_.  That is, __consistent__ on our understanding of a few things, so I must digress.
 

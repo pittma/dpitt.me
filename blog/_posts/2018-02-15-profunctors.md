@@ -13,17 +13,17 @@ _Disclaimer: This post reqiures a working understanding of functors in Haskell t
 
 If we're comfortable with the notion of a functor in Haskell, we can intuitively infer what might be meant by a _bifunctor_.  Consider the kind of a type that is a functor: `* -> *`. That is, it takes __one__ type as an argument and returns a type. A bifunctor's kind is one which takes __two__ types and returns a type: `* -> * -> *`.  Its definition looks like this:
 
-{% highlight haskell %}
+```haskell
 class Bifunctor (b :: * -> * -> *) where
   bimap :: (a -> b) -> (c -> d) -> f a c -> f b d
-{% endhighlight %}
+```
 
 A bifunctor is useful for mapping over product types, such as `(,)`:
 
-{% highlight haskell %}
+```haskell
 instance Bifunctor (,) where
   bimap f  g (x, y) = (f x, g y)
-{% endhighlight %}
+```
 
 Now is a good time to take note of the direction of the arrows.  We begin with an `f a b` and end up with a `f c d`, by way of two functions, `a -> b`, and `c -> d`. In both of their cases, the arrows go the same direction: forward.
 
@@ -80,10 +80,10 @@ $$
 
 Having finally met this post's desiderata, I'll present a Haskell definition of a profunctor, initially without comment.
 
-{% highlight haskell %}
+```haskell
 class Profunctor (p :: * -> * -> *) where
   dimap :: (a' -> a) -> (b -> b') -> p a b -> p a' b'
-{% endhighlight %}
+```
 
 Take it in. Ruminate. What do you see?
 

@@ -23,8 +23,7 @@ $$
 
 To put this in English: We've convered the first line.  That's our two maps: $f$ and $g$. The second line is illustrating the what $H$ maps: the _product_ of $X$ and the unit interval to $Y$. A product in this case means _and_. As a quick explanation of product in this context, we can refer to some Haskell:
 
-{% highlight haskell %}
-
+```haskell
 -- This is a sum type, i.e. an or. Meaning a Maybe' can be either a Just' a or
 -- Nothing.
 data Maybe' a = Just' a | Nothing'
@@ -32,7 +31,7 @@ data Maybe' a = Just' a | Nothing'
 -- While this is a product, an and. The tuple is the product of something of
 -- type a and something of type b.
 data Tuple' a b = (a, b)
-{% endhighlight %}
+```
 
 The unit interval however, is another scale to the onion.
 
