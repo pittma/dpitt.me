@@ -21,7 +21,7 @@ H(x, 0) = f(x) \\
 H(x, 1) = g(x)
 $$
 
-To put this in English: We've convered the first line.  That's our two maps: $f$ and $g$. The second line is illustrating the what $H$ maps: the _product_ of $X$ and the unit interval to $Y$. A product in this case means _and_. As a quick explanation of product in this context, we can refer to some Haskell:
+To put this in English: We've convered the first line.  That's our two maps: $f$ and $g$. The second line is illustrating the what $H$ maps: the _product_ of $X$ and the unit interval to $B$. A product in this case means _and_. As a quick explanation of product in this context, we can refer to some Haskell:
 
 ```haskell
 -- This is a sum type, i.e. an or. Meaning a Maybe' can be either a Just' a or
