@@ -3,7 +3,7 @@ layout: default
 ---
 
 <div class="row">
-  <div class="col-md-6 col-xs-12">
+  <div class="col-md-12 col-xs-12">
 
     <h2>Blog Posts:</h2>
     {% for post in site.categories.blog limit:5 %}
@@ -22,7 +22,7 @@ layout: default
 
   </div>
 
-  <div class="col-md-6 col-xs-12">
+  <!-- <div class="col-md-6 col-xs-12">
 
     <h2>The Week's Readings:</h2>
     {% for weekly in site.categories.weeklies limit:1 %}
@@ -36,7 +36,7 @@ layout: default
 
     {% endfor %}
 
-  </div>
+  </div> -->
 </div>
 
 {% include stats.html %}
