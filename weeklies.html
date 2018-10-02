@@ -5,12 +5,12 @@ permalink: /weeklies/
 
 <h2>Weekly Readings Archive</h2>
 
-{% for weekly in site.categories.weeklies %}
+{% for weekly in site.weeklies %}
   <h4><a href="{{ weekly.url }}">{{ weekly.title }}</a></h4>
 
   <ul>
-    {% for link in weekly.links %}
-      <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+    {% for topic in weekly.topics %}
+      <li>{{ topic }}</li>
     {% endfor %}
   </ul>
 

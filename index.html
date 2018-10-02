@@ -3,7 +3,7 @@ layout: default
 ---
 
 <div class="row">
-  <div class="col-md-12 col-xs-12">
+  <div class="col-md-6 col-xs-12">
 
     <h2>Blog Posts:</h2>
     {% for post in site.categories.blog limit:5 %}
@@ -22,21 +22,23 @@ layout: default
 
   </div>
 
-  <!-- <div class="col-md-6 col-xs-12">
+  <div class="col-md-6 col-xs-12">
 
-    <h2>The Week's Readings:</h2>
-    {% for weekly in site.categories.weeklies limit:1 %}
+    <h2>In Brief:</h2>
+    I occasionally write things down for didactic reasons—or, simply because they're interesting to me—and they aren't always necessarily full blog post worthy. Those things are separated by weeks, can be found here.
+    <hr>
+    {% for weekly in site.categories.weeklies limit:5 %}
       <h4><a href="{{ weekly.url }}">{{ weekly.title }}</a></h4>
 
       <ul>
         {% for link in weekly.links %}
-          <li><a href="{{ link.url }}">{{ link.title }}</a></li>
+          <li>{{ link.title }}</li>
         {% endfor %}
       </ul>
 
     {% endfor %}
 
-  </div> -->
+  </div>
 </div>
 
 {% include stats.html %}

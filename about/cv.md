@@ -17,24 +17,24 @@ I like learning about algebra-derivative maths and their adjacencies, programmin
 
 ## Work Experience
 
-### Principal Platform Engineer: PolySync, Inc.
+### Principal Engineer: PolySync, Inc.
 
-**November 2017 - Present**
+**November 2017 - July 2018**
 
-* High assurance software for autonomous vehicles
+* High assurance system software for autonomous vehicles
 * Focussed in the areas of type theory, programming languages, and formal methods.
 
 ### Software Engineer: Intel, Inc. / Nervana (AI Products Group)
 
 **June 2017 - November 2017**
 
-* Member of DL Accelerator Enablement team, responsible for making Nervana's DL hardware easier to consume in cloud environments.
+* Member of deep learning accelerator enablement team, responsible for making Nervana's DL hardware easier to consume in cloud environments.
 
 ### Software Engineer: Intel, Inc. / Software Defined Infrastructure
 
 **December 2014 - June 2017**
 
-* Lead on graph-based, typed, distributed execution engine and datacenter CMDB.
+* Creator and lead on a graph-based, typed, distributed execution engine.
 * Initial member of Snap team, responsible for design and development.
 * Work on NVML -> Go (I did this for Rust too)
 
@@ -42,7 +42,7 @@ I like learning about algebra-derivative maths and their adjacencies, programmin
 
 **March 2013 - December 2014**
 
-* Core team, Project Zombie, the automation platform for VMware's public cloud.
+* Core team on Project Zombie, the automation platform for VMware's public cloud.
 * Owned transition from home-grown paxos-based distributed locking -> Zookeeper based coördination.
 * Designed and owned cloud deprovisioning on said platform.
 

@@ -4,6 +4,11 @@ name: dan pittman
 description:
 baseurl: ''
 url: "http://dpitt.me"
+collections:
+  talks:
+    output: true
+  weeklies:
+    output: true
 
 # Build settings
 markdown: kramdown

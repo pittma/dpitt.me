@@ -1,0 +1,28 @@
+---
+layout: default
+permalink: /talks/
+---
+
+{% for talk in site.talks %}
+
+  <h3>{{ talk.title }}</h3>
+
+  <p><b>Venue:</b> <i>{{ talk.venue }}</i></p>
+
+  {{ talk.content }}
+
+  <ul>
+    {% if talk.slides %}
+      <li><a href="/slides/{{ talk.slides }}">Slides</a></li>
+    {% endif %}
+
+    {% if talk.video %}
+      <li><a href="{{ talk.video }}">Video</a></li>
+    {% endif %}
+  </ul>
+
+  <hr>
+
+{% endfor %}
+
+{% include stats.html %}
