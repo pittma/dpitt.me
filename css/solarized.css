@@ -1,0 +1,31 @@
+pre code { color: #657B83; }
+code > a.sourceLine > span.kw { color: #859900; font-weight: bold;   font-style: normal; } /* Keyword */
+code > a.sourceLine > span.dt { color: #B58900; font-weight: normal; font-style: normal; } /* DataType */
+code > a.sourceLine > span.dv { color: #2AA198; font-weight: normal; font-style: normal; } /* DecVal */
+code > a.sourceLine > span.bn { color: #2AA198; font-weight: normal; font-style: normal; } /* BaseN */
+code > a.sourceLine > span.fl { color: #2AA198; font-weight: normal; font-style: normal; } /* Float */
+code > a.sourceLine > span.ch { color: #2AA198; font-weight: normal; font-style: normal; } /* Char */
+code > a.sourceLine > span.st { color: #2AA198; font-weight: normal; font-style: normal; } /* String */
+code > a.sourceLine > span.co { color: #93A1A1; font-weight: normal; font-style: italic; } /* Comment */
+code > a.sourceLine > span.ot { color: #268BD2; font-weight: normal; font-style: normal; } /* Other */
+code > a.sourceLine > span.al { color: #DC322F; font-weight: bold;   font-style: normal; } /* Alert */
+code > a.sourceLine > span.fu { color: #268BD2; font-weight: normal; font-style: normal; } /* Function */
+code > a.sourceLine > span.er { color: #DC322F; font-weight: bold;   font-style: normal; } /* Error */
+code > a.sourceLine > span.wa { color: #CB4B16; font-weight: bold;   font-style: italic; } /* Warning */
+code > a.sourceLine > span.cn { color: #2AA198; font-weight: normal; font-style: normal; } /* Constant */
+code > a.sourceLine > span.sc { color: #DC322F; font-weight: normal; font-style: normal; } /* SpecialChar */
+code > a.sourceLine > span.vs { color: #657B83; font-weight: normal; font-style: normal; } /* VerbatimString */
+code > a.sourceLine > span.ss { color: #DC322F; font-weight: normal; font-style: normal; } /* SpecialString */
+code > a.sourceLine > span.im { color: #657B83; font-weight: normal; font-style: normal; } /* Import */
+code > a.sourceLine > span.va { color: #268BD2; font-weight: normal; font-style: normal; } /* Variable */
+code > a.sourceLine > span.cf { color: #859900; font-weight: bold;   font-style: normal; } /* ControlFlow */
+code > a.sourceLine > span.op { color: #859900; font-weight: bold;   font-style: normal; } /* Operator */
+code > a.sourceLine > span.bu { color: #657B83; font-weight: normal; font-style: normal; } /* BuiltIn */
+code > a.sourceLine > span.ex { color: #657B83; font-weight: normal; font-style: normal; } /* Extension */
+code > a.sourceLine > span.pp { color: #CB4B16; font-weight: normal; font-style: normal; } /* Preprocessor */
+code > a.sourceLine > span.at { color: #657B83; font-weight: normal; font-style: normal; } /* Attribute */
+code > a.sourceLine > span.do { color: #93A1A1; font-weight: normal; font-style: italic; } /* Documentation */
+code > a.sourceLine > span.an { color: #93A1A1; font-weight: bold;   font-style: italic; } /* Annotation */
+code > a.sourceLine > span.cv { color: #93A1A1; font-weight: bold;   font-style: italic; } /* CommentVar */
+code > a.sourceLine > span.in { color: #93A1A1; font-weight: bold;   font-style: italic; } /* Information */
+
