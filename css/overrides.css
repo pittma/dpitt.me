@@ -1,0 +1,9 @@
+body {
+    background-color: #fdf6e3;
+}
+
+a:link {
+    background: none;
+    text-shadow: none;
+    text-decoration: underline;
+}

@@ -1,0 +1,220 @@
+---
+layout: post
+title: "On Profunctors, Abruptly"
+summary: "Let's try to understand contravariance"
+tags:
+  - math
+  - category theory
+---
+
+_Disclaimer: This post reqiures a working understanding of functors in
+Haskell terms._
+
+## Introduction (Theses)
+
+If we're comfortable with the notion of a functor in Haskell, we can
+intuitively infer what might be meant by a _bifunctor_.  Consider the
+kind of a type that is a functor: `* -> *`. That is, it takes __one__
+type as an argument and returns a type. A bifunctor's kind is one
+which takes __two__ types and returns a type: `* -> * -> *`.  Its
+definition looks like this:
+
+```haskell
+class Bifunctor (b :: * -> * -> *) where
+  bimap :: (a -> b) -> (c -> d) -> f a c -> f b d
+```
+
+A bifunctor is useful for mapping over product types, such as `(,)`:
+
+```haskell
+instance Bifunctor (,) where
+  bimap f  g (x, y) = (f x, g y)
+```
+
+Now is a good time to take note of the direction of the arrows.  We
+begin with an `f a b` and end up with a `f c d`, by way of two
+functions, `a -> b`, and `c -> d`. In both of their cases, the arrows
+go the same direction: forward.
+
+1. The `a -> b` follows the same path as the `f a _ -> f b _` in the
+   bifunctor `f`.
+1. Like the function before it, `c -> d` follows the direction of the
+   functor as well `f _ c -> f _ d`.
+
+## Antitheses
+
+This direction-following is called _covariance_, and our Bifunctor is
+called a _covariant_ functor.  However, like all good things, category
+theory yields to the Hegelian Spirit and cannot achieve synthesis
+without both a thesis and an antithesis[^lawvere].  We have two
+antitheses two derive, so let us begin with a regression as a vehicle
+to the first.
+
+[^lawvere]: [Here's a Twitter
+thread](https://twitter.com/pittma_/status/933569372768972800) from
+when I discovered Lambek and Lawvere's explorations of Heraclitus's
+and/or Hegel's influence on mathematics.
+
+### Antithesis: Category
+
+In category theory, A category $C$ has an opposite category wherein
+the objects are the same, but the arrows are reversed.  $C$'s opposite
+category would be denoted as $C^{op}$.
+
+if this were C:
+
+$$
+\begin{xy}
+\xymatrix{
+  a \ar[r]^f \ar[d]_{g \circ f} & b \ar[dl]^g \\
+  c
+}
+\end{xy}
+$$
+
+Then this would be $C^{op}$:
+
+$$
+\begin{xy}
+\xymatrix{
+  a & b \ar[l]_{f^{op}} \\
+  c \ar[u]^{(g \circ f)^{op}} \ar[ur]_{g^{op}}
+}
+\end{xy}
+$$
+
+On to the next.
+
+### Antithesis: Covariant
+
+When we define a functor in a categorical sense rather than a Haskell
+sense, we define it as a mapping from one category $C$ to another $D$,
+whilst preserving structure: $F : C \rightarrow D$. To say a functor
+is covariant is to state that when a functor $F$, for example,
+represents morphisms on objects from $C$ in $D$, those morphisms'
+arrows' must go the same direction that they did in $C$. I.e., given
+$F : C \rightarrow D$ and our $C$ defined above, when we take $f$ into
+$D$ with $F$, the arrows must respect their initial directions,
+meaning the following statement must hold in $D$:
+
+$$
+F(f) : F(a) \rightarrow F(b)
+$$
+
+Okay, now that we have a more formal definition of a covariant
+functor, let's use it a baseline to define its antithesis.
+Covariant's antithesis is called _contravariant_, which, you guessed
+it, is a reversal of an arrow's direction. That said, lets define a
+new functor $F' : C \rightarrow D$, but note that $F'$ is
+_contravariant_, meaning that the following holds in $D$.
+
+$$
+F'(f) : F'(b) \rightarrow F'(a)
+$$
+
+## Profunctors
+
+Having finally met this post's desiderata, I'll present a Haskell definition of a profunctor, initially without comment.
+
+```haskell
+class Profunctor (p :: * -> * -> *) where
+  dimap :: (a' -> a) -> (b -> b') -> p a b -> p a' b'
+```
+
+Take it in. Ruminate. What do you see?
+
+Here's a more formal definition as a hint:
+
+$$
+P : C^{op} \times C \rightarrow D
+$$
+
+A profunctor is a mapping from a category $C$ and its opposite
+$C^{op}$ to $D$.  To put this in more practical terms, a profunctor is
+a bifunctor which is contravariant in one of its parameters. Let's go
+back for now to the Haskell definition above for an illustration.  A
+profunctor `p` starts with two functions, and a `p a b`, and ends up
+with a `p a' b'`.  The functions we're given map from `a' -> a` and `b
+-> b'`, respectively.  This tells us that `p`'s treatment of the first
+function, the `a`'s, will be contravariant.  But how is this possible?
+How could we end up with a `a'` if that's our starting point?  Let's
+draw it out!
+
+1. Our first function, which we'll call $f$, is `a' -> a`:
+
+   $$
+   \begin{xy}
+   \xymatrix{
+     a' \ar[r]^f & a
+   }
+   \end{xy}
+   $$
+
+1. And our next function, $g$,  is from `b -> b'`:
+
+   $$
+   \begin{xy}
+   \xymatrix{
+     a' \ar[r]^f & a & b \ar[dll]^g \\
+     b'
+   }
+   \end{xy}
+   $$
+
+1. Now, for the sake of our explanation, lets say our third parameter
+   `p a b` can be thought of as a more general way of writing the type
+   of a function from `a` to `b`. We can think about it this way by
+   replacing `p` with a concrete type constructor, the function type
+   constructor `(->)`, to be specific.  In its case we'd write `p a b`
+   as `(->) a b` or, in its more common form, `a -> b`. We'll call
+   this function $h$:
+
+   $$
+   \begin{xy}
+   \xymatrix{
+     a' \ar[r]^f & a \ar[r]^h & b \ar[dll]^g \\
+     b'
+   }
+   \end{xy}
+   $$
+
+1. There's two things I'd like to stop and make note of here.
+   1. If we can call our third parameter, `p a b` a more general way
+      of stating `a -> b`, then the same applies to `dimap`'s return
+      type, `p a' b'`.  It can be thought of as `a' -> b'`.
+   1. Let's look again at the diagram and use what we know about
+      category theory's laws to discern what it would take to get a
+      return type that was shaped like `a' -> b'`.  It's composition!
+      To return our `p a' b'`, or remember, our `a' -> b'`, we just
+      need to compose $f$, $g$, and $h$ in the right order: $g \circ h
+      \circ f$:
+
+   $$
+   \begin{xy}
+   \xymatrix{
+     a' \ar[r]^f \ar[d]_{g \circ h \circ f} & a \ar[r]^h & b \ar[dll]^g \\
+     b'
+   }
+   \end{xy}
+   $$
+
+And with that, you can see what makes a profunctor tick!
+
+## In Closing
+
+This sums up the technical section of this this post, as its purpose
+was to explain what, exactly, a profunctor was, while simultaneously
+sharing a manner such that makes contravariance a tractable thing.  It
+was through this intuition that I personally was able to get a handle
+on how to synthesize contravariance, and I hope it was helpful to
+anyone who comes across this post.
+
+## In Closing Closing
+
+Before I `:wq` on this one, though, I want to also make mention of the
+structure of the final technical section of this post.  Drawing out
+the commutative diagrams one arrow at a time was huge in getting a
+grasp on these concepts for me, and it's an approach I'll reach for
+regularly from now on.  If it's not something you've tried before when
+taking on something dense in the land of category theory, I can
+certainly attest to its efficacy!  Cheers!
