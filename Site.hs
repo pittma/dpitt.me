@@ -22,19 +22,29 @@ main =
     match "js/*.js" $ do
       route idRoute
       compile copyFileCompiler
-    match "posts/*" $ do
-      route $ toIdxPath "blog"
+    match "blog/*" $ do
+      route toIdxPath
       compile $
         pandocWithSidenotes >>=
         loadAndApplyTemplate "templates/default.html" dateCtx
+    match "archive.html" $ do
+      route toIdxPath
+      compile $ do
+        posts <- recentFirst =<< loadAll "blog/*"
+        let context = listField "items" (dateCtx <> cleanUrlCtx) (return posts)
+        asTempWithDefault context
     match "index.html" $ do
       route idRoute
       compile $ do
-        posts <- take 5 <$> (recentFirst =<< loadAll "posts/*")
-        let context = listField "posts" (dateCtx <> cleanUrlCtx) (return posts)
-        getResourceBody >>= applyAsTemplate context >>=
-          loadAndApplyTemplate "templates/default.html" defaultContext
+        posts <- take 5 <$> (recentFirst =<< loadAll "blog/*")
+        let context = listField "items" (dateCtx <> cleanUrlCtx) (return posts)
+        asTempWithDefault context
     match "templates/*" $ compile templateCompiler
+
+asTempWithDefault :: Context String -> Compiler (Item String)
+asTempWithDefault cs =
+  getResourceBody >>= applyAsTemplate cs >>=
+  loadAndApplyTemplate "templates/default.html" defaultContext
 
 dateCtx :: Context String
 dateCtx = dateField "date" "%B %e, %Y" <> defaultContext
@@ -45,12 +55,12 @@ cleanUrlCtx = field "clean-url" (return . clean . toFilePath . itemIdentifier)
     clean path = takeDirectory path </> takeBaseName path
 
 -- This is the infamous `niceRoute' function.
-toIdxPath :: String -> Routes
-toIdxPath prefix = customRoute createIndexRoute
+toIdxPath :: Routes
+toIdxPath = customRoute createIndexRoute
   where
     createIndexRoute ident =
       let path = toFilePath ident
-       in prefix </> takeDirectory path </> takeBaseName path </> "index.html"
+       in takeDirectory path </> takeBaseName path </> "index.html"
 
 pandocWithSidenotes :: Compiler (Item String)
 pandocWithSidenotes =
