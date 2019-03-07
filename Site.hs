@@ -22,6 +22,9 @@ main =
     match "js/*.js" $ do
       route idRoute
       compile copyFileCompiler
+    match "files/*" $ do
+      route idRoute
+      compile copyFileCompiler
     match "blog/*" $ do
       route toIdxPath
       compile $
@@ -33,6 +36,15 @@ main =
         posts <- recentFirst =<< loadAll "blog/*"
         let context = listField "items" (dateCtx <> cleanUrlCtx) (return posts)
         asTempWithDefault context
+    match "talks/*" $ do
+      route toIdxPath
+      compile pandocCompiler
+    match "talks.html" $ do
+      route toIdxPath
+      compile $ do
+        talks <- loadAll "talks/*"
+        let context = listField "talks" defaultContext (return talks)
+        asTempWithDefault context
     match "index.html" $ do
       route idRoute
       compile $ do
@@ -40,6 +52,11 @@ main =
         let context = listField "items" (dateCtx <> cleanUrlCtx) (return posts)
         asTempWithDefault context
     match "templates/*" $ compile templateCompiler
+    match "*.html" $ do
+      route toIdxPath
+      compile $
+        getResourceBody >>=
+        loadAndApplyTemplate "templates/default.html" defaultContext
 
 asTempWithDefault :: Context String -> Compiler (Item String)
 asTempWithDefault cs =

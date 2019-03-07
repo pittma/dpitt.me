@@ -7,3 +7,7 @@ a:link {
     text-shadow: none;
     text-decoration: underline;
 }
+
+.about-center {
+    text-align: center;
+}
