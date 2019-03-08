@@ -1,0 +1,20 @@
+---
+title: Ephemera
+---
+
+<p>Sometimes things don't warrant a complete post. Things like that
+end up here.</p>
+
+$for(first)$
+  <h2>This week: $title$</h2>
+
+  $teaser$
+
+  <p><a href="/$clean-url$">read more...</a></p>
+$endfor$
+
+<hr>
+
+<h3>Older Posts:</h3>
+
+$partial("templates/post-list.html")$

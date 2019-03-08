@@ -2,4 +2,24 @@
 title: Talks
 ---
 
-$partial("templates/talks.html")$
+$for(talks)$
+
+  <h3>$title$</h3>
+
+  <p><b>Venue:</b> <i>$venue$</i></p>
+
+  <p>$body$</p>
+
+  <ul>
+    $if(slides)$
+      <li><a href="/files/$slides$">Slides</a></li>
+    $endif$
+
+    $if(video)$
+      <li><a href="$video$">Video</a></li>
+    $endif$
+  </ul>
+
+  <hr>
+
+$endfor$
