@@ -45,6 +45,16 @@ main =
         talks <- loadAll "talks/*"
         let context = listField "talks" defaultContext (return talks)
         asTempWithDefault context
+    match "ephemera/*" $ do
+      route toIdxPath
+      compile $
+        pandocWithSidenotes >>= saveSnapshot "eph-content" >>=
+        loadAndApplyTemplate "templates/default.html" dateCtx
+    match "ephemera.html" $ do
+      route toIdxPath
+      compile $ do
+        eph <- recentFirst =<< loadAll "ephemera/*"
+        asTempWithDefault $ ephCtx eph
     match "index.html" $ do
       route idRoute
       compile $ do
@@ -70,6 +80,15 @@ cleanUrlCtx :: Context String
 cleanUrlCtx = field "clean-url" (return . clean . toFilePath . itemIdentifier)
   where
     clean path = takeDirectory path </> takeBaseName path
+
+ephCtx :: [Item String] -> Context String
+ephCtx items =
+  listField "first" ephPostCtx (return (take 1 items)) <>
+  listField "items" ephPostCtx (return (drop 1 items))
+  where
+    ephPostCtx =
+      defaultContext <> teaserField "teaser" "eph-content" <> cleanUrlCtx <>
+      dateCtx
 
 -- This is the infamous `niceRoute' function.
 toIdxPath :: Routes
