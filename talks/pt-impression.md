@@ -10,6 +10,8 @@ systems. Once such instance of this correspondence is the conspicuous
 propositions-as-types notion, which draws correspondences between
 logical propositions and types in a programming language.
 
+<!--more-->
+
 As another more specific instance, one could consider a program
 written in a traditional programming language like Rust, and its
 formal proof exercised in a language like Coq.
@@ -30,3 +32,10 @@ capabilities present in "provable" systems. These explorations will
 include spaces like totality, type-level programming, and dependent
 types. Ultimately drawing lines from the above explorations back to
 how one might write such a thing in the language of a proof assistant.
+
+$if(slides)$
+* [Slides](/files/$slides$)
+$endif$
+$if(video)$
+* [Video]($video$)
+$endif$

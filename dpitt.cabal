@@ -19,6 +19,5 @@ executable dpitt
                        hakyll,
                        pandoc,
                        pandoc-sidenote,
-                       containers,
                        filepath,
-                       process
+                       split
