@@ -2,7 +2,7 @@ body {
     background-color: #fdf6e3;
 }
 
-a:link {
+a:link, a:visited {
     background: none;
     text-shadow: none;
     text-decoration: underline;
@@ -10,4 +10,8 @@ a:link {
 
 .about-center {
     text-align: center;
+}
+
+h1, h2, h3 {
+    color: #657b83;
 }
