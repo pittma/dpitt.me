@@ -12,6 +12,14 @@ a:link, a:visited {
     text-align: center;
 }
 
-h1, h2, h3 {
+h1, h2, h3, #navigation {
     color: #657b83;
+}
+
+#navigation > a:link, #navigation a:visited {
+    color: #d33682;
+}
+
+#navigation a:visited {
+    color: #6c71c4;
 }
