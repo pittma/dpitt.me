@@ -16,8 +16,8 @@ h1, h2, h3, #navigation {
     color: #657b83;
 }
 
-#navigation > a:link, #navigation a:visited {
-    color: #d33682;
+#navigation a:link, #navigation a:visited {
+    color: #dc322f;
 }
 
 #navigation a:visited {

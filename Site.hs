@@ -27,6 +27,9 @@ main =
     match "files/*" $ do
       route idRoute
       compile copyFileCompiler
+    match "images/*" $ do
+      route idRoute
+      compile copyFileCompiler
     match "blog/*" $ do
       route blogRoute
       compile $
@@ -40,11 +43,11 @@ main =
         asTempWithDefault context
     match "talks/*" $ do
       route toIdxPath
-      compile $ do
+      compile $
         getResourceBody >>= applyAsTemplate defaultContext >>=
-          saveSnapshot "talk-content" >>=
-          renderPandoc >>=
-          loadAndApplyTemplate "templates/default.html" defaultContext
+        saveSnapshot "talk-content" >>=
+        renderPandoc >>=
+        loadAndApplyTemplate "templates/default.html" defaultContext
     match "talks.html" $ do
       route toIdxPath
       compile $ do
@@ -121,7 +124,7 @@ mkBlogRoute :: Identifier -> FilePath
 mkBlogRoute ident =
   let path = toFilePath ident
       fileNameSplit = splitOn "-" (takeBaseName path)
-   in takeDirectory path </> fileNameSplit !! 0 </> fileNameSplit !! 1 </>
+   in takeDirectory path </> head fileNameSplit </> fileNameSplit !! 1 </>
       drop 11 (takeBaseName path) </>
       "index.html"
 
