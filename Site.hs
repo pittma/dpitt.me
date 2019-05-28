@@ -96,7 +96,10 @@ ephCtx items =
   listField "items" ephPostCtx (return (drop 1 items))
   where
     ephPostCtx =
-      defaultContext <> teaserField "teaser" "eph-content" <> blogRouteCtx <>
+      defaultContext <>
+      teaserFieldWithSeparator "···" "teaser" "eph-content" <>
+
+      blogRouteCtx <>
       dateCtx
 
 -- This is the infamous `niceRoute' function.

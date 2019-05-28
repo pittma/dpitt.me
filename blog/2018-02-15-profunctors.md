@@ -1,10 +1,6 @@
 ---
-layout: post
 title: "On Profunctors, Abruptly"
-summary: "Let's try to understand contravariance"
-tags:
-  - math
-  - category theory
+publish: true
 ---
 
 _Disclaimer: This post reqiures a working understanding of functors in

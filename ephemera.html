@@ -9,8 +9,10 @@ break it up to a weekly cadence.</p>
 $for(first)$
   <h2>This week: $title$</h2>
 
-  $teaser$
-
+  $if(teaser)$
+    $teaser$
+  $endif$
+  
   <p><a href="/$blog-route$">read more...</a></p>
 $endfor$
 
