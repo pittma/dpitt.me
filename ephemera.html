@@ -6,13 +6,15 @@ title: Ephemera
 about, working on, or just found to be interesting.</p>
 
 $for(first)$
-  <h2>Most recently: $title$</h2>
+  $if(publish)$
+    <h2>Most recently: $title$</h2>
 
-  $if(teaser)$
-    $teaser$
+        $if(teaser)$
+        $teaser$
+        $endif$
+
+    <p><a href="/$blog-route$">read more...</a></p>
   $endif$
-
-  <p><a href="/$blog-route$">read more...</a></p>
 $endfor$
 
 <hr>

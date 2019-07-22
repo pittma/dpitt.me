@@ -1,5 +1,6 @@
 ---
 title: "A Week of ECM"
+publish: true
 ---
 
 #+TITLE: A Week of ECM

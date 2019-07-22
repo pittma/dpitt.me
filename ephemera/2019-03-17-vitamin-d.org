@@ -1,5 +1,6 @@
 ---
 title: Vitamin D
+publish: true
 ---
 
 We're headed to CA this week while still nursing all of our bumps and
