@@ -1,0 +1,36 @@
+---
+title: A Quiver of Telescopes
+---
+
+A few years ago, as my first foray into philosophy as a Real Adult, I
+attempt to power my way through Deleuze and Guattari's /AntiOedipus:
+Capitalism and Schizophrenia/. It didn't go particularly well. I think
+I understood that there was something revolutionary about it, about
+escaping oppresive heirarchies imposed on us by the Oedipal Triangle,
+but the lyrical language can be, at times, nearly impossible to
+follow. I gave up about half-way through.
+
+Last week, though, I went on tirade during a phone call with a friend
+about the aforementioned pair's /What s Philosophy/, and the
+juxtaposition of philosophy to aesthetics. To them, philosophy is the
+aesthetics of /concepts/. Because I'm entitled to do so, I contributed
+my intrepretation of this notion: that philosophy doesn't tell us what
+Is, or Should Be, but instead gives us lenses with which to view what
+Has, Will, or Could. Philosophy is a *quiver of telescopes* that we
+can use to view the world, discourse, existence, &c.; swapping them
+out according to need, and adding cyclinders to the ones we use most
+in hopes to further their efficacy.
+
+···
+
+ That same friend then read an article in [[http://www.cabinetmagazine.org/kiosk/kan-sperling_olivia_28_august_2019.php][/Cabinet/]] that mentioned
+ "Deleuzo-Guattari Assemblage Theory", something put forth in
+ /AntiOedipus'/ follow up, /A Thousand Plateaus/. Assemblage Theory
+ advances the concept of flows between bodies, "desiring-production",
+ which is so prevalent in /AntiOedipus/.
+
+(TODO: I need to explain wtf desiring production is, I can't just say
+ shit about "flows" and the PTFO)
+
+Desiring-production by giving a name to the composites of bodies and
+their flows, and then a name to those composites and so on.
