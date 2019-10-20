@@ -55,7 +55,7 @@ main =
         let context =
               listField
                 "talks"
-                (defaultContext <> teaserField "teaser" "talk-content" <>
+                (defaultContext <> composeTeaser "talk-content" <>
                  cleanRouteCtx)
                 (return talks)
         asTempWithDefault context
@@ -90,6 +90,9 @@ asTempWithDefault cs =
 dateCtx :: Context String
 dateCtx = dateField "date" "%B %e, %Y" <> defaultContext
 
+composeTeaser :: String -> Context String
+composeTeaser = teaserFieldWithSeparator "···" "teaser"
+
 ephCtx :: [Item String] -> Context String
 ephCtx items =
   listField "first" ephPostCtx (return (take 1 items)) <>
@@ -97,8 +100,7 @@ ephCtx items =
   where
     ephPostCtx =
       defaultContext <>
-      teaserFieldWithSeparator "···" "teaser" "eph-content" <>
-
+      composeTeaser "eph-content" <>
       blogRouteCtx <>
       dateCtx
 
