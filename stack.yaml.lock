@@ -19,12 +19,12 @@ packages:
   original:
     hackage: pandoc-sidenote-0.19.0.0
 - completed:
-    hackage: hakyll-4.13.0.1@sha256:0f27d74feaedc96648ec5377ecec2b35dd677516c9667d179462a350f2075628,8817
+    hackage: hakyll-4.13.2.0@sha256:7185031bacfff87141486ada90798550dd0c29424ba613c7974222b27cf0f3b5,8867
     pantry-tree:
       size: 7841
-      sha256: 4a4409d287ee3daabb0141e3ebd3d2e88ead7382ba5cc582733907b4a938c4a8
+      sha256: d56afbe335270c66a19dea685413f4b06225805b5d6036a28da8b51f113dffae
   original:
-    hackage: hakyll-4.13.0.1
+    hackage: hakyll-4.13.2.0
 - completed:
     hackage: lrucache-1.2.0.1@sha256:18fc3d7052012c7ab3cd395160f34b53c5e1ec5379cc45185baf35b90ffadc2e,1254
     pantry-tree:
@@ -34,7 +34,7 @@ packages:
     hackage: lrucache-1.2.0.1
 snapshots:
 - completed:
-    size: 524127
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/14/6.yaml
-    sha256: dc70dfb45e2c32f54719819bd055f46855dd4b3bd2e58b9f3f38729a2d553fbb
-  original: lts-14.6
+    size: 524804
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/14/16.yaml
+    sha256: 4d1519a4372d051d47a5eae2241cf3fb54e113d7475f89707ddb6ec06add2888
+  original: lts-14.16

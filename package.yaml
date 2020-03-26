@@ -1,0 +1,21 @@
+name: "dpitt-dot-me"
+version: 0.1.0
+github: "pittma/dpitt.me"
+author: "dan pittman"
+maintainer: "dan pittman"
+copyright: "2020 dan pittman"
+license: MIT
+license-file: LICENSE
+
+extra-source-files:
+  - Readme.org
+
+executable:
+  main: Site.hs
+  dependencies:
+    - base
+    - hakyll
+    - pandoc
+    - pandoc-sidenote
+    - filepath
+    - split
