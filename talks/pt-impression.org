@@ -34,7 +34,7 @@ types. Ultimately drawing lines from the above explorations back to
 how one might write such a thing in the language of a proof assistant.
 
 $if(slides)$
-- [[/files/$slides$][Slides]]
+- [[https://dpitt.me/files/$slides$][Slides]]
 $endif$
 $if(video)$
 - [[$video$][Video]]
