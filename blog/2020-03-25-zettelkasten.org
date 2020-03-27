@@ -7,30 +7,30 @@ subtitle: (And some editorializing on the foundations of mathematics)
 I like to write. I don't do it as often as I'd like to, but
 nonetheless I do like to do it. I've found that one of the best
 exercises for increasing the bandwidth of the passageway from my brain
-to my fingers is superfluous note taking. Couple this Good thing with
-a Could Appear Like A Good Thing But Is Dubious At Best thing, namely
+to my fingers is superfluous note taking. Couple this Good Thing with
+a Could Appear Like A Good Thing But Is Dubious At Best Thing, namely
 ADHD/anxiety-induced procrastinatory over-organizing, one could
 imagine that how I choose to organize those notes is something that I
 (superfluously) think about. I've tried them all, notebooks, Evernote,
 Google Keep, [[https://github.com/pittma/notes][even a custom markdown-to-jekyll app that was synched by
-Dropbox]]. When I switched to Emacs about 2 years ago and started using
+Dropbox]]. However, when I switched to Emacs about 2 years ago and started using
 [[https://orgmode.org/][Org mode]], it, as a medium, really stuck. Since then I've just been
 spinning and churning with nearly no success on how to organize my org
-file(s). However, about a week ago I encountered [[https://www.srid.ca/2010101.html][~neuron~]] in the
+file(s). And then, about a week ago, I encountered [[https://www.srid.ca/2010101.html][~neuron~]] in the
 /[[https://haskellweekly.news][Haskell Weekly]]/ newsletter, and because I'm prone to buy wholesale
 anything a smart person says about note-taking, my interest was
 piqued. The ~neuron~ author linked to this [[https://writingcooperative.com/zettelkasten-how-one-german-scholar-was-so-freakishly-productive-997e4e0ca125][Zettelkästen overview]],
-which I promptly devoured and, well, it I /had/ to do it. Please read
+which I promptly devoured and, well, I /had/ to do it. Please read
 what I linked above for a nice narrative on Zettelkasten's
 origins. What follows is just a skeletal exposition.
 
 ** Zettelkästen
 
 Literally "note box", the original zettlekästen was a piece of
-furniture with index card drawers, six-by-six, like one those bygone
+furniture with index card drawers, six-by-six, like one of those bygone
 cabinets you used to see at the library for filing books' locations
-with Dewey Decimal Classification. In that zettelkästen those index
-cards followed these rules:
+with Dewey Decimal Classification. Those index
+cards followed four simple rules:
 
 1. *A unique id.*[fn:id]
 1. *One idea per card.*
@@ -43,7 +43,7 @@ you can explore from any ingress "idea vertex"[fn:conv]. It was this
 broad transitivity of ideas that Zettelkästen's creator attributed
 their prolificacy to.
 
-Aha! A system. What kind of programmer would I didn't automate as much
+Aha! A system. What kind of programmer would I be if I didn't automate as much
 of this system as possible?
 
 *** Step One: A ~zet~ Command
@@ -57,8 +57,8 @@ $ zet the sorites paradox
 #+END_SRC
 
 Which I would expect to open an editor and let me try and get this
-thought from my head to my fingers with as few barriers as possible. I
-ended up with this small bash script that I put on my path:
+thought from my head to my fingers with as few barriers as possible.
+To this end, I created a small bash script to put on my path:
 
 #+BEGIN_SRC bash
 #! /usr/bin/env bash
@@ -82,7 +82,7 @@ fi
 emacsclient -n $name.org
 #+END_SRC
 
-In terms of new code, this is just extent of it for this Org
+In terms of new code, this is the extent of it for this Org
 mode-based zettelkästen. It pokes my pretty-much-always-running Emacs
 server and opens a file whose name is prepended by the date and time,
 followed by a dash-joined version of what I typed out at the command
@@ -230,14 +230,14 @@ I've found a thing that fits, that /works/.
 One important factor I've found with note taking, at least for me, is
 for my note compendium to be append-only. I can't let myself go back
 and pare down, edit and reëdit endlessly, because, unfailingly, I
-always end up deleting everything because no organizational scheme I
+always end up deleting everything since of course no organizational scheme I
 can come up with is copacetic. The Zettelkästen approach actually
 saves me from myself here because there's a single note per file, and
-I'm not inundated with an entire list almost ever.
+I'm almost never inundated with an entire list.
 
 Using my zettelkästen stirs up that nostalgic feeling of going through
-an old notebook every time I open it, and I'm only confronted with the
-ideas I've asked it about. It narrows the aperture on a topic in a way
+an old notebook every time I open it, and I'm only ever confronted with the
+ideas I've asked of it. It narrows the aperture to a topic in a way
 that saves me from myself and the consequences of the inexorable
 self-loathing of an anxious mind. If anything from these last few
 paragraphs resonates at all, I think it may work for you too.
