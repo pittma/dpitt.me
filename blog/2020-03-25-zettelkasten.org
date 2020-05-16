@@ -1,6 +1,7 @@
 ---
 title: Using Emacs's org-mode As Your Zettelkasten
 subtitle: (And some editorializing on the foundations of mathematics)
+publish: true
 ---
 
 
