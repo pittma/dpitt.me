@@ -1,5 +1,5 @@
 ---
-title: Using Emacs's org-mode As Your Zettelkästen
+title: Using Emacs's org-mode As Your Zettelkasten
 subtitle: (And some editorializing on the foundations of mathematics)
 ---
 
@@ -19,14 +19,14 @@ just been spinning and churning with nearly no success on how to
 organize my org file(s). And then, about a week ago, I encountered
 [[https://www.srid.ca/2010101.html][~neuron~]] in the /[[https://haskellweekly.news][Haskell Weekly]]/ newsletter, and because I'm prone to
 buy wholesale anything a smart person says about note-taking, my
-interest was piqued. The ~neuron~ author linked to this [[https://writingcooperative.com/zettelkasten-how-one-german-scholar-was-so-freakishly-productive-997e4e0ca125][Zettelkästen
+interest was piqued. The ~neuron~ author linked to this [[https://writingcooperative.com/zettelkasten-how-one-german-scholar-was-so-freakishly-productive-997e4e0ca125][Zettelkasten
 overview]], which I promptly devoured and, well, I /had/ to do
 it. Please read what I linked above for a nice narrative on
 Zettelkasten's origins. What follows is just a skeletal exposition.
 
-** Zettelkästen
+** Zettelkasten
 
-Literally "note box", the original zettlekästen was a piece of
+Literally "note box", the original zettlekasten was a piece of
 furniture with index card drawers, six-by-six, like one of those
 bygone cabinets you used to see at the library for filing books'
 locations with Dewey Decimal Classification. Those index cards
@@ -40,7 +40,7 @@ followed four simple rules:
 Given these rules, one can begin to build a cache of knowledge linked
 together /almost/ like neurons, but /definitely/ like a graph that you
 can explore from any ingress "idea vertex"[fn:conv]. It was this broad
-transitivity of ideas that Zettelkästen's creator attributed their
+transitivity of ideas that Zettelkasten's creator attributed their
 prolificacy to.
 
 Aha! A system. What kind of programmer would I be if I didn't automate
@@ -49,7 +49,7 @@ as much of this system as possible?
 *** Step One: A ~zet~ Command
 
 To begin, I wanted a way to "start the conversation" with my
-zettelkästen. To me, that looked like just telling it about a new
+zettelkasten. To me, that looked like just telling it about a new
 topic. Something like this:
 
 #+BEGIN_SRC shell
@@ -83,7 +83,7 @@ emacsclient -n $name.org
 #+END_SRC
 
 In terms of new code, this is the extent of it for this Org mode-based
-zettelkästen. It pokes my pretty-much-always-running Emacs server and
+zettelkasten. It pokes my pretty-much-always-running Emacs server and
 opens a file whose name is prepended by the date and time, followed by
 a dash-joined version of what I typed out at the command line. As an
 example, right now it's March 26th, 2020 11:58 AM. So given the ~zet~
@@ -148,7 +148,7 @@ sharing their insight about the foundations of mathematics. While I
 was writing this post and thinking about the neuron to intelligent
 brain paradox I remembered the nonsense my own brain synthesized while
 O explained multiplication to T, so, yeah, I want to link these two
-things in my zettelkästen—because that's the whole point!
+things in my zettelkasten—because that's the whole point!
 
 I'll add that link by typing @@html: <kbd>@@ctrl@@html: </kbd>@@ +
 @@html: <kbd>@@c@@html: </kbd>@@ @@html: <kbd>@@ctrl@@html: </kbd>@@ +
@@ -224,18 +224,18 @@ the file containing it.
 
 ** Valedictions
 
-I've only started to build up my own zettelkästen, but it truly feels
+I've only started to build up my own zettelkasten, but it truly feels
 like I've found a thing that fits, that /works/.
 
 One important factor I've found with note taking, at least for me, is
 for my note compendium to be append-only. I can't let myself go back
 and pare down, edit and reëdit endlessly, because, unfailingly, I
 always end up deleting everything since of course no organizational
-scheme I can come up with is copacetic. The Zettelkästen approach
+scheme I can come up with is copacetic. The Zettelkasten approach
 actually saves me from myself here because there's a single note per
 file, and I'm almost never inundated with an entire list.
 
-Using my zettelkästen stirs up that nostalgic feeling of going through
+Using my zettelkasten stirs up that nostalgic feeling of going through
 an old notebook every time I open it, and I'm only ever confronted
 with the ideas I've asked of it. It narrows the aperture to a topic in
 a way that saves me from myself and the consequences of the inexorable
@@ -246,5 +246,5 @@ Happy remembering!
 
 [fn:id] This id needs to be unique, but is in general arbitrary and
         needn't necessarily be related to the note's content.
-[fn:conv] Niklas Luhmann, the creator of the original zettelkästen
+[fn:conv] Niklas Luhmann, the creator of the original zettelkasten
           occasionally referred to it as a "converation partner".
