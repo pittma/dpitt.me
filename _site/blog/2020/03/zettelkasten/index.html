@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-37369627-6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-37369627-6');
+    </script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>dpitt.me :: Using Emacs's org-mode As Your Zettelkasten</title>
+    <meta name="viewport" content="width=device-width">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/tufte/tufte.css">
+    <link rel="stylesheet" href="/css/solarized.css">
+    <link rel="stylesheet" href="/css/overrides.css">
+
+    <!-- Twitter card things -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:image" content="https://dpitt.me/images/chicken-square.jpg" />
+    <meta name="twitter:url" content="/" />
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+    "HTML-CSS": {
+    styles: {".MathJax_Preview": {visibility: "hidden"}}
+    },
+    tex2jax: {inlineMath: [["\[","\]"],["\\\(","\\\)"]]},
+    TeX: {extensions: ["AMSmath.js","AMSsymbols.js","/js/xypic.js"]}
+    });
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
+
+  </head>
+  <body>
+
+    <div id="header">
+       <div id="navigation">
+         <a href="/">dpitt.me</a> ::
+         <a href="/about/">About</a>
+         /
+         <a href="/archive/">Archive</a>
+         /
+         <a href="/talks/">Talks</a>
+         /
+         <a href="/ephemera/">Ephemera</a>
+         <!--/
+         <a href="/listening/">Now Listening</a>-->
+       </div>
+    </div>
+
+     <div id="content">
+
+       <article>
+         <h1>Using Emacs's org-mode As Your Zettelkasten</h1>
+         
+         <h2>(And some editorializing on the foundations of mathematics)</h2>
+         
+         <div class="info">
+           
+               Posted on March 25, 2020
+           
+         </div>
+
+         <section>
+           <p>I like to write. I don’t do it as often as I’d like to, but nonetheless I do like to do it. I’ve found that one of the best exercises for increasing the bandwidth of the passageway from my brain to my fingers is superfluous note taking. Couple this Good Thing with a Could Appear Like A Good Thing But Is Dubious At Best Thing, namely ADHD/anxiety-induced procrastinatory over-organizing, one could imagine that how I choose to organize those notes is something that I (superfluously) think about. I’ve tried them all, notebooks, Evernote, Google Keep, <a href="https://github.com/pittma/notes">even a custom markdown-to-jekyll app that was synched by Dropbox</a>. However, when I switched to Emacs about 2 years ago and started using <a href="https://orgmode.org/">Org mode</a>, it, as a medium, really stuck. Since then I’ve just been spinning and churning with nearly no success on how to organize my org file(s). And then, about a week ago, I encountered <a href="https://www.srid.ca/2010101.html"><code>neuron</code></a> in the <em><a href="https://haskellweekly.news">Haskell Weekly</a></em> newsletter, and because I’m prone to buy wholesale anything a smart person says about note-taking, my interest was piqued. The <code>neuron</code> author linked to this <a href="https://writingcooperative.com/zettelkasten-how-one-german-scholar-was-so-freakishly-productive-997e4e0ca125">Zettelkasten overview</a>, which I promptly devoured and, well, I <em>had</em> to do it. Please read what I linked above for a nice narrative on Zettelkasten’s origins. What follows is just a skeletal exposition.</p>
+<h2 id="zettelkasten">Zettelkasten</h2>
+<p>Literally “note box”, the original zettlekasten was a piece of furniture with index card drawers, six-by-six, like one of those bygone cabinets you used to see at the library for filing books’ locations with Dewey Decimal Classification. Those index cards followed four simple rules:</p>
+<ol>
+<li><strong>A unique id.</strong><span><label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span class="sidenote">This id needs to be unique, but is in general arbitrary and needn’t necessarily be related to the note’s content.<br />
+<br />
+</span></span></li>
+<li><strong>One idea per card.</strong></li>
+<li><strong>Tag each idea/card (optionally).</strong></li>
+<li><strong>Each idea/card <em>links</em> to related ideas.</strong></li>
+</ol>
+<p>Given these rules, one can begin to build a cache of knowledge linked together <em>almost</em> like neurons, but <em>definitely</em> like a graph that you can explore from any ingress “idea vertex”<span><label for="sn-2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-2" class="margin-toggle"/><span class="sidenote">Niklas Luhmann, the creator of the original zettelkasten occasionally referred to it as a “converation partner”.<br />
+<br />
+</span></span>. It was this broad transitivity of ideas that Zettelkasten’s creator attributed their prolificacy to.</p>
+<p>Aha! A system. What kind of programmer would I be if I didn’t automate as much of this system as possible?</p>
+<h3 id="step-one-a-zet-command">Step One: A <code>zet</code> Command</h3>
+<p>To begin, I wanted a way to “start the conversation” with my zettelkasten. To me, that looked like just telling it about a new topic. Something like this:</p>
+<pre class="shell"><code>$ zet the sorites paradox
+</code></pre>
+<p>Which I would expect to open an editor and let me try and get this thought from my head to my fingers with as few barriers as possible. To this end, I created a small bash script to put on my path:</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">#! /usr/bin/env bash</span></span>
+<span id="cb2-2"><a href="#cb2-2"></a></span>
+<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">set</span> <span class="ex">-e</span></span>
+<span id="cb2-4"><a href="#cb2-4"></a></span>
+<span id="cb2-5"><a href="#cb2-5"></a><span class="va">ZROOT=${ZET_ROOT:=</span>~/Dropbox/zet<span class="va">}</span></span>
+<span id="cb2-6"><a href="#cb2-6"></a></span>
+<span id="cb2-7"><a href="#cb2-7"></a><span class="va">name=</span><span class="st">&quot;</span><span class="va">$ZROOT</span><span class="st">/</span><span class="va">$(</span><span class="fu">date</span> +<span class="st">&quot;%Y-%m-%d-%H%M&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb2-8"><a href="#cb2-8"></a><span class="va">content=</span><span class="st">&quot;*&quot;</span></span>
+<span id="cb2-9"><a href="#cb2-9"></a></span>
+<span id="cb2-10"><a href="#cb2-10"></a><span class="kw">for</span> <span class="ex">word</span> in <span class="va">$@</span><span class="kw">;</span> <span class="kw">do</span></span>
+<span id="cb2-11"><a href="#cb2-11"></a>  <span class="va">name+=</span><span class="st">&quot;-</span><span class="va">$word</span><span class="st">&quot;</span></span>
+<span id="cb2-12"><a href="#cb2-12"></a>  <span class="va">content+=</span><span class="st">&quot; </span><span class="va">${word^}</span><span class="st">&quot;</span></span>
+<span id="cb2-13"><a href="#cb2-13"></a><span class="kw">done</span></span>
+<span id="cb2-14"><a href="#cb2-14"></a></span>
+<span id="cb2-15"><a href="#cb2-15"></a><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> <span class="st">&quot;</span><span class="va">$name</span><span class="st">.org&quot;</span><span class="bu"> ]</span>; <span class="kw">then</span></span>
+<span id="cb2-16"><a href="#cb2-16"></a>  <span class="bu">echo</span> -e <span class="st">&quot;</span><span class="va">$content</span><span class="st">\n\n#+FILETAGS:&quot;</span> <span class="op">&gt;</span> <span class="va">$name</span>.org</span>
+<span id="cb2-17"><a href="#cb2-17"></a><span class="kw">fi</span></span>
+<span id="cb2-18"><a href="#cb2-18"></a></span>
+<span id="cb2-19"><a href="#cb2-19"></a><span class="ex">emacsclient</span> -n <span class="va">$name</span>.org</span></code></pre></div>
+<p>In terms of new code, this is the extent of it for this Org mode-based zettelkasten. It pokes my pretty-much-always-running Emacs server and opens a file whose name is prepended by the date and time, followed by a dash-joined version of what I typed out at the command line. As an example, right now it’s March 26th, 2020 11:58 AM. So given the <code>zet</code> command I ran above, I’d get a file created for me called <code>2020-03-26-1158-sorites-paradox.org</code> and that file’d have the following content:</p>
+<pre class="org"><code>* Sorites Paradox
+
+#+FILETAGS:
+</code></pre>
+<p>That I can go on to add content to:</p>
+<pre class="org"><code>#+FILETAGS: :philosophy:fom:
+
+[[https://en.wikipedia.org/wiki/Sorites_paradox]]
+
+A random philosophical point made very well about the foundations of
+mathematics, from the Foundations of Mathematics mailing list no less.
+
+#+BEGIN_QUOTE
+Maybe ZFC is not the most natural framework in order to express
+emergent properties related to the so-called Sorites Paradox. For
+example, one neuron is not an intelligent brain. If we have a system
+consisting of n neurons that is not an intelligent brain, to add one
+neuron more to the system will not transform it into an intelligent
+brain. The conclusion seems to be that there are not intelligent
+brains in nature, which is contradicted by experience. Therefore,
+sciences depending on emergent properties (neurology, biology, etc)
+may need mathematical machinery which is not founded on ZFC.
+#+END_QUOTE
+</code></pre>
+<h3 id="step-two-links">Step Two: Links</h3>
+<p>Then let’s say that I’d had a thought of my own (mind you, one that I cannot and will not defend):</p>
+<pre class="org"><code>* Category Theory Metatheory
+
+#+FILETAGS: :fom:philosophy:
+
+*Category theory is a metatheory for mathematics.*
+
+This idea brought to you by O explaining multiplication to T about how
+it&#39;s /like/ addition, but you add one number to itself the other
+number of times or something like that. It was this /like addition/
+that sparked the thought, because it captures the arity of the
+addition and multiplication operator, which is the point she was
+making. They have the same shape. With Cartesian closed categories,
+you can give a metatheory for this shape, i.e. with currying, and what
+is math if not functions with some arity?
+</code></pre>
+<p>These two ideas are related insofar as one is a dilettante spitballing about the foundations of mathematics and the other is an expert sharing their insight about the foundations of mathematics. While I was writing this post and thinking about the neuron to intelligent brain paradox I remembered the nonsense my own brain synthesized while O explained multiplication to T, so, yeah, I want to link these two things in my zettelkasten—because that’s the whole point!</p>
+<p>I’ll add that link by typing  <kbd>ctrl </kbd> +  <kbd>c </kbd>  <kbd>ctrl </kbd> +  <kbd>l </kbd> (<code>C-c C-l</code>) then start to type <code>file</code> which gives me this menu (I’m using <a href="https://emacs-helm.github.io/helm/">Helm</a>):</p>
+<p><img src="/images/zettel-file.png" /></p>
+<p>When I hit  <kbd>return</kbd>, it shows my list of files in the current directory. That is, the directory of the file I’m currently visiting:</p>
+<p><img src="/images/zettel-link.png" /></p>
+<p>From here I can use the arrow keys or the completion search that Helm gives me to find the note I’d like to link. Now I’ve got a link in this note:</p>
+<pre class="org"><code>* Category Theory Metatheory
+
+#+FILETAGS: :fom:philosophy:
+
+*Category theory is a metatheory for mathematics.*
+
+This idea brought to you by O explaining multiplication to T about how
+it&#39;s /like/ addition, but you add one number to itself the other
+number of times or something like that. It was this /like addition/
+that sparked the thought, because it captures the arity of the
+addition and multiplication operator, which is the point she was
+making. They have the same shape. With Cartesian closed categories,
+you can give a metatheory for this shape, i.e. with currying, and what
+is math if not functions with arity?
+
+** Links
+
+[[file:2020-03-26-1132-sorites-paradox.org]]
+</code></pre>
+<p>And if I’d like to follow it, I can just do  <kbd>ctrl
+</kbd> +  <kbd>c </kbd>  <kbd>ctrl
+</kbd> +  <kbd>o </kbd> (<code>C-c C-o</code>), or <code>org-open-link-at-point</code>.</p>
+<h3 id="step-three-conversing-search">Step Three: Conversing (search)</h3>
+<p>Emacs Org mode has something called an <em>agenda</em>, that works as an aggregator over a collection of Org files. It can do some pretty amazing things like build a calendar for you, help you track your habits, or organize your todo list. For us, now, though, we’re going to use its tag and string matching searches. It does require a little setup in your <code>init.el</code> file to enable it, something like this:</p>
+<div class="sourceCode" id="cb7" data-org-language="emacs-lisp"><pre class="sourceCode commonlisp"><code class="sourceCode commonlisp"><span id="cb7-1"><a href="#cb7-1"></a>(global-set-key (kbd <span class="st">&quot;C-c a&quot;</span>) &#39;org-agenda)</span>
+<span id="cb7-2"><a href="#cb7-2"></a>(<span class="kw">setq</span> org-agenda-files &#39;(<span class="st">&quot;~/Dropbox/org/notes/todo.org&quot;</span> <span class="st">&quot;~/Dropbox/zet/&quot;</span>))</span></code></pre></div>
+<p>This results in the key sequence  <kbd>ctrl </kbd> +  <kbd>c </kbd>  <kbd>a </kbd> being globally bound to opening Org Agenda, which looks like this:</p>
+<p><img src="/images/zettel-agenda.png" /></p>
+<p>From here I can use  <kbd>m </kbd> to search by tag matches, or  <kbd>s </kbd> for string matches, both of which yield a list of matches:</p>
+<p><img src="/images/zettel-search.png" /></p>
+<p>I can just arrow down and select one of the matching headlines to open the file containing it.</p>
+<h2 id="valedictions">Valedictions</h2>
+<p>I’ve only started to build up my own zettelkasten, but it truly feels like I’ve found a thing that fits, that <em>works</em>.</p>
+<p>One important factor I’ve found with note taking, at least for me, is for my note compendium to be append-only. I can’t let myself go back and pare down, edit and reëdit endlessly, because, unfailingly, I always end up deleting everything since of course no organizational scheme I can come up with is copacetic. The Zettelkasten approach actually saves me from myself here because there’s a single note per file, and I’m almost never inundated with an entire list.</p>
+<p>Using my zettelkasten stirs up that nostalgic feeling of going through an old notebook every time I open it, and I’m only ever confronted with the ideas I’ve asked of it. It narrows the aperture to a topic in a way that saves me from myself and the consequences of the inexorable self-loathing of an anxious mind. If anything from these last few paragraphs resonates at all, I think it may work for you too.</p>
+<p>Happy remembering!</p>
+         </section>
+
+       </article>
+
+     </div>
+
+     <div id="footer">
+         Site proudly generated by
+         <a href="http://jaspervdj.be/hakyll">Hakyll</a>.
+         <br>
+         Note: This site uses Google Analytics track its usage. I
+         don't use this for anything other than traffic analysis.
+     </div>
+
+  </body>
+
+</html>

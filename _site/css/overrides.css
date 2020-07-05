@@ -1,0 +1,66 @@
+body {
+    background-color: #fff;
+    width: 55%;
+    padding-left: 0;
+}
+
+h2, h3, h4 {
+    font-style: normal;
+}
+
+p {
+    text-align: justify;
+    font-size: 1.3rem;
+}
+
+section > p, section > footer, section > table {
+  width: 100%;
+}
+
+section > ol, section ul {
+    width: 96.5%;
+}
+
+.sidenote, .marginnote {
+  text-align: justify;
+  margin-right: -30%;
+  width: 25%;
+}
+
+a:link, a:visited {
+    background: none;
+    text-shadow: none;
+    text-decoration: underline;
+}
+
+.about-center {
+    text-align: center;
+}
+
+h1, h2, h3, #navigation {
+    color: #657b83;
+}
+
+#navigation a:link, #navigation a:visited {
+    color: #6c71c4;
+}
+
+kbd {
+    padding: 0.1em 0.6em;
+    border: 1px solid #ccc;
+    font-size: 13px;
+    font-family: Arial,Helvetica,sans-serif;
+    background-color: #f7f7f7;
+    color: #333;
+    -moz-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+    -webkit-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+    box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+    -moz-border-radius: 3px;
+    -webkit-border-radius: 3px;
+    border-radius: 3px;
+    display: inline-block;
+    margin: 0 0.1em;
+    text-shadow: 0 1px 0 #fff;
+    line-height: 1.4;
+    white-space: nowrap;
+}
