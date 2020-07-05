@@ -1,5 +1,7 @@
 body {
     background-color: #fff;
+    width: 55%;
+    padding-left: 0;
 }
 
 h2, h3, h4 {
@@ -9,6 +11,20 @@ h2, h3, h4 {
 p {
     text-align: justify;
     font-size: 1.3rem;
+}
+
+section > p, section > footer, section > table {
+  width: 100%;
+}
+
+section > ol, section ul {
+    width: 96.5%;
+}
+
+.sidenote, .marginnote {
+  text-align: justify;
+  margin-right: -30%;
+  width: 25%;
 }
 
 a:link, a:visited {
