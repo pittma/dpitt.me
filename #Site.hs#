@@ -59,15 +59,15 @@ main =
                  cleanRouteCtx)
                 (return talks)
         asTempWithDefault context
-    match "newsletter/*" $ do
-      route toIdxPath
+    match "ephemera/*" $ do
+      route cleanRoute
       compile $
         pandocWithSidenotes >>= saveSnapshot "eph-content" >>=
         loadAndApplyTemplate "templates/default.html" dateCtx
-    match "newsletter.html" $ do
+    match "ephemera.html" $ do
       route toIdxPath
       compile $ do
-        eph <- loadAll "newsletter/*"
+        eph <- recentFirst =<< loadAll "ephemera/*"
         asTempWithDefault $ ephCtx eph
     match "index.html" $ do
       route idRoute
@@ -96,7 +96,7 @@ composeTeaser = teaserFieldWithSeparator "···" "teaser"
 ephCtx :: [Item String] -> Context String
 ephCtx items = listField "items" ephPostCtx (return items)
   where
-    ephPostCtx = defaultContext <> teaserField "teaser" "eph-content" <> cleanRouteCtx
+    ephPostCtx = defaultContext <> composeTeaser "eph-content"
 
 -- This is the infamous `niceRoute' function.
 toIdxPath :: Routes

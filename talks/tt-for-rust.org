@@ -2,6 +2,7 @@
 title: "Type Theory for The Working Rustacean"
 venue: "Rust Belt Rust 2019"
 slides: "tt-for-rust.pdf"
+back: true
 ---
 
 Rust really hits a sweet spot with respect to programming languages on

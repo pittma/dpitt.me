@@ -1,5 +1,5 @@
 body {
-    background-color: #fff;
+    background-color: #fdf6e3;
 }
 
 h2, h3, h4 {
@@ -35,7 +35,15 @@ a:link, a:visited {
 }
 
 h1, h2, h3, #navigation {
-    color: #657b83;
+    color: #222;
+}
+
+#navigation {
+    font-size: 1.3em;
+}
+
+.back {
+    font-size: 1.5em;
 }
 
 #navigation a:link, #navigation a:visited {

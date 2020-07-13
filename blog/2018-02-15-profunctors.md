@@ -1,6 +1,7 @@
 ---
 title: "On Profunctors, Abruptly"
 publish: true
+back: true
 ---
 
 _Disclaimer: This post reqiures a working understanding of functors in

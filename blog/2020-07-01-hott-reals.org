@@ -1,5 +1,6 @@
 ---
 title: "WIP: The Real Numbers, Propositionally"
+back: true
 ---
 
 #+TITLE: The Real Numbers, Propositionally
