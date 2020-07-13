@@ -1,7 +1,5 @@
 body {
     background-color: #fff;
-    width: 55%;
-    padding-left: 0;
 }
 
 h2, h3, h4 {
@@ -14,16 +12,15 @@ p {
 }
 
 section > p, section > footer, section > table {
-  width: 100%;
+  width: 80%;
 }
 
-section > ol, section ul {
-    width: 96.5%;
+section > ol, section > ul {
+  width: 77%;
 }
 
 .sidenote, .marginnote {
-  text-align: justify;
-  margin-right: -30%;
+  margin-right: -35%;
   width: 25%;
 }
 
@@ -64,3 +61,33 @@ kbd {
     line-height: 1.4;
     white-space: nowrap;
 }
+
+/* Still use the resets for small screens from tufte */
+@media (max-width: 768px) { body { width: 84%;
+                                   padding-left: 8%;
+                                   padding-right: 8%; }
+                            hr, section > p, section > footer, section > table { width: 100%; }
+                            pre { overflow: scroll; }
+                            pre.code { width: 97%; }
+                            section > ol { width: 90%; }
+                            section > ul { width: 90%; }
+                            figure { max-width: 90%; }
+                            figcaption, figure.fullwidth figcaption { margin-right: 0%;
+                                                                      max-width: none; }
+                            blockquote { margin-left: 1.5em;
+                                         margin-right: 0em; }
+                            blockquote p, blockquote footer { width: 100%; }
+                            label.margin-toggle:not(.sidenote-number) { display: inline; }
+                            .sidenote, .marginnote { display: none; }
+                            .margin-toggle:checked + .sidenote,
+                            .margin-toggle:checked + .marginnote { display: block;
+                                                                   float: left;
+                                                                   left: 1rem;
+                                                                   clear: both;
+                                                                   width: 95%;
+                                                                   margin: 1rem 2.5%;
+                                                                   vertical-align: baseline;
+                                                                   position: relative; }
+                            label { cursor: pointer; }
+                            div.table-wrapper, table { width: 85%; }
+                            img { width: 100%; } }

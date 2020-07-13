@@ -248,4 +248,4 @@ Happy remembering!
 [fn:id] This id needs to be unique, but is in general arbitrary and
         needn't necessarily be related to the note's content.
 [fn:conv] Niklas Luhmann, the creator of the original zettelkasten
-          occasionally referred to it as a "converation partner".
+          occasionally referred to it as a "conversation partner".
