@@ -6,24 +6,6 @@ h2, h3, h4 {
     font-style: normal;
 }
 
-p {
-    text-align: justify;
-    font-size: 1.3rem;
-}
-
-section > p, section > footer, section > table {
-  width: 80%;
-}
-
-section > ol, section > ul {
-  width: 77%;
-}
-
-.sidenote, .marginnote {
-  margin-right: -35%;
-  width: 25%;
-}
-
 a:link, a:visited {
     background: none;
     text-shadow: none;
@@ -38,12 +20,20 @@ h1, h2, h3, #navigation {
     color: #222;
 }
 
+p {
+    color: #444;
+}
+
 #navigation {
     font-size: 1.3em;
 }
 
 .back {
     font-size: 1.5em;
+}
+
+.page-descrip {
+    margin-right: 12.5%;
 }
 
 #navigation a:link, #navigation a:visited {
@@ -56,7 +46,7 @@ kbd {
     font-size: 13px;
     font-family: Arial,Helvetica,sans-serif;
     background-color: #f7f7f7;
-    color: #333;
+    color: #333
     -moz-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
     -webkit-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
     box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
@@ -70,32 +60,47 @@ kbd {
     white-space: nowrap;
 }
 
-/* Still use the resets for small screens from tufte */
-@media (max-width: 768px) { body { width: 84%;
-                                   padding-left: 8%;
-                                   padding-right: 8%; }
-                            hr, section > p, section > footer, section > table { width: 100%; }
-                            pre { overflow: scroll; }
-                            pre.code { width: 97%; }
-                            section > ol { width: 90%; }
-                            section > ul { width: 90%; }
-                            figure { max-width: 90%; }
-                            figcaption, figure.fullwidth figcaption { margin-right: 0%;
-                                                                      max-width: none; }
-                            blockquote { margin-left: 1.5em;
-                                         margin-right: 0em; }
-                            blockquote p, blockquote footer { width: 100%; }
-                            label.margin-toggle:not(.sidenote-number) { display: inline; }
-                            .sidenote, .marginnote { display: none; }
-                            .margin-toggle:checked + .sidenote,
-                            .margin-toggle:checked + .marginnote { display: block;
-                                                                   float: left;
-                                                                   left: 1rem;
-                                                                   clear: both;
-                                                                   width: 95%;
-                                                                   margin: 1rem 2.5%;
-                                                                   vertical-align: baseline;
-                                                                   position: relative; }
-                            label { cursor: pointer; }
-                            div.table-wrapper, table { width: 85%; }
-                            img { width: 100%; } }
+table {
+  font-size: 1.2em;
+  padding: 0;
+  margin-right: 12.5%;
+  }
+  table tr {
+    background-color: white;
+    margin: 0;
+    padding: 0; }
+    table tr:nth-child(2n) {
+      background-color: #e6e6e6; }
+    table tr th {
+      font-weight: bold;
+      text-align: left;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr td {
+      text-align: left;
+      margin: 0;
+      padding: 6px 13px; }
+    table tr th :first-child, table tr td :first-child {
+      margin-top: 0; }
+    table tr th :last-child, table tr td :last-child {
+        margin-bottom: 0; }
+
+.read-status {
+    font-weight: bold;
+}
+
+.read-status.gave-up {
+    color: #923610;
+}
+
+.read-status.in-progress {
+    color: #185d58;
+}
+
+.read-status.queued {
+    color: #7d2f9c;
+}
+
+.read-status.completed {
+    color: #47575C;
+}

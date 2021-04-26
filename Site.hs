@@ -34,7 +34,7 @@ main =
       route blogRoute
       compile $
         pandocWithSidenotes >>=
-        loadAndApplyTemplate "templates/default.html" dateCtx
+        loadAndApplyTemplate "templates/post.html" dateCtx
     match "archive.html" $ do
       route toIdxPath
       compile $ do
@@ -47,7 +47,7 @@ main =
         getResourceBody >>= applyAsTemplate defaultContext >>=
         saveSnapshot "talk-content" >>=
         renderPandoc >>=
-        loadAndApplyTemplate "templates/default.html" defaultContext
+        loadAndApplyTemplate "templates/post.html" defaultContext
     match "talks.html" $ do
       route toIdxPath
       compile $ do
@@ -59,16 +59,17 @@ main =
                  cleanRouteCtx)
                 (return talks)
         asTempWithDefault context
-    match "newsletter/*" $ do
+    match "reads/*" $ do
       route toIdxPath
-      compile $
-        pandocWithSidenotes >>= saveSnapshot "eph-content" >>=
-        loadAndApplyTemplate "templates/default.html" dateCtx
-    match "newsletter.html" $ do
+      compile
+        getResourceBody
+    match "reads.html" $ do
       route toIdxPath
       compile $ do
-        eph <- loadAll "newsletter/*"
-        asTempWithDefault $ ephCtx eph
+        books <- loadAll "reads/*"
+        let context = listField "books" defaultContext (return books)
+        getResourceBody >>= applyAsTemplate context >>=
+          loadAndApplyTemplate "templates/wide.html" defaultContext
     match "index.html" $ do
       route idRoute
       compile $ do
@@ -76,27 +77,23 @@ main =
         let context = listField "items" (dateCtx <> blogRouteCtx) (return posts)
         asTempWithDefault context
     match "templates/*" $ compile templateCompiler
+
     match "*.html" $ do
       route toIdxPath
       compile $
         getResourceBody >>=
-        loadAndApplyTemplate "templates/default.html" defaultContext
+        loadAndApplyTemplate "templates/post.html" defaultContext
 
 asTempWithDefault :: Context String -> Compiler (Item String)
 asTempWithDefault cs =
   getResourceBody >>= applyAsTemplate cs >>=
-  loadAndApplyTemplate "templates/default.html" defaultContext
+  loadAndApplyTemplate "templates/post.html" defaultContext
 
 dateCtx :: Context String
 dateCtx = dateField "date" "%B %e, %Y" <> defaultContext
 
 composeTeaser :: String -> Context String
 composeTeaser = teaserFieldWithSeparator "···" "teaser"
-
-ephCtx :: [Item String] -> Context String
-ephCtx items = listField "items" ephPostCtx (return items)
-  where
-    ephPostCtx = defaultContext <> teaserField "teaser" "eph-content" <> cleanRouteCtx
 
 -- This is the infamous `niceRoute' function.
 toIdxPath :: Routes

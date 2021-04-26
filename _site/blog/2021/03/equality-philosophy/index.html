@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html>
+  <head>
+
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-37369627-6"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+    
+      gtag('config', 'UA-37369627-6');
+    </script>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    
+    
+    <title>dpitt.me :: Thinking about Equality Philosophically</title>
+    
+    
+    <meta name="viewport" content="width=device-width">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/tufte/tufte.css">
+    <link rel="stylesheet" href="/css/solarized.css">
+    <link rel="stylesheet" href="/css/overrides.css">
+
+    <!-- Twitter card things -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="" />
+    <meta name="twitter:image" content="https://dpitt.me/images/chicken-square.jpg" />
+    <meta name="twitter:url" content="/" />
+
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+    "HTML-CSS": {
+    styles: {".MathJax_Preview": {visibility: "hidden"}}
+    },
+    tex2jax: {inlineMath: [["\[","\]"],["\\\(","\\\)"]]},
+    TeX: {extensions: ["AMSmath.js","AMSsymbols.js","/js/xypic.js"]}
+    });
+  </script>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
+
+  </head>
+  <body>
+
+    <div id="header">
+       <div id="navigation">
+         <a href="/">dpitt.me</a> ::
+         <a href="/about/">About</a>
+         /
+         <a href="/archive/">Archive</a>
+         /
+         <a href="/talks/">Talks</a>
+         /
+         <a href="/reads/">Reading List</a>
+         <!-- / -->
+         <!-- <a href="/newsletter/">Newsletter</a> -->
+       </div>
+    </div>
+
+
+     <div id="content">
+
+       <article>
+         <h1>Thinking about Equality Philosophically</h1>
+         
+         <div class="info">
+           
+               Posted on March 27, 2021
+           
+         </div>
+
+         <section>
+           <p>I’ve a long running obsession with the meaning of equality, generally as its used in type theory, and about the divide between <em>intensional</em> equality and <em>extensional</em> equality. I’ve had discussions about this with real type theorists on IRC, and armchair theorists like myself, and I’m consistently left unsatisfied with the outcome. It seems that everyone has a different way of articulating this difference, and—as I’ve said <a href="https://twitter.com/pittma_/status/1255968222328709120?s=20">before</a>—it’s been hard, at least in my experience, to really land on a common understanding. In this post, I’m going to give some background, then try and articulate my own way of thinking about this, and how I think it’s related to Kant’s ideas about synthetic and analytic utterances.</p>
+<h1 id="i.-equalitys-divide">I. Equality’s Divide</h1>
+<p>As I alluded above, a lot of my interest in this topic is anchored in the distinction between intensional equality and extensional equality. The dropping of that anchor is frankly due to the struggle I’ve had myself to grasp this distinction which makes it difficult to make headway when you’re learning about type theory. To start, let’s try and give some meaningful definitions to these two types of equality:</p>
+<h2 id="intensional-equality">Intensional equality</h2>
+<p><strong>An <em>intensional</em> equality is one whose definition ships with the</strong> <strong>theory we’re working within. It’s an equality that is a part of our</strong> <strong><em>metatheory</em>.</strong></p>
+<p>Let’s, for example, think about working in Agda’s type theory, which is <em>pretty</em> damn close to vanilla Martin-Löf dependent type theory with some inconsequential—at least for the topic at hand—embellishments. In Agda, equality is intensional, and the metatheory we’re working within when we’re writing Agda is the language itself. So another way to think about intensionality within Agda is that equality is <em>syntactic</em>. When we, for instance, prove something like <code>x + y ≡ y + x</code> in Agda, we’re tasked with showing the type checker that the normal forms of the left-hand side of <span class="math inline">\(\equiv\)</span> is syntactically identical to the right-hand side. The thing to keep in mind that we <em>don’t</em> have to do, is to illustrate that this is true for all x’s and y’s by listing them, one by one, doing the two additions with every possible combination of <code>x</code> and <code>y</code>, and showing they both have the same results. If we’re using the natural numbers as the type for <code>x</code> and <code>y</code>, this task would take an infinite span of time. Instead, we get to use induction to show that, through reduction, the syntax on the left side <strong>is the same</strong> as the syntax on the right side. This is because <code>≡</code>’s meaning is <em>intrinsic</em> to the theory of Agda, when we use Agda what we’re using is the syntax of the language, and that syntax comes with the notion of sameness, rather simply in that two things are the same if they’re literally the same normalized string of characters<span><label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span class="sidenote">There is a bit of an over simplification w/r/t what is essentially an implementation detail. In practice Agda isn’t literally comparing strings of characters, but a data structure which can be shown to a human in Agda’s syntax.<br />
+<br />
+</span></span>.</p>
+<h3 id="intensionality-and-analycity">Intensionality and Analycity</h3>
+<p>Western Philosophy’s most famous lover of rules is, far and away, Immanuel Kant.</p>
+         </section>
+
+         
+         <a class="back" href="/">↩</a>
+         
+       </article>
+
+     </div>
+
+
+     <div id="footer">
+         Site proudly generated by
+         <a href="http://jaspervdj.be/hakyll">Hakyll</a>.
+         <br>
+         Note: This site uses Google Analytics track its usage. I
+         don't use this for anything other than traffic analysis.
+     </div>
+
+  </body>
+
+</html>
+

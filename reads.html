@@ -1,0 +1,64 @@
+---
+page-title: "Reading List"
+---
+
+<div id="content">
+
+  <div class="page-descrip">
+    <p>
+      In an effort to wean myself off of Amazon as a source for books
+      &c., I'm going to use this page to keep track of my reading list
+      rather than using Goodreads. I started this list on Sunday,
+      April 25th, 2021.
+    </p>
+  </div> <!-- /page-descrip -->
+
+<h2>2021</h2>
+
+<table>
+  <tr>
+    <th>Title</th>
+    <th>Author</th>
+    <th>Year Published</th>
+    <th>Status</th>
+    <th>Date Added</th>
+    <th>Date Completed</th>
+    <th>Description</th>
+  </tr>
+  $for(books)$
+  <tr>
+    <td><i>$book-title$</i></td>
+    <td>$author$</td>
+    <td>$year$</td>
+
+    $if(in-progress)$
+    <td><span class='read-status in-progress'>In Progress</span></td>
+    $endif$
+    $if(completed)$
+    <td><span class='read-status completed'>Completed</span></td>
+    $endif$
+    $if(queued)$
+    <td><span class='read-status queued'>Queued</span></td>
+    $endif$
+    $if(gave-up)$
+    <td><span class='read-status gave-up'>Gave Up</span></td>
+    $endif$
+
+    <td>$added$</td>
+
+    $if(date-completed)$
+    <td>$date-completed$</td>
+    $else$
+    <td></td>
+    $endif$
+
+    <td>
+      $body$
+    </td>
+  </tr>
+  $endfor$
+</table>
+
+<br>
+
+</div> <!-- /content-->
