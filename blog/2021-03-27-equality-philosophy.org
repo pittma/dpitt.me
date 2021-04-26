@@ -1,7 +1,6 @@
 ---
 title: Thinking about Equality Philosophically
 back: true
-publish: false
 ---
 
 I've a long running obsession with the meaning of equality, generally
