@@ -1,0 +1,143 @@
+body {
+  font-family: 'Source Sans Pro', sans-serif;
+  background-color: #fdf6e3;
+}
+
+a {
+  color: #3253ad;
+}
+
+a:hover {
+  color: #111;
+  text-decoration: none;
+}
+
+h1 {
+  font-weight: bold;
+  line-height: 40px;
+  font-size: 48px;
+  margin: -5px;
+  letter-spacing: -1px;
+}
+h1 a {
+  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #222;
+}
+
+h1 a:hover {
+  color: #3253ad;
+}
+
+h2 {
+  margin: 0;
+}
+
+h2 a {
+  color: #3253ad;
+}
+
+h2 a:hover {
+  color: #222;
+  text-decoration: none;
+}
+
+#nav-left {
+  position: absolute;
+}
+
+#nav-left a {
+  letter-spacing: -1px;
+  font-family: "HelveticaNeue", "Helvetica Neue", Helvetica, Arial, sans-serif;
+  color: #222;
+  font-size: 1.25em;
+}
+
+#nav-left li {
+  list-style-type: none;
+  margin: none;
+}
+
+#nav-descrip {
+  font-size: 1.2em;
+  font-weight: bold;
+  letter-spacing:-1px;
+}
+
+#nav {
+  color: #f0f0f0;
+}
+
+#nav:hover {
+  color: #3253ad;
+}
+
+#contain {
+  margin-top 40px;
+}
+
+#subtitle {
+  color: #878787;
+  letter-spacing: -1px;
+  font-size: 24px;
+}
+
+#post-title {
+  font-size: 3em;
+  font-weight: 300;
+  font-family: 'Source Sans Pro', sans-serif;
+  margin-top: 10px;
+}
+.post-body {
+  font-family: 'Source Sans Pro', sans-serif;
+  margin-top: 10px;
+  font-size: 1.3em;
+  color: #222;
+}
+
+.post-footer {
+  margin: 15px, 0px 0px 0px;
+  color: #878787;
+}
+
+#links a:hover {
+  color: #222;
+}
+
+#github-link {
+  color: #000;
+}
+
+#twitter-link {
+  color: #4099ff;
+}
+
+#linkedin-link {
+  color: #4875b4;
+}
+
+#descrip a {
+  color: #9a9a9a;
+}
+
+#me h3 {
+  color: #777;
+  font-family: 'PT Serif',  serif;
+  letter-spacing: -1px;
+  font-style: italic;
+}
+
+#me p {
+  font-size: 1.4em;
+  font-family: 'Source Sans Pro', sans-serif;
+ /*  text-align: justify; */
+ /* text-justify: inter-word; */
+}
+
+#icons {
+  color: #777;
+  font-size: 2.5em;
+}
+
+.tag {
+  background-color: #fff;
+}
