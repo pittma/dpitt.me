@@ -44,8 +44,8 @@
 	 //
          <b><a href="/talks">talks</a></b>
        </div>
+       <hr/>
     </div>
-    <hr/>
 
 
      <div id="content">
@@ -61,14 +61,14 @@
 <h2 id="zettelkasten">Zettelkasten</h2>
 <p>Literally “note box”, the original zettlekasten was a piece of furniture with index card drawers, six-by-six, like one of those bygone cabinets you used to see at the library for filing books’ locations with Dewey Decimal Classification. Those index cards followed four simple rules:</p>
 <ol>
-<li><strong>A unique id.</strong><span><label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span class="sidenote">This id needs to be unique, but is in general arbitrary and needn’t necessarily be related to the note’s content.<br />
+<li><strong>A unique id.</strong><span class="sidenote-wrapper"><label for="sn-0" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-0" class="margin-toggle"/><span class="sidenote">This id needs to be unique, but is in general arbitrary and needn’t necessarily be related to the note’s content.<br />
 <br />
 </span></span></li>
 <li><strong>One idea per card.</strong></li>
 <li><strong>Tag each idea/card (optionally).</strong></li>
 <li><strong>Each idea/card <em>links</em> to related ideas.</strong></li>
 </ol>
-<p>Given these rules, one can begin to build a cache of knowledge linked together <em>almost</em> like neurons, but <em>definitely</em> like a graph that you can explore from any ingress “idea vertex”<span><label for="sn-2" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-2" class="margin-toggle"/><span class="sidenote">Niklas Luhmann, the creator of the original zettelkasten occasionally referred to it as a “conversation partner”.<br />
+<p>Given these rules, one can begin to build a cache of knowledge linked together <em>almost</em> like neurons, but <em>definitely</em> like a graph that you can explore from any ingress “idea vertex”<span class="sidenote-wrapper"><label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span class="sidenote">Niklas Luhmann, the creator of the original zettelkasten occasionally referred to it as a “conversation partner”.<br />
 <br />
 </span></span>. It was this broad transitivity of ideas that Zettelkasten’s creator attributed their prolificacy to.</p>
 <p>Aha! A system. What kind of programmer would I be if I didn’t automate as much of this system as possible?</p>
@@ -77,25 +77,25 @@
 <pre class="shell"><code>$ zet the sorites paradox
 </code></pre>
 <p>Which I would expect to open an editor and let me try and get this thought from my head to my fingers with as few barriers as possible. To this end, I created a small bash script to put on my path:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1"></a><span class="co">#! /usr/bin/env bash</span></span>
-<span id="cb2-2"><a href="#cb2-2"></a></span>
-<span id="cb2-3"><a href="#cb2-3"></a><span class="kw">set</span> <span class="ex">-e</span></span>
-<span id="cb2-4"><a href="#cb2-4"></a></span>
-<span id="cb2-5"><a href="#cb2-5"></a><span class="va">ZROOT=${ZET_ROOT:=</span>~/Dropbox/zet<span class="va">}</span></span>
-<span id="cb2-6"><a href="#cb2-6"></a></span>
-<span id="cb2-7"><a href="#cb2-7"></a><span class="va">name=</span><span class="st">&quot;</span><span class="va">$ZROOT</span><span class="st">/</span><span class="va">$(</span><span class="fu">date</span> +<span class="st">&quot;%Y-%m-%d-%H%M&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
-<span id="cb2-8"><a href="#cb2-8"></a><span class="va">content=</span><span class="st">&quot;*&quot;</span></span>
-<span id="cb2-9"><a href="#cb2-9"></a></span>
-<span id="cb2-10"><a href="#cb2-10"></a><span class="kw">for</span> <span class="ex">word</span> in <span class="va">$@</span><span class="kw">;</span> <span class="kw">do</span></span>
-<span id="cb2-11"><a href="#cb2-11"></a>  <span class="va">name+=</span><span class="st">&quot;-</span><span class="va">$word</span><span class="st">&quot;</span></span>
-<span id="cb2-12"><a href="#cb2-12"></a>  <span class="va">content+=</span><span class="st">&quot; </span><span class="va">${word^}</span><span class="st">&quot;</span></span>
-<span id="cb2-13"><a href="#cb2-13"></a><span class="kw">done</span></span>
-<span id="cb2-14"><a href="#cb2-14"></a></span>
-<span id="cb2-15"><a href="#cb2-15"></a><span class="kw">if</span><span class="bu"> [</span> <span class="ot">!</span> <span class="ot">-e</span> <span class="st">&quot;</span><span class="va">$name</span><span class="st">.org&quot;</span><span class="bu"> ]</span>; <span class="kw">then</span></span>
-<span id="cb2-16"><a href="#cb2-16"></a>  <span class="bu">echo</span> -e <span class="st">&quot;</span><span class="va">$content</span><span class="st">\n\n#+FILETAGS:&quot;</span> <span class="op">&gt;</span> <span class="va">$name</span>.org</span>
-<span id="cb2-17"><a href="#cb2-17"></a><span class="kw">fi</span></span>
-<span id="cb2-18"><a href="#cb2-18"></a></span>
-<span id="cb2-19"><a href="#cb2-19"></a><span class="ex">emacsclient</span> -n <span class="va">$name</span>.org</span></code></pre></div>
+<div class="sourceCode" id="cb2"><pre class="sourceCode bash"><code class="sourceCode bash"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="co">#! /usr/bin/env bash</span></span>
+<span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-3"><a href="#cb2-3" aria-hidden="true" tabindex="-1"></a><span class="bu">set</span> <span class="at">-e</span></span>
+<span id="cb2-4"><a href="#cb2-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-5"><a href="#cb2-5" aria-hidden="true" tabindex="-1"></a><span class="va">ZROOT</span><span class="op">=</span><span class="va">${ZET_ROOT</span><span class="op">:=</span>~/Dropbox/zet<span class="va">}</span></span>
+<span id="cb2-6"><a href="#cb2-6" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-7"><a href="#cb2-7" aria-hidden="true" tabindex="-1"></a><span class="va">name</span><span class="op">=</span><span class="st">&quot;</span><span class="va">$ZROOT</span><span class="st">/</span><span class="va">$(</span><span class="fu">date</span> +<span class="st">&quot;%Y-%m-%d-%H%M&quot;</span><span class="va">)</span><span class="st">&quot;</span></span>
+<span id="cb2-8"><a href="#cb2-8" aria-hidden="true" tabindex="-1"></a><span class="va">content</span><span class="op">=</span><span class="st">&quot;*&quot;</span></span>
+<span id="cb2-9"><a href="#cb2-9" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-10"><a href="#cb2-10" aria-hidden="true" tabindex="-1"></a><span class="cf">for</span> word <span class="kw">in</span> <span class="va">$@</span><span class="kw">;</span> <span class="cf">do</span></span>
+<span id="cb2-11"><a href="#cb2-11" aria-hidden="true" tabindex="-1"></a>  <span class="va">name</span><span class="op">+=</span><span class="st">&quot;-</span><span class="va">$word</span><span class="st">&quot;</span></span>
+<span id="cb2-12"><a href="#cb2-12" aria-hidden="true" tabindex="-1"></a>  <span class="va">content</span><span class="op">+=</span><span class="st">&quot; </span><span class="va">${word</span><span class="op">^</span><span class="va">}</span><span class="st">&quot;</span></span>
+<span id="cb2-13"><a href="#cb2-13" aria-hidden="true" tabindex="-1"></a><span class="cf">done</span></span>
+<span id="cb2-14"><a href="#cb2-14" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-15"><a href="#cb2-15" aria-hidden="true" tabindex="-1"></a><span class="cf">if</span> <span class="bu">[</span> <span class="ot">!</span> <span class="ot">-e</span> <span class="st">&quot;</span><span class="va">$name</span><span class="st">.org&quot;</span> <span class="bu">]</span><span class="kw">;</span> <span class="cf">then</span></span>
+<span id="cb2-16"><a href="#cb2-16" aria-hidden="true" tabindex="-1"></a>  <span class="bu">echo</span> <span class="at">-e</span> <span class="st">&quot;</span><span class="va">$content</span><span class="st">\n\n#+FILETAGS:&quot;</span> <span class="op">&gt;</span> <span class="va">$name</span>.org</span>
+<span id="cb2-17"><a href="#cb2-17" aria-hidden="true" tabindex="-1"></a><span class="cf">fi</span></span>
+<span id="cb2-18"><a href="#cb2-18" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb2-19"><a href="#cb2-19" aria-hidden="true" tabindex="-1"></a><span class="ex">emacsclient</span> <span class="at">-n</span> <span class="va">$name</span>.org</span></code></pre></div>
 <p>In terms of new code, this is the extent of it for this Org mode-based zettelkasten. It pokes my pretty-much-always-running Emacs server and opens a file whose name is prepended by the date and time, followed by a dash-joined version of what I typed out at the command line. As an example, right now it’s March 26th, 2020 11:58 AM. So given the <code>zet</code> command I ran above, I’d get a file created for me called <code>2020-03-26-1158-sorites-paradox.org</code> and that file’d have the following content:</p>
 <pre class="org"><code>* Sorites Paradox
 
@@ -168,8 +168,8 @@ is math if not functions with arity?
 </kbd> +  <kbd>o </kbd> (<code>C-c C-o</code>), or <code>org-open-link-at-point</code>.</p>
 <h3 id="step-three-conversing-search">Step Three: Conversing (search)</h3>
 <p>Emacs Org mode has something called an <em>agenda</em>, that works as an aggregator over a collection of Org files. It can do some pretty amazing things like build a calendar for you, help you track your habits, or organize your todo list. For us, now, though, we’re going to use its tag and string matching searches. It does require a little setup in your <code>init.el</code> file to enable it, something like this:</p>
-<div class="sourceCode" id="cb7" data-org-language="emacs-lisp"><pre class="sourceCode commonlisp"><code class="sourceCode commonlisp"><span id="cb7-1"><a href="#cb7-1"></a>(global-set-key (kbd <span class="st">&quot;C-c a&quot;</span>) &#39;org-agenda)</span>
-<span id="cb7-2"><a href="#cb7-2"></a>(<span class="kw">setq</span> org-agenda-files &#39;(<span class="st">&quot;~/Dropbox/org/notes/todo.org&quot;</span> <span class="st">&quot;~/Dropbox/zet/&quot;</span>))</span></code></pre></div>
+<div class="sourceCode" id="cb7" data-org-language="emacs-lisp"><pre class="sourceCode commonlisp"><code class="sourceCode commonlisp"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>(global-set-key (kbd <span class="st">&quot;C-c a&quot;</span>) &#39;org-agenda)</span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>(<span class="kw">setq</span> org-agenda-files &#39;(<span class="st">&quot;~/Dropbox/org/notes/todo.org&quot;</span> <span class="st">&quot;~/Dropbox/zet/&quot;</span>))</span></code></pre></div>
 <p>This results in the key sequence  <kbd>ctrl </kbd> +  <kbd>c </kbd>  <kbd>a </kbd> being globally bound to opening Org Agenda, which looks like this:</p>
 <p><img src="/images/zettel-agenda.png" /></p>
 <p>From here I can use  <kbd>m </kbd> to search by tag matches, or  <kbd>s </kbd> for string matches, both of which yield a list of matches:</p>

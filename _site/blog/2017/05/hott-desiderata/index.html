@@ -44,8 +44,8 @@
 	 //
          <b><a href="/talks">talks</a></b>
        </div>
+       <hr/>
     </div>
-    <hr/>
 
 
      <div id="content">
@@ -66,13 +66,13 @@ H(x, 0) = f(x) \\
 H(x, 1) = g(x)
 \]</span></p>
 <p>To put this in English: We’ve convered the first line. That’s our two maps: <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span>. The second line is illustrating the what <span class="math inline">\(H\)</span> maps: the <em>product</em> of <span class="math inline">\(X\)</span> and the unit interval to <span class="math inline">\(B\)</span>. A product in this case means <em>and</em>. As a quick explanation of product in this context, we can refer to some Haskell:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1"></a><span class="co">-- This is a sum type, i.e. an or. Meaning a Maybe&#39; can be either a Just&#39; a or</span></span>
-<span id="cb1-2"><a href="#cb1-2"></a><span class="co">-- Nothing.</span></span>
-<span id="cb1-3"><a href="#cb1-3"></a><span class="kw">data</span> <span class="dt">Maybe&#39;</span> a <span class="ot">=</span> <span class="dt">Just&#39;</span> a <span class="op">|</span> <span class="dt">Nothing&#39;</span></span>
-<span id="cb1-4"><a href="#cb1-4"></a></span>
-<span id="cb1-5"><a href="#cb1-5"></a><span class="co">-- While this is a product, an and. The tuple is the product of something of</span></span>
-<span id="cb1-6"><a href="#cb1-6"></a><span class="co">-- type a and something of type b.</span></span>
-<span id="cb1-7"><a href="#cb1-7"></a><span class="kw">data</span> <span class="dt">Tuple&#39;</span> a b <span class="ot">=</span> (a, b)</span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- This is a sum type, i.e. an or. Meaning a Maybe&#39; can be either a Just&#39; a or</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- Nothing.</span></span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Maybe&#39;</span> a <span class="ot">=</span> <span class="dt">Just&#39;</span> a <span class="op">|</span> <span class="dt">Nothing&#39;</span></span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a><span class="co">-- While this is a product, an and. The tuple is the product of something of</span></span>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">-- type a and something of type b.</span></span>
+<span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Tuple&#39;</span> a b <span class="ot">=</span> (a, b)</span></code></pre></div>
 <p>The unit interval however, is another scale to the onion.</p>
 <p>The unit interval is the set of all the real numbers between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>. We use the bounds of this interval to be equal to our two maps given some <span class="math inline">\(x\)</span>. This means that our <span class="math inline">\(H\)</span>, our homotopy, is a function which through a transfinite series of inputs can “bend” <span class="math inline">\(f\)</span> into <span class="math inline">\(g\)</span>.</p>
 <p>That, in a nutshell is homotopy. But, as I delved deeper, like anything worth learning, that nascent intuition was simply a prerequisite.</p>
