@@ -5,36 +5,22 @@
 
 packages:
 - completed:
-    hackage: monad-gen-0.3.0.1@sha256:a2569465cfbd468d3350ef25de56b3362580e77537224313aab1210f40804a3b,821
+    hackage: pandoc-sidenote-0.22.1.0@sha256:44a4e9db8dcbd93fdc8b1a6e038b4d6402cace3b5f1bd3532ebd7e4e3ed0f2a2,1732
     pantry-tree:
-      size: 288
-      sha256: a825dc8dcc3ee27dbbc1b71f6853703790ed320249b8f8510bb36d726664e795
+      size: 322
+      sha256: 836d587c85e9c1d37ca25e7d8fb29f460447bae9d75b400f7fa1f080ad3f2003
   original:
-    hackage: monad-gen-0.3.0.1
+    hackage: pandoc-sidenote-0.22.1.0
 - completed:
-    hackage: pandoc-sidenote-0.19.0.0@sha256:f5a5fdab1900da7b26ca673d14302b0a27b56024ca811babcacab79ba9614e90,1196
+    hackage: hakyll-4.14.1.0@sha256:3afc2e60d14388792dfaf3592d489e21fd48a0abd47f0dbfbf9ab7ec25e582cd,9290
     pantry-tree:
-      size: 273
-      sha256: 0d23026f86da13ca57aaa0041bfe719cf7acbeddbadbbe1bb8e265316dcfce49
+      size: 8490
+      sha256: f5242fdbfbed08b7374055b5236dfff8220a964563e3268eadd8a0c7b1cb5d8a
   original:
-    hackage: pandoc-sidenote-0.19.0.0
-- completed:
-    hackage: hakyll-4.13.2.0@sha256:7185031bacfff87141486ada90798550dd0c29424ba613c7974222b27cf0f3b5,8867
-    pantry-tree:
-      size: 7841
-      sha256: d56afbe335270c66a19dea685413f4b06225805b5d6036a28da8b51f113dffae
-  original:
-    hackage: hakyll-4.13.2.0
-- completed:
-    hackage: lrucache-1.2.0.1@sha256:18fc3d7052012c7ab3cd395160f34b53c5e1ec5379cc45185baf35b90ffadc2e,1254
-    pantry-tree:
-      size: 619
-      sha256: 61b2a39a11873f2d8a577e1f6b5e848d2f465ea7f6837ce15436796d3a20eda0
-  original:
-    hackage: lrucache-1.2.0.1
+    hackage: hakyll-4.14.1.0
 snapshots:
 - completed:
-    size: 524804
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/14/16.yaml
-    sha256: 4d1519a4372d051d47a5eae2241cf3fb54e113d7475f89707ddb6ec06add2888
-  original: lts-14.16
+    size: 586041
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/18/12.yaml
+    sha256: 80fc6391195ff00c36f2a605ecbb07de909bfaa2eaa9722a27e486a6ecf8ecb0
+  original: lts-18.12
