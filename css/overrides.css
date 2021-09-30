@@ -1,43 +1,13 @@
 body {
-    background-color: #fdf6e3;
+    width: 87%;
+    font-family: 'Source Serif Pro', serif;
+    background-color: #fff;
+    max-width: none;
 }
 
-h2, h3, h4 {
-    font-style: normal;
-}
-
-a:link, a:visited {
-    background: none;
-    text-shadow: none;
-    text-decoration: underline;
-}
-
-.about-center {
-    text-align: center;
-}
-
-h1, h2, h3, #navigation {
-    color: #222;
-}
-
-p {
-    color: #444;
-}
-
-#navigation {
-    font-size: 1.3em;
-}
-
-.back {
-    font-size: 1.5em;
-}
-
-.page-descrip {
-    margin-right: 12.5%;
-}
-
-#navigation a:link, #navigation a:visited {
-    color: #6c71c4;
+#content {
+    margin: auto;
+    width: 80%;
 }
 
 kbd {
@@ -58,49 +28,4 @@ kbd {
     text-shadow: 0 1px 0 #fff;
     line-height: 1.4;
     white-space: nowrap;
-}
-
-table {
-  font-size: 1.2em;
-  padding: 0;
-  margin-right: 12.5%;
-  }
-  table tr {
-    background-color: white;
-    margin: 0;
-    padding: 0; }
-    table tr:nth-child(2n) {
-      background-color: #e6e6e6; }
-    table tr th {
-      font-weight: bold;
-      text-align: left;
-      margin: 0;
-      padding: 6px 13px; }
-    table tr td {
-      text-align: left;
-      margin: 0;
-      padding: 6px 13px; }
-    table tr th :first-child, table tr td :first-child {
-      margin-top: 0; }
-    table tr th :last-child, table tr td :last-child {
-        margin-bottom: 0; }
-
-.read-status {
-    font-weight: bold;
-}
-
-.read-status.gave-up {
-    color: #923610;
-}
-
-.read-status.in-progress {
-    color: #185d58;
-}
-
-.read-status.queued {
-    color: #7d2f9c;
-}
-
-.read-status.completed {
-    color: #47575C;
 }

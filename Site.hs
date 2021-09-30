@@ -35,12 +35,6 @@ main =
       compile $
         pandocWithSidenotes >>=
         loadAndApplyTemplate "templates/post.html" dateCtx
-    match "archive.html" $ do
-      route toIdxPath
-      compile $ do
-        posts <- recentFirst =<< loadAll "blog/*"
-        let context = listField "items" (dateCtx <> blogRouteCtx) (return posts)
-        asTempWithDefault context
     match "talks/*" $ do
       route toIdxPath
       compile $
@@ -51,7 +45,7 @@ main =
     match "talks.html" $ do
       route toIdxPath
       compile $ do
-        talks <- loadAll "talks/*"
+        talks <- recentFirst =<< loadAll "talks/*"
         let context =
               listField
                 "talks"
@@ -59,23 +53,12 @@ main =
                  cleanRouteCtx)
                 (return talks)
         asTempWithDefault context
-    match "reads/*" $ do
-      route toIdxPath
-      compile
-        getResourceBody
-    match "reads.html" $ do
-      route toIdxPath
-      compile $ do
-        books <- loadAll "reads/*"
-        let context = listField "books" defaultContext (return books)
-        getResourceBody >>= applyAsTemplate context >>=
-          loadAndApplyTemplate "templates/wide.html" defaultContext
     match "index.html" $ do
       route idRoute
       compile $ do
-        posts <- take 5 <$> (recentFirst =<< loadAll "blog/*")
+        posts <- recentFirst =<< loadAll "blog/*"
         let context = listField "items" (dateCtx <> blogRouteCtx) (return posts)
-        asTempWithDefault context
+        getResourceBody >>= applyAsTemplate context
     match "templates/*" $ compile templateCompiler
 
     match "*.html" $ do
@@ -90,7 +73,7 @@ asTempWithDefault cs =
   loadAndApplyTemplate "templates/post.html" defaultContext
 
 dateCtx :: Context String
-dateCtx = dateField "date" "%B %e, %Y" <> defaultContext
+dateCtx = dateField "date" "%m-%d-%Y" <> defaultContext
 
 composeTeaser :: String -> Context String
 composeTeaser = teaserFieldWithSeparator "···" "teaser"

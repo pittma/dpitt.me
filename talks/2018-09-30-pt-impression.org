@@ -2,6 +2,7 @@
 title: "Proof Theory Impressionism: Blurring the Curry-Howard Line"
 venue: "Strangeloop 2018"
 slides: "proof-theory-impressionism.pdf"
+video: "https://youtu.be/jrVPB-Ad5Gc"
 back: true
 ---
 

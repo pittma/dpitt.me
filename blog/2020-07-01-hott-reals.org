@@ -1,12 +1,13 @@
 ---
-title: "WIP: The Real Numbers, Propositionally"
+title: "The Real Numbers, Propositionally"
 back: true
+publish: true
 ---
 
 #+TITLE: The Real Numbers, Propositionally
 
 *NOTE: If you come across this please know that it is a WIP. There is
-stuff in here that is /wrong/.*
+stuff in here that is /wrong/ because I was still learning it.*
 
 * Part I: Foundations
 
@@ -107,6 +108,9 @@ this section without taking them with us.
 Now, this notion of functions, their inverses, and functions between
 functions can be generalized in category theory in an object called a
 /groupoid/.
+
+[fn:ri] Where $[0, 1]$ denotes the /real interval/, the continuous and
+        transfinite sequence of the real numbers between $0$ and $1$.
 
 ** Groupoids
 
@@ -401,5 +405,3 @@ And given an $a : \text{CApprox}$ we take its limit:
 $lim : \text{CApprx} \rightarrow \mathbb{R}$ to produce our real number.
 
 
-[fn:ri] Where $[0, 1]$ denotes the /real interval/, the continuous and
-        transfinite sequence of the real numbers between $0$ and $1$.

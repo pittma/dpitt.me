@@ -7,19 +7,10 @@ $partial("templates/header.html")$
          $if(subtitle)$
          <h2>$subtitle$</h2>
          $endif$
-         <div class="info">
-           $if(date)$
-               Posted on $date$
-           $endif$
-         </div>
 
          <section>
            $body$
          </section>
-
-         $if(back)$
-         <a class="back" href="/">↩</a>
-         $endif$
        </article>
 
      </div>

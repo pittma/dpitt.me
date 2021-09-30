@@ -8,6 +8,3 @@ extra-deps:
 - hakyll-4.13.2.0
 - lrucache-1.2.0.1
 resolver: lts-14.16
-nix:
-  enable: true
-  packages: [zlib]

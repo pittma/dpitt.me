@@ -2,6 +2,7 @@
 title: "Type Theory for The Working Rustacean"
 venue: "Rust Belt Rust 2019"
 slides: "tt-for-rust.pdf"
+video: "https://youtu.be/BdXWlQsd7RI"
 back: true
 ---
 
