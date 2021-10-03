@@ -59,6 +59,10 @@ main =
         posts <- recentFirst =<< loadAll "blog/*"
         let context = listField "items" (dateCtx <> blogRouteCtx) (return posts)
         getResourceBody >>= applyAsTemplate context
+    match "newsletter.html" $ do
+      route toIdxPath
+      compile $ do
+        getResourceBody >>= applyAsTemplate defaultContext
     match "templates/*" $ compile templateCompiler
 
     match "*.html" $ do

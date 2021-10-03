@@ -38,8 +38,7 @@ kbd {
 			    #header, #footer { width: 100%; }
 			    #content { width: 90%; margin: auto; }
                             hr, section > p, section > footer, section > table { width: 100%; }
-			    pre { overflow-x: scroll }
-                            pre.code { width: 97%; }
+                            pre.code { width: 97%; overflow: scroll }
                             section > ol { width: 90%; }
                             section > ul { width: 90%; }
                             figure { max-width: 90%; }
