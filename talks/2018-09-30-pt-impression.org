@@ -35,9 +35,5 @@ include spaces like totality, type-level programming, and dependent
 types. Ultimately drawing lines from the above explorations back to
 how one might write such a thing in the language of a proof assistant.
 
-$if(slides)$
 - [[https://dpitt.me/files/$slides$][Slides]]
-$endif$
-$if(video)$
 - [[$video$][Video]]
-$endif$

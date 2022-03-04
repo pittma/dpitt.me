@@ -1,9 +1,9 @@
 ---
-layout: post
 title: "Wittgenstein's Language Games"
+publish: true
 ---
 
-## 1. Introduction
+# Introduction
 
 In _Remarks on Colour_, Ludwig Wittgenstein explores a set of puzzles through
 colors which are meant to illuminate a specific type of logical incongruence.
@@ -14,10 +14,10 @@ $$
 $$
 
 This example is the most salient for the purposes of this post, but before I
-try and explain why, I'd like to try explain what point Wittgenstein was trying
+try and explain why, I'd like to explain what point Wittgenstein was trying
 to elucidate with this puzzle.
 
-## 2 Language Games
+# Language Games
 
 Wittgenstein, by the end of his life had resolved to understand language in its
 ordinary setting as a collection of _language games_. One such language game
@@ -45,10 +45,10 @@ Now, when viewed as distinct modalities, there is no violation of what one could
 imagine the "rules" of a language game might be: A can be red, A can be blue,
 and conjunction is standard tool in logic. It's only when we try to put them
 together that we find that they cease to be logical. It's this point that
-Wittgenstein was trying to illustrate. There isn't a singular, univeral
+Wittgenstein was trying to illustrate. There isn't a singular, universal
 structure which language can be reduced to<sup>[1]</sup>.
 
-## 3 Language Games in Mathematics
+# Language Games in Mathematics
 
 Wittgenstein also believed that language games were present in mathematics.
 Arguably, this is in opposition to the viewpoint of earlier Wittgenstein and
@@ -67,5 +67,3 @@ exactly once. Here's an example:
 <!-- Consider changing the narrative here. Instead of "a few examples", focus
      on linear logic and show that, at least in logic, we have the ! and ?
      modalities which act as vehicles _between_ the two games. -->
-
-{% include math.html %}

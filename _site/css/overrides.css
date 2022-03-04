@@ -1,15 +1,19 @@
 body {
     font-family: 'Source Serif Pro', serif;
-    background-color: #fff;
-    max-width: none;
-    overflow-x: hidden;
+    width: 80%;
+    margin: auto;
+    color: #1c1c1c;
 }
 
-#header, #footer { width: 150%; }
+article > h1 {
+    border-bottom: 1px solid #222;
+    border-left: 1px solid #222;
+    padding-left: 0.5em;
+    font-style: italic;
+}
 
-#content {
-    margin: auto;
-    width: 80%;
+#footer {
+    font-size: 0.75em;
 }
 
 kbd {
@@ -31,33 +35,3 @@ kbd {
     line-height: 1.4;
     white-space: nowrap;
 }
-
-
-/* reset to the original tufte css for smaller screens */
-@media (max-width: 760px) { body { width: 100%; margin-right: 0; padding-right: 0;}
-			    #header, #footer { width: 100%; }
-			    #content { width: 90%; margin: auto; }
-                            hr, section > p, section > footer, section > table { width: 100%; }
-                            pre.code { width: 97%; overflow: scroll }
-                            section > ol { width: 90%; }
-                            section > ul { width: 90%; }
-                            figure { max-width: 90%; }
-                            figcaption, figure.fullwidth figcaption { margin-right: 0%;
-                                                                      max-width: none; }
-                            blockquote { margin-left: 1.5em;
-                                         margin-right: 0em; }
-                            blockquote p, blockquote footer { width: 100%; }
-                            label.margin-toggle:not(.sidenote-number) { display: inline; }
-                            .sidenote, .marginnote { display: none; }
-                            .margin-toggle:checked + .sidenote,
-                            .margin-toggle:checked + .marginnote { display: block;
-                                                                   float: left;
-                                                                   left: 1rem;
-                                                                   clear: both;
-                                                                   width: 95%;
-                                                                   margin: 1rem 2.5%;
-                                                                   vertical-align: baseline;
-                                                                   position: relative; }
-                            label { cursor: pointer; }
-                            div.table-wrapper, table { width: 85%; }
-                            img { width: 100%; } }

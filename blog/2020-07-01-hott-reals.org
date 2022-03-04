@@ -1,7 +1,6 @@
 ---
 title: "The Real Numbers, Propositionally"
 back: true
-publish: true
 ---
 
 #+TITLE: The Real Numbers, Propositionally
@@ -23,7 +22,7 @@ mathematics. For HoTT to be "foundational" we're going to need to be
 able to reason about the real numbers /through/ it.
 
 The goal of this document is to first build up an intuition for the
-requisite peices of understanding the reals in HoTT. We begin by giving
+requisite pieces of understanding the reals in HoTT. We begin by giving
 a whirlwind introduction to Homotopy Type Theory and the mathematical
 toolbox it provides us. Next, we'll explore the mathematical structure
 we need to construct the real numbers, namely Cauchy Sequences. And

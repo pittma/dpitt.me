@@ -9,7 +9,6 @@ import System.FilePath
 import Data.List.Split (splitOn)
 
 import Text.Pandoc.Options
-import Text.Pandoc.SideNote (usingSideNotes)
 
 main :: IO ()
 main =
@@ -98,10 +97,9 @@ pandocWithSidenotes =
       wopts =
         defaultHakyllWriterOptions
           {writerExtensions = extents, writerHTMLMathMethod = MathJax ""}
-   in pandocCompilerWithTransform
+   in pandocCompilerWith
         defaultHakyllReaderOptions
         wopts
-        usingSideNotes
 
 mkBlogRoute :: Identifier -> FilePath
 mkBlogRoute ident =

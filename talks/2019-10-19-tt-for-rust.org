@@ -3,7 +3,6 @@ title: "Type Theory for The Working Rustacean"
 venue: "Rust Belt Rust 2019"
 slides: "tt-for-rust.pdf"
 video: "https://youtu.be/BdXWlQsd7RI"
-back: true
 ---
 
 Rust really hits a sweet spot with respect to programming languages on
@@ -30,9 +29,5 @@ how this mimicry is derived from common ground in the worlds of types
 or categories.
 
 - [[https://play.rust-lang.org/?version=stable&mode=debug&edition=2018&gist=5b1cd1dddfb7c374e9271199a08913af][Playground link to the Rust code used in the talk]]
-$if(slides)$
 - [[https://dpitt.me/files/$slides$][Slides]]
-$endif$
-$if(video)$
 - [[$video$][Video]]
-$endif$

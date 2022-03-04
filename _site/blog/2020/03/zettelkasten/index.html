@@ -15,7 +15,6 @@
     <meta name="viewport" content="width=device-width">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="/tufte/tufte.css">
     <link rel="stylesheet" href="/css/solarized.css">
     <link rel="stylesheet" href="/css/overrides.css">
 
@@ -46,33 +45,28 @@
 	 //
          <b><a href="/newsletter">newsletter</a></b>
        </div>
-       <hr/>
     </div>
 
 
      <div id="content">
 
+       <h1>Using Emacs's org-mode As Your Zettelkasten</h1>
+	 
        <article>
-         <h1>Using Emacs's org-mode As Your Zettelkasten</h1>
          
          <h2>(And some editorializing on the foundations of mathematics)</h2>
          
 
-         <section>
-           <p>I like to write. I don’t do it as often as I’d like to, but nonetheless I do like to do it. I’ve found that one of the best exercises for increasing the bandwidth of the passageway from my brain to my fingers is superfluous note taking. Couple this Good Thing with a Could Appear Like A Good Thing But Is Dubious At Best Thing, namely ADHD/anxiety-induced procrastinatory over-organizing, one could imagine that how I choose to organize those notes is something that I (superfluously) think about. I’ve tried them all, notebooks, Evernote, Google Keep, <a href="https://github.com/pittma/notes">even a custom markdown-to-jekyll app that was synched by Dropbox</a>. However, when I switched to Emacs about 2 years ago and started using <a href="https://orgmode.org/">Org mode</a>, it, as a medium, really stuck. Since then I’ve just been spinning and churning with nearly no success on how to organize my org file(s). And then, about a week ago, I encountered <a href="https://www.srid.ca/2010101.html"><code>neuron</code></a> in the <em><a href="https://haskellweekly.news">Haskell Weekly</a></em> newsletter, and because I’m prone to buy wholesale anything a smart person says about note-taking, my interest was piqued. The <code>neuron</code> author linked to this <a href="https://writingcooperative.com/zettelkasten-how-one-german-scholar-was-so-freakishly-productive-997e4e0ca125">Zettelkasten overview</a>, which I promptly devoured and, well, I <em>had</em> to do it. Please read what I linked above for a nice narrative on Zettelkasten’s origins. What follows is just a skeletal exposition.</p>
+         <p>I like to write. I don’t do it as often as I’d like to, but nonetheless I do like to do it. I’ve found that one of the best exercises for increasing the bandwidth of the passageway from my brain to my fingers is superfluous note taking. Couple this Good Thing with a Could Appear Like A Good Thing But Is Dubious At Best Thing, namely ADHD/anxiety-induced procrastinatory over-organizing, one could imagine that how I choose to organize those notes is something that I (superfluously) think about. I’ve tried them all, notebooks, Evernote, Google Keep, <a href="https://github.com/pittma/notes">even a custom markdown-to-jekyll app that was synched by Dropbox</a>. However, when I switched to Emacs about 2 years ago and started using <a href="https://orgmode.org/">Org mode</a>, it, as a medium, really stuck. Since then I’ve just been spinning and churning with nearly no success on how to organize my org file(s). And then, about a week ago, I encountered <a href="https://www.srid.ca/2010101.html"><code>neuron</code></a> in the <em><a href="https://haskellweekly.news">Haskell Weekly</a></em> newsletter, and because I’m prone to buy wholesale anything a smart person says about note-taking, my interest was piqued. The <code>neuron</code> author linked to this <a href="https://writingcooperative.com/zettelkasten-how-one-german-scholar-was-so-freakishly-productive-997e4e0ca125">Zettelkasten overview</a>, which I promptly devoured and, well, I <em>had</em> to do it. Please read what I linked above for a nice narrative on Zettelkasten’s origins. What follows is just a skeletal exposition.</p>
 <h2 id="zettelkasten">Zettelkasten</h2>
 <p>Literally “note box”, the original zettlekasten was a piece of furniture with index card drawers, six-by-six, like one of those bygone cabinets you used to see at the library for filing books’ locations with Dewey Decimal Classification. Those index cards followed four simple rules:</p>
 <ol>
-<li><strong>A unique id.</strong><span class="sidenote-wrapper"><label for="sn-0" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-0" class="margin-toggle"/><span class="sidenote">This id needs to be unique, but is in general arbitrary and needn’t necessarily be related to the note’s content.<br />
-<br />
-</span></span></li>
+<li><strong>A unique id.</strong><a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a></li>
 <li><strong>One idea per card.</strong></li>
 <li><strong>Tag each idea/card (optionally).</strong></li>
 <li><strong>Each idea/card <em>links</em> to related ideas.</strong></li>
 </ol>
-<p>Given these rules, one can begin to build a cache of knowledge linked together <em>almost</em> like neurons, but <em>definitely</em> like a graph that you can explore from any ingress “idea vertex”<span class="sidenote-wrapper"><label for="sn-1" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-1" class="margin-toggle"/><span class="sidenote">Niklas Luhmann, the creator of the original zettelkasten occasionally referred to it as a “conversation partner”.<br />
-<br />
-</span></span>. It was this broad transitivity of ideas that Zettelkasten’s creator attributed their prolificacy to.</p>
+<p>Given these rules, one can begin to build a cache of knowledge linked together <em>almost</em> like neurons, but <em>definitely</em> like a graph that you can explore from any ingress “idea vertex”<a href="#fn2" class="footnote-ref" id="fnref2" role="doc-noteref"><sup>2</sup></a>. It was this broad transitivity of ideas that Zettelkasten’s creator attributed their prolificacy to.</p>
 <p>Aha! A system. What kind of programmer would I be if I didn’t automate as much of this system as possible?</p>
 <h3 id="step-one-a-zet-command">Step One: A <code>zet</code> Command</h3>
 <p>To begin, I wanted a way to “start the conversation” with my zettelkasten. To me, that looked like just telling it about a new topic. Something like this:</p>
@@ -182,15 +176,21 @@ is math if not functions with arity?
 <p>One important factor I’ve found with note taking, at least for me, is for my note compendium to be append-only. I can’t let myself go back and pare down, edit and reëdit endlessly, because, unfailingly, I always end up deleting everything since of course no organizational scheme I can come up with is copacetic. The Zettelkasten approach actually saves me from myself here because there’s a single note per file, and I’m almost never inundated with an entire list.</p>
 <p>Using my zettelkasten stirs up that nostalgic feeling of going through an old notebook every time I open it, and I’m only ever confronted with the ideas I’ve asked of it. It narrows the aperture to a topic in a way that saves me from myself and the consequences of the inexorable self-loathing of an anxious mind. If anything from these last few paragraphs resonates at all, I think it may work for you too.</p>
 <p>Happy remembering!</p>
-         </section>
+<section class="footnotes" role="doc-endnotes">
+<hr />
+<ol>
+<li id="fn1" role="doc-endnote"><p>This id needs to be unique, but is in general arbitrary and needn’t necessarily be related to the note’s content.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+<li id="fn2" role="doc-endnote"><p>Niklas Luhmann, the creator of the original zettelkasten occasionally referred to it as a “conversation partner”.<a href="#fnref2" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
+</ol>
+</section>
        </article>
 
      </div>
 
      <div id="footer">
        <hr/>
-       Site proudly generated by
-       <a href="http://jaspervdj.be/hakyll">Hakyll</a>.
+       © dan pittman.
+       I reserve the right to be wrong.
      </div>
 
   </body>
