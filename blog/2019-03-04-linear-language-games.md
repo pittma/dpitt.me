@@ -1,6 +1,5 @@
 ---
 title: "Wittgenstein's Language Games"
-publish: true
 ---
 
 # Introduction
