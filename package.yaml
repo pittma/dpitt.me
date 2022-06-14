@@ -15,6 +15,7 @@ executable:
   dependencies:
     - base
     - hakyll
+    - hakyll-hacks
     - pandoc
     - pandoc-sidenote
     - filepath

@@ -3,37 +3,23 @@
 module Main where
 
 import Hakyll
+import HakyllHacks
 
 import System.FilePath
-
-import Data.List.Split (splitOn)
-
 import Text.Pandoc.Options
 
 main :: IO ()
 main =
-  hakyll $ do
+  hakyllWithBaseRules $ do
     match "tufte/et-book/*/*" $ route $ customRoute $ drop 6 . toFilePath
     match "tufte/tufte.css" $ do
       route idRoute
       compile copyFileCompiler
-    match "css/*.css" $ do
-      route idRoute
-      compile copyFileCompiler
-    match "js/*.js" $ do
-      route idRoute
-      compile copyFileCompiler
-    match "files/*" $ do
-      route idRoute
-      compile copyFileCompiler
-    match "images/*" $ do
-      route idRoute
-      compile copyFileCompiler
     match "blog/*" $ do
-      route blogRoute
+      route slugRoute
       compile $
         pandocWithSidenotes >>=
-        loadAndApplyTemplate "templates/post.html" dateCtx
+        loadAndApplyTemplate "templates/post.html" (dateCtx <> defaultContext)
     match "talks/*" $ do
       route toIdxPath
       compile $
@@ -51,12 +37,12 @@ main =
                 (defaultContext <> composeTeaser "talk-content" <>
                  cleanRouteCtx)
                 (return talks)
-        asTempWithDefault context
+        asPostTemp context
     match "index.html" $ do
       route idRoute
       compile $ do
         posts <- recentFirst =<< loadAll "blog/*"
-        let context = listField "items" (dateCtx <> blogRouteCtx) (return posts)
+        let context = listField "items" (dateCtx <> blogRouteCtx <> defaultContext) (return posts)
         getResourceBody >>= applyAsTemplate context
     match "newsletter.html" $ do
       route toIdxPath
@@ -66,28 +52,13 @@ main =
 
     match "*.html" $ do
       route toIdxPath
-      compile $
-        getResourceBody >>=
-        loadAndApplyTemplate "templates/post.html" defaultContext
+      compile $ asPostTemp defaultContext
 
-asTempWithDefault :: Context String -> Compiler (Item String)
-asTempWithDefault cs =
-  getResourceBody >>= applyAsTemplate cs >>=
-  loadAndApplyTemplate "templates/post.html" defaultContext
-
-dateCtx :: Context String
-dateCtx = dateField "date" "%m-%d-%Y" <> defaultContext
+asPostTemp :: Context String -> Compiler (Item String)
+asPostTemp = asTempWithDefault "templates/post.html"
 
 composeTeaser :: String -> Context String
 composeTeaser = teaserFieldWithSeparator "···" "teaser"
-
--- This is the infamous `niceRoute' function.
-toIdxPath :: Routes
-toIdxPath = customRoute createIndexRoute
-  where
-    createIndexRoute ident =
-      let path = toFilePath ident
-       in takeDirectory path </> takeBaseName path </> "index.html"
 
 pandocWithSidenotes :: Compiler (Item String)
 pandocWithSidenotes =
@@ -101,28 +72,9 @@ pandocWithSidenotes =
         defaultHakyllReaderOptions
         wopts
 
-mkBlogRoute :: Identifier -> FilePath
-mkBlogRoute ident =
-  let path = toFilePath ident
-      fileNameSplit = splitOn "-" (takeBaseName path)
-   in takeDirectory path </> head fileNameSplit </> fileNameSplit !! 1 </>
-      drop 11 (takeBaseName path) </>
-      "index.html"
-
-blogRoute :: Routes
-blogRoute = customRoute mkBlogRoute
-
 blogRouteCtx :: Context String
 blogRouteCtx =
-  field "blog-route" (return . dropFileName . mkBlogRoute . itemIdentifier)
-
-mkCleanRoute :: Identifier -> FilePath
-mkCleanRoute ident =
-  let path = toFilePath ident
-   in takeDirectory path </> takeBaseName path
-
-cleanRoute :: Routes
-cleanRoute = customRoute mkCleanRoute
+  field "blog-route" (return . dropFileName . dateSlug . itemIdentifier)
 
 cleanRouteCtx :: Context String
 cleanRouteCtx =
