@@ -16,6 +16,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/solarized.css">
+    <link rel="stylesheet" href="/tufte/tufte.css">
     <link rel="stylesheet" href="/css/overrides.css">
 
   <script type="text/x-mathjax-config">
@@ -37,13 +38,13 @@
 
     <div id="header">
        <div id="navigation">
-         <b><a href="/">dpitt.me</a></b>
+         <b><a href="/">home</a></b>
 	 //
-         <b><a href="/about">about me</a></b>
+         <b><a href="/archive">archive</a></b>
 	 //
          <b><a href="/talks">talks</a></b>
-	 //
-         <b><a href="/newsletter">newsletter</a></b>
+	 <!-- // -->
+         <!-- <b><a href="/newsletter">newsletter</a></b> -->
        </div>
     </div>
 
@@ -53,19 +54,35 @@
        <h1>Homotopy Type Theory Desiderata</h1>
 	 
        <article>
-         
+	 <section>
+           
 
-         <p>This is a thing I do. I like to learn things by finding the thing I want to learn, and then work my way down as I encounter unknowns, exposing layers like an epistemological onion — a truth vegetable.</p>
-<p>The current outermost layer is Homotopy Type Theory which is put forth by <a href="https://homotopytypetheory.org/book/">the HoTT Book</a>. Per usual, as I dig down beneath the <em>tunic</em> I’m reminded that, for all intents and purposes, I know nothing and I spiral out of control wiki link after wiki link, my only respite a term I actually understand. It could be argued that this is called “learning”, but that label is dubious.</p>
+           <p>This is a thing I do. I like to learn things by finding the thing I
+want to learn, and then work my way down as I encounter unknowns,
+exposing layers like an epistemological onion — a truth vegetable.</p>
+<p>The current outermost layer is Homotopy Type Theory which is put forth
+by <a href="https://homotopytypetheory.org/book/">the HoTT Book</a>. Per usual,
+as I dig down beneath the <em>tunic</em> I’m reminded that, for all intents
+and purposes, I know nothing and I spiral out of control wiki link
+after wiki link, my only respite a term I actually understand. It
+could be argued that this is called “learning”, but that label is
+dubious.</p>
 <h3 id="homotopy">Homotopy</h3>
-<p>Digressions aside, Homotopy is, in my best attempt at lucidity, a continuous function that can map between two functions, say <span class="math inline">\(f,g: A \rightarrow B\)</span> mapping from the same space to another same space. If this function exists, and we’ll call it <span class="math inline">\(H\)</span>, then those two maps are homotopic. Formally, it looks like this:</p>
+<p>Digressions aside, Homotopy is, in my best attempt at lucidity, a
+continuous function that can map between two functions, say <span class="math inline">\(f,g: A \rightarrow B\)</span> mapping from the same space to another same space. If
+this function exists, and we’ll call it <span class="math inline">\(H\)</span>, then those two maps are
+homotopic. Formally, it looks like this:</p>
 <p><span class="math display">\[\
 f, g: A \rightarrow B \\
 H: A \times [0, 1] \rightarrow B \\
 H(x, 0) = f(x) \\
 H(x, 1) = g(x)
 \]</span></p>
-<p>To put this in English: We’ve convered the first line. That’s our two maps: <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span>. The second line is illustrating the what <span class="math inline">\(H\)</span> maps: the <em>product</em> of <span class="math inline">\(X\)</span> and the unit interval to <span class="math inline">\(B\)</span>. A product in this case means <em>and</em>. As a quick explanation of product in this context, we can refer to some Haskell:</p>
+<p>To put this in English: We’ve convered the first line. That’s our two
+maps: <span class="math inline">\(f\)</span> and <span class="math inline">\(g\)</span>. The second line is illustrating the what <span class="math inline">\(H\)</span> maps:
+the <em>product</em> of <span class="math inline">\(X\)</span> and the unit interval to <span class="math inline">\(B\)</span>. A product in this
+case means <em>and</em>. As a quick explanation of product in this context,
+we can refer to some Haskell:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co">-- This is a sum type, i.e. an or. Meaning a Maybe&#39; can be either a Just&#39; a or</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="co">-- Nothing.</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Maybe&#39;</span> a <span class="ot">=</span> <span class="dt">Just&#39;</span> a <span class="op">|</span> <span class="dt">Nothing&#39;</span></span>
@@ -74,26 +91,47 @@ H(x, 1) = g(x)
 <span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a><span class="co">-- type a and something of type b.</span></span>
 <span id="cb1-7"><a href="#cb1-7" aria-hidden="true" tabindex="-1"></a><span class="kw">data</span> <span class="dt">Tuple&#39;</span> a b <span class="ot">=</span> (a, b)</span></code></pre></div>
 <p>The unit interval however, is another scale to the onion.</p>
-<p>The unit interval is the set of all the real numbers between <span class="math inline">\(0\)</span> and <span class="math inline">\(1\)</span>. We use the bounds of this interval to be equal to our two maps given some <span class="math inline">\(x\)</span>. This means that our <span class="math inline">\(H\)</span>, our homotopy, is a function which through a transfinite series of inputs can “bend” <span class="math inline">\(f\)</span> into <span class="math inline">\(g\)</span>.</p>
-<p>That, in a nutshell is homotopy. But, as I delved deeper, like anything worth learning, that nascent intuition was simply a prerequisite.</p>
+<p>The unit interval is the set of all the real numbers between <span class="math inline">\(0\)</span> and
+<span class="math inline">\(1\)</span>. We use the bounds of this interval to be equal to our two maps
+given some <span class="math inline">\(x\)</span>. This means that our <span class="math inline">\(H\)</span>, our homotopy, is a function
+which through a transfinite series of inputs can “bend” <span class="math inline">\(f\)</span> into <span class="math inline">\(g\)</span>.</p>
+<p>That, in a nutshell is homotopy. But, as I delved deeper, like
+anything worth learning, that nascent intuition was simply a
+prerequisite.</p>
 <h3 id="univalence">Univalence</h3>
 <p><strong>Univalence Axiom</strong>: <span class="math inline">\((A = B) \approx (A \approx B)\)</span>.</p>
 <p>The book says this about Univalence:</p>
 <blockquote>
-<p>Thinking of types as spaces, […] the points of which are spaces[. T]o understand its identity type, we must ask, what is a path <span class="math inline">\(p : A \leadsto B\)</span> between spaces in <span class="math inline">\(U\)</span>? The univalence axiom says that such paths correspond to homotopy equivalences <span class="math inline">\(A \approx B\)</span>[.] (Univalent Foundations of Mathematics, 4)</p>
+<p>Thinking of types as spaces, […] the points of which are
+spaces[. T]o understand its identity type, we must ask, what is a
+path <span class="math inline">\(p : A \leadsto B\)</span> between spaces in <span class="math inline">\(U\)</span>? The univalence axiom
+says that such paths correspond to homotopy equivalences <span class="math inline">\(A \approx B\)</span>[.] (Univalent Foundations of Mathematics, 4)</p>
 </blockquote>
-<p>It goes on to say that Univalence is informally an equivalence, and more specifcally <em>homotopy equivalence</em>. Homotopy equivalence is given by an isomorphism between two spaces where the following holds:</p>
-<p>Given spaces <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> and maps <span class="math inline">\(f: X \rightarrow; Y\)</span> and <span class="math inline">\(g: Y \rightarrow X\)</span>, the composition <span class="math inline">\(f \circ g\)</span> is homotopic to <span class="math inline">\(Id_X\)</span> and the composition <span class="math inline">\(g \circ f\)</span> is homotopic to <span class="math inline">\(Id_Y\)</span>.</p>
-<p>To put this is another way, and how I actually wrote this down in my notebook when I was searching for the intuition: Univalence is a topological bijection and that bijection is a valid isomorphism in the domain of pure topology. There’s a inside joke about topologists: Toplogists can’t tell the difference between an donut and a coffee mug. This is precisely why! The torus (donut) is homotopy equivalent, i.e. isomorphic, to a coffee mug.</p>
-<p>So, when we talk about univalence in the context of Homotopy, we’re talking about a form of equality, an isomorphism.</p>
-<p>This concludes the initial desiderata for grappling with Homotopy Type Theory, or at least its introduction. There’s more to come, for the both of us.</p>
+<p>It goes on to say that Univalence is informally an equivalence, and
+more specifcally <em>homotopy equivalence</em>. Homotopy equivalence is given
+by an isomorphism between two spaces where the following holds:</p>
+<p>Given spaces <span class="math inline">\(X\)</span> and <span class="math inline">\(Y\)</span> and maps <span class="math inline">\(f: X \rightarrow; Y\)</span> and <span class="math inline">\(g: Y \rightarrow X\)</span>, the composition <span class="math inline">\(f \circ g\)</span> is homotopic to <span class="math inline">\(Id_X\)</span> and
+the composition <span class="math inline">\(g \circ f\)</span> is homotopic to <span class="math inline">\(Id_Y\)</span>.</p>
+<p>To put this is another way, and how I actually wrote this down in my
+notebook when I was searching for the intuition: Univalence is a
+topological bijection and that bijection is a valid isomorphism in the
+domain of pure topology. There’s a inside joke about topologists:
+Toplogists can’t tell the difference between an donut and a coffee
+mug. This is precisely why! The torus (donut) is homotopy
+equivalent, i.e. isomorphic, to a coffee mug.</p>
+<p>So, when we talk about univalence in the context of Homotopy, we’re
+talking about a form of equality, an isomorphism.</p>
+<p>This concludes the initial desiderata for grappling with Homotopy Type
+Theory, or at least its introduction. There’s more to come, for the
+both of us.</p>
+	 </section>
        </article>
 
      </div>
 
      <div id="footer">
        <hr/>
-       © dan pittman.
+       © dan pittman.<br>
        I reserve the right to be wrong.
      </div>
 

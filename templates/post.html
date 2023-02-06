@@ -5,11 +5,13 @@ $partial("templates/header.html")$
        <h1>$title$</h1>
 	 
        <article>
-         $if(subtitle)$
-         <h2>$subtitle$</h2>
-         $endif$
+	 <section>
+           $if(subtitle)$
+           <h2>$subtitle$</h2>
+           $endif$
 
-         $body$
+           $body$
+	 </section>
        </article>
 
      </div>

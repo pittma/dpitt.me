@@ -1,15 +1,7 @@
 body {
     font-family: 'Source Serif Pro', serif;
-    width: 80%;
-    margin: auto;
     color: #1c1c1c;
-}
-
-article > h1 {
-    border-bottom: 1px solid #222;
-    border-left: 1px solid #222;
-    padding-left: 0.5em;
-    font-style: italic;
+    background-color: #fffff0;
 }
 
 #footer {

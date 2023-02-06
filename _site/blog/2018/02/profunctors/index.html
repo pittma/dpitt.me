@@ -16,6 +16,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/solarized.css">
+    <link rel="stylesheet" href="/tufte/tufte.css">
     <link rel="stylesheet" href="/css/overrides.css">
 
   <script type="text/x-mathjax-config">
@@ -37,13 +38,13 @@
 
     <div id="header">
        <div id="navigation">
-         <b><a href="/">dpitt.me</a></b>
+         <b><a href="/">home</a></b>
 	 //
-         <b><a href="/about">about me</a></b>
+         <b><a href="/archive">archive</a></b>
 	 //
          <b><a href="/talks">talks</a></b>
-	 //
-         <b><a href="/newsletter">newsletter</a></b>
+	 <!-- // -->
+         <!-- <b><a href="/newsletter">newsletter</a></b> -->
        </div>
     </div>
 
@@ -53,25 +54,49 @@
        <h1>On Profunctors, Abruptly</h1>
 	 
        <article>
-         
+	 <section>
+           
 
-         <p><em>Disclaimer: This post reqiures a working understanding of functors in Haskell terms.</em></p>
+           <p><em>Disclaimer: This post reqiures a working understanding of functors in
+Haskell terms.</em></p>
 <h2 id="introduction-theses">Introduction (Theses)</h2>
-<p>If we’re comfortable with the notion of a functor in Haskell, we can intuitively infer what might be meant by a <em>bifunctor</em>. Consider the kind of a type that is a functor: <code>* -&gt; *</code>. That is, it takes <strong>one</strong> type as an argument and returns a type. A bifunctor’s kind is one which takes <strong>two</strong> types and returns a type: <code>* -&gt; * -&gt; *</code>. Its definition looks like this:</p>
+<p>If we’re comfortable with the notion of a functor in Haskell, we can
+intuitively infer what might be meant by a <em>bifunctor</em>. Consider the
+kind of a type that is a functor: <code>* -&gt; *</code>. That is, it takes <strong>one</strong>
+type as an argument and returns a type. A bifunctor’s kind is one
+which takes <strong>two</strong> types and returns a type: <code>* -&gt; * -&gt; *</code>. Its
+definition looks like this:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="kw">class</span> <span class="dt">Bifunctor</span> (<span class="ot">b ::</span> <span class="op">*</span> <span class="ot">-&gt;</span> <span class="op">*</span> <span class="ot">-&gt;</span> <span class="op">*</span>) <span class="kw">where</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="ot">  bimap ::</span> (a <span class="ot">-&gt;</span> b) <span class="ot">-&gt;</span> (c <span class="ot">-&gt;</span> d) <span class="ot">-&gt;</span> f a c <span class="ot">-&gt;</span> f b d</span></code></pre></div>
 <p>A bifunctor is useful for mapping over product types, such as <code>(,)</code>:</p>
 <div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a><span class="kw">instance</span> <span class="dt">Bifunctor</span> (,) <span class="kw">where</span></span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>  bimap f  g (x, y) <span class="ot">=</span> (f x, g y)</span></code></pre></div>
-<p>Now is a good time to take note of the direction of the arrows. We begin with an <code>f a b</code> and end up with a <code>f c d</code>, by way of two functions, <code>a -&gt; b</code>, and <code>c -&gt; d</code>. In both of their cases, the arrows go the same direction: forward.</p>
+<p>Now is a good time to take note of the direction of the arrows. We
+begin with an <code>f a b</code> and end up with a <code>f c d</code>, by way of two
+functions, <code>a -&gt; b</code>, and <code>c -&gt; d</code>. In both of their cases, the arrows
+go the same direction: forward.</p>
 <ol type="1">
-<li>The <code>a -&gt; b</code> follows the same path as the <code>f a _ -&gt; f b _</code> in the bifunctor <code>f</code>.</li>
-<li>Like the function before it, <code>c -&gt; d</code> follows the direction of the functor as well <code>f _ c -&gt; f _ d</code>.</li>
+<li>The <code>a -&gt; b</code> follows the same path as the <code>f a _ -&gt; f b _</code> in the
+bifunctor <code>f</code>.</li>
+<li>Like the function before it, <code>c -&gt; d</code> follows the direction of the
+functor as well <code>f _ c -&gt; f _ d</code>.</li>
 </ol>
 <h2 id="antitheses">Antitheses</h2>
-<p>This direction-following is called <em>covariance</em>, and our Bifunctor is called a <em>covariant</em> functor. However, like all good things, category theory yields to the Hegelian Spirit and cannot achieve synthesis without both a thesis and an antithesis<a href="#fn1" class="footnote-ref" id="fnref1" role="doc-noteref"><sup>1</sup></a>. We have two antitheses two derive, so let us begin with a regression as a vehicle to the first.</p>
+<p>This direction-following is called <em>covariance</em>, and our Bifunctor is
+called a <em>covariant</em> functor. However, like all good things, category
+theory yields to the Hegelian Spirit and cannot achieve synthesis
+without both a thesis and an antithesis<span class="sidenote-wrapper"><label for="sn-0" class="margin-toggle sidenote-number"></label><input type="checkbox" id="sn-0" class="margin-toggle"/><span class="sidenote"><a href="https://twitter.com/pittma_/status/933569372768972800">Here’s a Twitter
+thread</a> from
+when I discovered Lambek and Lawvere’s explorations of Heraclitus’s
+and/or Hegel’s influence on mathematics.<br />
+<br />
+</span></span>. We have two
+antitheses two derive, so let us begin with a regression as a vehicle
+to the first.</p>
 <h3 id="antithesis-category">Antithesis: Category</h3>
-<p>In category theory, A category <span class="math inline">\(C\)</span> has an opposite category wherein the objects are the same, but the arrows are reversed. <span class="math inline">\(C\)</span>’s opposite category would be denoted as <span class="math inline">\(C^{op}\)</span>.</p>
+<p>In category theory, A category <span class="math inline">\(C\)</span> has an opposite category wherein
+the objects are the same, but the arrows are reversed. <span class="math inline">\(C\)</span>’s opposite
+category would be denoted as <span class="math inline">\(C^{op}\)</span>.</p>
 <p>if this were C:</p>
 <p><span class="math display">\[
 \begin{xy}
@@ -92,11 +117,24 @@
 \]</span></p>
 <p>On to the next.</p>
 <h3 id="antithesis-covariant">Antithesis: Covariant</h3>
-<p>When we define a functor in a categorical sense rather than a Haskell sense, we define it as a mapping from one category <span class="math inline">\(C\)</span> to another <span class="math inline">\(D\)</span>, whilst preserving structure: <span class="math inline">\(F : C \rightarrow D\)</span>. To say a functor is covariant is to state that when a functor <span class="math inline">\(F\)</span>, for example, represents morphisms on objects from <span class="math inline">\(C\)</span> in <span class="math inline">\(D\)</span>, those morphisms’ arrows’ must go the same direction that they did in <span class="math inline">\(C\)</span>. I.e., given <span class="math inline">\(F : C \rightarrow D\)</span> and our <span class="math inline">\(C\)</span> defined above, when we take <span class="math inline">\(f\)</span> into <span class="math inline">\(D\)</span> with <span class="math inline">\(F\)</span>, the arrows must respect their initial directions, meaning the following statement must hold in <span class="math inline">\(D\)</span>:</p>
+<p>When we define a functor in a categorical sense rather than a Haskell
+sense, we define it as a mapping from one category <span class="math inline">\(C\)</span> to another <span class="math inline">\(D\)</span>,
+whilst preserving structure: <span class="math inline">\(F : C \rightarrow D\)</span>. To say a functor
+is covariant is to state that when a functor <span class="math inline">\(F\)</span>, for example,
+represents morphisms on objects from <span class="math inline">\(C\)</span> in <span class="math inline">\(D\)</span>, those morphisms’
+arrows’ must go the same direction that they did in <span class="math inline">\(C\)</span>. I.e., given
+<span class="math inline">\(F : C \rightarrow D\)</span> and our <span class="math inline">\(C\)</span> defined above, when we take <span class="math inline">\(f\)</span> into
+<span class="math inline">\(D\)</span> with <span class="math inline">\(F\)</span>, the arrows must respect their initial directions,
+meaning the following statement must hold in <span class="math inline">\(D\)</span>:</p>
 <p><span class="math display">\[
 F(f) : F(a) \rightarrow F(b)
 \]</span></p>
-<p>Okay, now that we have a more formal definition of a covariant functor, let’s use it a baseline to define its antithesis. Covariant’s antithesis is called <em>contravariant</em>, which, you guessed it, is a reversal of an arrow’s direction. That said, lets define a new functor <span class="math inline">\(F&#39; : C \rightarrow D\)</span>, but note that <span class="math inline">\(F&#39;\)</span> is <em>contravariant</em>, meaning that the following holds in <span class="math inline">\(D\)</span>.</p>
+<p>Okay, now that we have a more formal definition of a covariant
+functor, let’s use it a baseline to define its antithesis.
+Covariant’s antithesis is called <em>contravariant</em>, which, you guessed
+it, is a reversal of an arrow’s direction. That said, lets define a
+new functor <span class="math inline">\(F&#39; : C \rightarrow D\)</span>, but note that <span class="math inline">\(F&#39;\)</span> is
+<em>contravariant</em>, meaning that the following holds in <span class="math inline">\(D\)</span>.</p>
 <p><span class="math display">\[
 F&#39;(f) : F&#39;(b) \rightarrow F&#39;(a)
 \]</span></p>
@@ -109,7 +147,15 @@ F&#39;(f) : F&#39;(b) \rightarrow F&#39;(a)
 <p><span class="math display">\[
 P : C^{op} \times C \rightarrow D
 \]</span></p>
-<p>A profunctor is a mapping from a category <span class="math inline">\(C\)</span> and its opposite <span class="math inline">\(C^{op}\)</span> to <span class="math inline">\(D\)</span>. To put this in more practical terms, a profunctor is a bifunctor which is contravariant in one of its parameters. Let’s go back for now to the Haskell definition above for an illustration. A profunctor <code>p</code> starts with two functions, and a <code>p a b</code>, and ends up with a <code>p a' b'</code>. The functions we’re given map from <code>a' -&gt; a</code> and <code>b -&gt; b'</code>, respectively. This tells us that <code>p</code>’s treatment of the first function, the <code>a</code>’s, will be contravariant. But how is this possible? How could we end up with a <code>a'</code> if that’s our starting point? Let’s draw it out!</p>
+<p>A profunctor is a mapping from a category <span class="math inline">\(C\)</span> and its opposite
+<span class="math inline">\(C^{op}\)</span> to <span class="math inline">\(D\)</span>. To put this in more practical terms, a profunctor is
+a bifunctor which is contravariant in one of its parameters. Let’s go
+back for now to the Haskell definition above for an illustration. A
+profunctor <code>p</code> starts with two functions, and a <code>p a b</code>, and ends up
+with a <code>p a' b'</code>. The functions we’re given map from <code>a' -&gt; a</code> and <code>b -&gt; b'</code>, respectively. This tells us that <code>p</code>’s treatment of the first
+function, the <code>a</code>’s, will be contravariant. But how is this possible?
+How could we end up with a <code>a'</code> if that’s our starting point? Let’s
+draw it out!</p>
 <ol type="1">
 <li><p>Our first function, which we’ll call <span class="math inline">\(f\)</span>, is <code>a' -&gt; a</code>:</p>
 <p><span class="math display">\[
@@ -128,7 +174,13 @@ P : C^{op} \times C \rightarrow D
 }
 \end{xy}
 \]</span></p></li>
-<li><p>Now, for the sake of our explanation, lets say our third parameter <code>p a b</code> can be thought of as a more general way of writing the type of a function from <code>a</code> to <code>b</code>. We can think about it this way by replacing <code>p</code> with a concrete type constructor, the function type constructor <code>(-&gt;)</code>, to be specific. In its case we’d write <code>p a b</code> as <code>(-&gt;) a b</code> or, in its more common form, <code>a -&gt; b</code>. We’ll call this function <span class="math inline">\(h\)</span>:</p>
+<li><p>Now, for the sake of our explanation, lets say our third parameter
+<code>p a b</code> can be thought of as a more general way of writing the type
+of a function from <code>a</code> to <code>b</code>. We can think about it this way by
+replacing <code>p</code> with a concrete type constructor, the function type
+constructor <code>(-&gt;)</code>, to be specific. In its case we’d write <code>p a b</code>
+as <code>(-&gt;) a b</code> or, in its more common form, <code>a -&gt; b</code>. We’ll call
+this function <span class="math inline">\(h\)</span>:</p>
 <p><span class="math display">\[
 \begin{xy}
 \xymatrix{
@@ -139,8 +191,14 @@ P : C^{op} \times C \rightarrow D
 \]</span></p></li>
 <li><p>There’s two things I’d like to stop and make note of here.</p>
 <ol type="1">
-<li>If we can call our third parameter, <code>p a b</code> a more general way of stating <code>a -&gt; b</code>, then the same applies to <code>dimap</code>’s return type, <code>p a' b'</code>. It can be thought of as <code>a' -&gt; b'</code>.</li>
-<li>Let’s look again at the diagram and use what we know about category theory’s laws to discern what it would take to get a return type that was shaped like <code>a' -&gt; b'</code>. It’s composition! To return our <code>p a' b'</code>, or remember, our <code>a' -&gt; b'</code>, we just need to compose <span class="math inline">\(f\)</span>, <span class="math inline">\(g\)</span>, and <span class="math inline">\(h\)</span> in the right order: <span class="math inline">\(g \circ h \circ f\)</span>:</li>
+<li>If we can call our third parameter, <code>p a b</code> a more general way
+of stating <code>a -&gt; b</code>, then the same applies to <code>dimap</code>’s return
+type, <code>p a' b'</code>. It can be thought of as <code>a' -&gt; b'</code>.</li>
+<li>Let’s look again at the diagram and use what we know about
+category theory’s laws to discern what it would take to get a
+return type that was shaped like <code>a' -&gt; b'</code>. It’s composition!
+To return our <code>p a' b'</code>, or remember, our <code>a' -&gt; b'</code>, we just
+need to compose <span class="math inline">\(f\)</span>, <span class="math inline">\(g\)</span>, and <span class="math inline">\(h\)</span> in the right order: <span class="math inline">\(g \circ h \circ f\)</span>:</li>
 </ol>
 <p><span class="math display">\[
 \begin{xy}
@@ -153,22 +211,28 @@ P : C^{op} \times C \rightarrow D
 </ol>
 <p>And with that, you can see what makes a profunctor tick!</p>
 <h2 id="in-closing">In Closing</h2>
-<p>This sums up the technical section of this this post, as its purpose was to explain what, exactly, a profunctor was, while simultaneously sharing a manner such that makes contravariance a tractable thing. It was through this intuition that I personally was able to get a handle on how to synthesize contravariance, and I hope it was helpful to anyone who comes across this post.</p>
+<p>This sums up the technical section of this this post, as its purpose
+was to explain what, exactly, a profunctor was, while simultaneously
+sharing a manner such that makes contravariance a tractable thing. It
+was through this intuition that I personally was able to get a handle
+on how to synthesize contravariance, and I hope it was helpful to
+anyone who comes across this post.</p>
 <h2 id="in-closing-closing">In Closing Closing</h2>
-<p>Before I <code>:wq</code> on this one, though, I want to also make mention of the structure of the final technical section of this post. Drawing out the commutative diagrams one arrow at a time was huge in getting a grasp on these concepts for me, and it’s an approach I’ll reach for regularly from now on. If it’s not something you’ve tried before when taking on something dense in the land of category theory, I can certainly attest to its efficacy! Cheers!</p>
-<section class="footnotes" role="doc-endnotes">
-<hr />
-<ol>
-<li id="fn1" role="doc-endnote"><p><a href="https://twitter.com/pittma_/status/933569372768972800">Here’s a Twitter thread</a> from when I discovered Lambek and Lawvere’s explorations of Heraclitus’s and/or Hegel’s influence on mathematics.<a href="#fnref1" class="footnote-back" role="doc-backlink">↩︎</a></p></li>
-</ol>
-</section>
+<p>Before I <code>:wq</code> on this one, though, I want to also make mention of the
+structure of the final technical section of this post. Drawing out
+the commutative diagrams one arrow at a time was huge in getting a
+grasp on these concepts for me, and it’s an approach I’ll reach for
+regularly from now on. If it’s not something you’ve tried before when
+taking on something dense in the land of category theory, I can
+certainly attest to its efficacy! Cheers!</p>
+	 </section>
        </article>
 
      </div>
 
      <div id="footer">
        <hr/>
-       © dan pittman.
+       © dan pittman.<br>
        I reserve the right to be wrong.
      </div>
 

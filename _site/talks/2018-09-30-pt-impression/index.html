@@ -16,6 +16,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/solarized.css">
+    <link rel="stylesheet" href="/tufte/tufte.css">
     <link rel="stylesheet" href="/css/overrides.css">
 
   <script type="text/x-mathjax-config">
@@ -37,13 +38,13 @@
 
     <div id="header">
        <div id="navigation">
-         <b><a href="/">dpitt.me</a></b>
+         <b><a href="/">home</a></b>
 	 //
-         <b><a href="/about">about me</a></b>
+         <b><a href="/archive">archive</a></b>
 	 //
          <b><a href="/talks">talks</a></b>
-	 //
-         <b><a href="/newsletter">newsletter</a></b>
+	 <!-- // -->
+         <!-- <b><a href="/newsletter">newsletter</a></b> -->
        </div>
     </div>
 
@@ -53,24 +54,45 @@
        <h1>Proof Theory Impressionism: Blurring the Curry-Howard Line</h1>
 	 
        <article>
-         
+	 <section>
+           
 
-         <p>The Curry-Howard Correspondence is the observation that there exists a correspondence between objects present in disparate formal systems. Once such instance of this correspondence is the conspicuous propositions-as-types notion, which draws correspondences between logical propositions and types in a programming language.</p>
+           <p>The Curry-Howard Correspondence is the observation that there exists a
+correspondence between objects present in disparate formal
+systems. Once such instance of this correspondence is the conspicuous
+propositions-as-types notion, which draws correspondences between
+logical propositions and types in a programming language.</p>
 <p>···</p>
-<p>As another more specific instance, one could consider a program written in a traditional programming language like Rust, and its formal proof exercised in a language like Coq.</p>
-<p>While this is a beautiful revelation in theory, in practice this line begins to look more like an impenetrable wall as it divides proof from program. This chasm prevents assurances that, beyond those that can simply be “observed” by a human, an implementation faithfully abides its proofs. The conventional solution to this problem is code extraction. However, in cases like safety-critical system software (e.g. avionics, medical devices, &amp; autonomous vehicles), the languages and platforms targeted by extraction tools simply aren’t an option. What if there was another way?</p>
-<p>This talk explores some potential approaches to endow our production language, mostly Rust in this case (w/ a dash of Haskell), with the capabilities present in “provable” systems. These explorations will include spaces like totality, type-level programming, and dependent types. Ultimately drawing lines from the above explorations back to how one might write such a thing in the language of a proof assistant.</p>
+<p>As another more specific instance, one could consider a program
+written in a traditional programming language like Rust, and its
+formal proof exercised in a language like Coq.</p>
+<p>While this is a beautiful revelation in theory, in practice this line
+begins to look more like an impenetrable wall as it divides proof from
+program. This chasm prevents assurances that, beyond those that can
+simply be “observed” by a human, an implementation faithfully abides
+its proofs. The conventional solution to this problem is code
+extraction. However, in cases like safety-critical system software
+(e.g. avionics, medical devices, &amp; autonomous vehicles), the languages
+and platforms targeted by extraction tools simply aren’t an
+option. What if there was another way?</p>
+<p>This talk explores some potential approaches to endow our production
+language, mostly Rust in this case (w/ a dash of Haskell), with the
+capabilities present in “provable” systems. These explorations will
+include spaces like totality, type-level programming, and dependent
+types. Ultimately drawing lines from the above explorations back to
+how one might write such a thing in the language of a proof assistant.</p>
 <ul>
 <li><a href="https://dpitt.me/files/proof-theory-impressionism.pdf">Slides</a></li>
 <li><a href="https://youtu.be/jrVPB-Ad5Gc">Video</a></li>
 </ul>
+	 </section>
        </article>
 
      </div>
 
      <div id="footer">
        <hr/>
-       © dan pittman.
+       © dan pittman.<br>
        I reserve the right to be wrong.
      </div>
 

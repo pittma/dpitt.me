@@ -7,6 +7,7 @@ import HakyllHacks
 
 import System.FilePath
 import Text.Pandoc.Options
+import Text.Pandoc.SideNote (usingSideNotes)
 
 main :: IO ()
 main =
@@ -38,18 +39,21 @@ main =
                  cleanRouteCtx)
                 (return talks)
         asPostTemp context
-    match "index.html" $ do
-      route idRoute
+    match "archive.html" $ do
+      route toIdxPath
       compile $ do
         posts <- recentFirst =<< loadAll "blog/*"
         let context = listField "items" (dateCtx <> blogRouteCtx <> defaultContext) (return posts)
         getResourceBody >>= applyAsTemplate context
-    match "newsletter.html" $ do
-      route toIdxPath
-      compile $ do
-        getResourceBody >>= applyAsTemplate defaultContext
+    -- match "newsletter.html" $ do
+    --   route toIdxPath
+    --   compile $ do
+    --     getResourceBody >>= applyAsTemplate defaultContext
     match "templates/*" $ compile templateCompiler
 
+    match "index.html" $ do
+      route idRoute
+      compile $ asPostTemp defaultContext
     match "*.html" $ do
       route toIdxPath
       compile $ asPostTemp defaultContext
@@ -68,9 +72,10 @@ pandocWithSidenotes =
       wopts =
         defaultHakyllWriterOptions
           {writerExtensions = extents, writerHTMLMathMethod = MathJax ""}
-   in pandocCompilerWith
+   in pandocCompilerWithTransform
         defaultHakyllReaderOptions
         wopts
+        usingSideNotes
 
 blogRouteCtx :: Context String
 blogRouteCtx =

@@ -16,6 +16,7 @@
 
     <!-- CSS -->
     <link rel="stylesheet" href="/css/solarized.css">
+    <link rel="stylesheet" href="/tufte/tufte.css">
     <link rel="stylesheet" href="/css/overrides.css">
 
   <script type="text/x-mathjax-config">
@@ -37,13 +38,13 @@
 
     <div id="header">
        <div id="navigation">
-         <b><a href="/">dpitt.me</a></b>
+         <b><a href="/">home</a></b>
 	 //
-         <b><a href="/about">about me</a></b>
+         <b><a href="/archive">archive</a></b>
 	 //
          <b><a href="/talks">talks</a></b>
-	 //
-         <b><a href="/newsletter">newsletter</a></b>
+	 <!-- // -->
+         <!-- <b><a href="/newsletter">newsletter</a></b> -->
        </div>
     </div>
 
@@ -53,33 +54,72 @@
        <h1>Why Functional Programming: My Emotions Laid Bare</h1>
 	 
        <article>
-         
+	 <section>
+           
 
-         <p>A friend asks a harmless question and I ramble for 30 minutes.</p>
+           <p>A friend asks a harmless question and I ramble for 30 minutes.</p>
 <h2 id="writing-prompt">Writing Prompt:</h2>
-<p>People talk about functional programming in the same way people talk about hallucinogens. like FP is “such a beautiful experience” and “will totally expand your mind”. A friend just semi-jokingly told me he’s</p>
+<p>People talk about functional programming in the same way people talk
+about hallucinogens. like FP is “such a beautiful experience” and
+“will totally expand your mind”. A friend just semi-jokingly told me
+he’s</p>
 <blockquote>
 <p>gonna smoke some functional programming and play some jazz</p>
 </blockquote>
 <h2 id="your-response">Your Response:</h2>
 <h3 id="why-functional-programming">Why Functional Programming?</h3>
-<p>There’s a sentiment that functional programming folks have: With functional programming you “discover” and not “invent”. While the veracity of this notion is dubious, I think this purported beauty can be explained as a byproduct of the processes we go through when building a program in a language like Haskell. A large example of this, by definition, would be denotational design, while a smaller one would be something like <span class="math inline">\(\eta\)</span> reduction. The latter proposition, i.e., “it will totally expand your mind” is the math bit. Abstraction and generalization are totally lost in object-oriented land. Lawvere and Awodey after him wanted to supplant set theory as the foundation of mathematics with category theory and (a specific) type theory respectively because they saw that there existed higher order abstractions that corresponded to adjacent fields! When you’re doing FP, you’re using the fruits of their labor, which you can’t say about something as parochial as OO.</p>
-<p>Also, it should be said, someone having less of an interest in the why / how does not necessarily preclude them from having the <code>:mindblown:</code> experience when building practical things in a language like Haskell. In fact, I see it happen all the time. However, I think in the FP cabal, lots of folks arrive here precisely because they’re interested in the origins of their tools.</p>
+<p>There’s a sentiment that functional programming folks have: With
+functional programming you “discover” and not “invent”. While the
+veracity of this notion is dubious, I think this purported beauty can
+be explained as a byproduct of the processes we go through when
+building a program in a language like Haskell. A large example of
+this, by definition, would be denotational design, while a smaller one
+would be something like <span class="math inline">\(\eta\)</span> reduction. The latter proposition,
+i.e., “it will totally expand your mind” is the math bit. Abstraction
+and generalization are totally lost in object-oriented land. Lawvere
+and Awodey after him wanted to supplant set theory as the foundation
+of mathematics with category theory and (a specific) type theory
+respectively because they saw that there existed higher order
+abstractions that corresponded to adjacent fields! When you’re doing
+FP, you’re using the fruits of their labor, which you can’t say about
+something as parochial as OO.</p>
+<p>Also, it should be said, someone having less of an interest in the why
+/ how does not necessarily preclude them from having the <code>:mindblown:</code>
+experience when building practical things in a language like
+Haskell. In fact, I see it happen all the time. However, I think in
+the FP cabal, lots of folks arrive here precisely because they’re
+interested in the origins of their tools.</p>
 <h3 id="as-we-progress-things-get-more-tenuous">As we progress, things get more tenuous</h3>
-<p>Personally, functional programming and its mathematical roots and adjacencies are what spurred my interests in philosophy. These interests are very focussed, and were precipitated by continuing to ask, “but why?” which brought me all the way back to Frege / Kant / Quine which seems to be an origination point for lots of cool shit. Including linguistics, which is cool as hell. I finally have the right prescription to where I can squint and see why there are so many categorical analogues to computational linguistics.</p>
+<p>Personally, functional programming and its mathematical roots and
+adjacencies are what spurred my interests in philosophy. These
+interests are very focussed, and were precipitated by continuing to
+ask, “but why?” which brought me all the way back to Frege / Kant /
+Quine which seems to be an origination point for lots of cool
+shit. Including linguistics, which is cool as hell. I finally have the
+right prescription to where I can squint and see why there are so many
+categorical analogues to computational linguistics.</p>
 <h3 id="obligatory-david-foster-wallace-reference">Obligatory David Foster Wallace Reference</h3>
-<p>There’s this amazing interview with DFW where he talks about “chasing the click” and how he felt said click when doing formal logic, but never like he did writing fiction. To borrow his turn of phrase, with FP (and its adjacencies), I get to “clicking like a fucking Geiger counter”.</p>
+<p>There’s this amazing interview with DFW where he talks about “chasing
+the click” and how he felt said click when doing formal logic, but
+never like he did writing fiction. To borrow his turn of phrase, with
+FP (and its adjacencies), I get to “clicking like a fucking Geiger
+counter”.</p>
 <h3 id="a-conclusion-is-in-sight">A Conclusion Is In Sight</h3>
-<p>Here’s what it is: It’s because functional programming is an end to itself and not a means to one. You’re free to exercise your ridiculous ideas like type-level state machines, “because you can”, not so you can Make a Webapp For Business. And, at least Haskell, was borne out of this ethos.</p>
+<p>Here’s what it is: It’s because functional programming is an end to
+itself and not a means to one. You’re free to exercise your ridiculous
+ideas like type-level state machines, “because you can”, not so you
+can Make a Webapp For Business. And, at least Haskell, was borne out
+of this ethos.</p>
 <p>I’m overdoing it now, aren’t I?</p>
 <p><em>Goes back to his corner of the lambda cube.</em></p>
+	 </section>
        </article>
 
      </div>
 
      <div id="footer">
        <hr/>
-       © dan pittman.
+       © dan pittman.<br>
        I reserve the right to be wrong.
      </div>
 
