@@ -4,7 +4,8 @@ body {
     background-color: rgb(20, 41, 64);
 }
 
-a:link {
+a:link, a:visited {
+    color: rgb(174, 114, 48);
     background: none;
     text-shadow: none;
     text-decoration: underline;
