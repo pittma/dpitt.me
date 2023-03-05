@@ -1,7 +1,13 @@
 body {
     font-family: 'Source Serif Pro', serif;
-    color: #1c1c1c;
-    background-color: #fffff0;
+    color: rgb(231, 234, 236);
+    background-color: rgb(20, 41, 64);
+}
+
+a:link {
+    background: none;
+    text-shadow: none;
+    text-decoration: underline;
 }
 
 #footer {
