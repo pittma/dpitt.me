@@ -12,15 +12,7 @@ import Text.Pandoc.SideNote (usingSideNotes)
 main :: IO ()
 main =
   hakyllWithBaseRules $ do
-    match "tufte/et-book/*/*" $ route $ customRoute $ drop 6 . toFilePath
-    match "tufte/tufte.css" $ do
-      route idRoute
-      compile copyFileCompiler
-    match "blog/*" $ do
-      route slugRoute
-      compile $
-        pandocWithSidenotes >>=
-        loadAndApplyTemplate "templates/post.html" (dateCtx <> defaultContext)
+
     match "talks/*" $ do
       route toIdxPath
       compile $
@@ -28,6 +20,7 @@ main =
         saveSnapshot "talk-content" >>=
         renderPandoc >>=
         loadAndApplyTemplate "templates/post.html" defaultContext
+
     match "talks.html" $ do
       route toIdxPath
       compile $ do
@@ -39,23 +32,23 @@ main =
                  cleanRouteCtx)
                 (return talks)
         asPostTemp context
-    match "archive.html" $ do
-      route toIdxPath
-      compile $ do
-        posts <- recentFirst =<< loadAll "blog/*"
-        let context = listField "items" (dateCtx <> blogRouteCtx <> defaultContext) (return posts)
-        getResourceBody >>= applyAsTemplate context
-    -- match "newsletter.html" $ do
-    --   route toIdxPath
-    --   compile $ do
-    --     getResourceBody >>= applyAsTemplate defaultContext
+
     match "templates/*" $ compile templateCompiler
 
+
+    match "cv.pdf" $ do
+      route $ constRoute "cv/cv.pdf"
+      compile copyFileCompiler
+    
+    match "cv.md" $ do
+      route toIdxPath
+      compile $ do
+        getResourceBody >>=
+          renderPandoc >>=
+          loadAndApplyTemplate "templates/cv.html" defaultContext
+      
     match "index.html" $ do
       route idRoute
-      compile $ asPostTemp defaultContext
-    match "*.html" $ do
-      route toIdxPath
       compile $ asPostTemp defaultContext
 
 asPostTemp :: Context String -> Compiler (Item String)
@@ -63,23 +56,6 @@ asPostTemp = asTempWithDefault "templates/post.html"
 
 composeTeaser :: String -> Context String
 composeTeaser = teaserFieldWithSeparator "···" "teaser"
-
-pandocWithSidenotes :: Compiler (Item String)
-pandocWithSidenotes =
-  let defWExt = writerExtensions defaultHakyllWriterOptions
-      mathExtensions = [Ext_tex_math_dollars, Ext_latex_macros]
-      extents = foldr enableExtension defWExt mathExtensions
-      wopts =
-        defaultHakyllWriterOptions
-          {writerExtensions = extents, writerHTMLMathMethod = MathJax ""}
-   in pandocCompilerWithTransform
-        defaultHakyllReaderOptions
-        wopts
-        usingSideNotes
-
-blogRouteCtx :: Context String
-blogRouteCtx =
-  field "blog-route" (return . dropFileName . dateSlug . itemIdentifier)
 
 cleanRouteCtx :: Context String
 cleanRouteCtx =
