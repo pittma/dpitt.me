@@ -6,11 +6,12 @@ this document)
 
 ## Intel Corporation
 ### Technical Lead, Hyperscaler Resource Management
-**10/2021 - Current**
+**11/2021 - Current**
 
-We do weird and innovative Linux things that I can't really talk
-about, both in the kernel and in userspace, to serve Intel's
-hyper-scale customers.
+I built and now lead a team that does weird and innovative Linux
+things that I can't really talk about, both in the kernel and in
+userspace, to serve Intel's hyper-scale customers' resource management
+needs.
 
 ## Auxon Corporation
 ### Principal and Founding Engineer
