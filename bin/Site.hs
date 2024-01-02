@@ -1,5 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Site where
+module Site
+  ( site
+  ) where
 
 import Control.Monad (foldM)
 import Data.Maybe (fromMaybe, isJust)
@@ -11,8 +13,6 @@ import Text.Pandoc.SideNote (usingSideNotes)
 
 import Hakyll
 import Hakyll.Core.Compiler.Internal
-
-import Debug.Trace
 
 baseRules :: Rules ()
 baseRules = do
@@ -44,6 +44,27 @@ pandocWithSidenotes item =
         usingSideNotes
         item
 
+trim' :: String -> String
+trim' cs
+  | head cs == '"' && last cs == '"' = tail (init cs)
+  | head cs == '"' = tail cs
+  | last cs == '"' = init cs
+  | otherwise = cs
+
+
+yankTitle :: String -> String
+yankTitle content@(_:content') =
+  if "title: " `isPrefixOf` content
+    then trim' $ toNewLine (drop 7 content)
+    else yankTitle content'
+  where
+    toNewLine (c:cs) =
+      if c == '\n'
+        then []
+        else c : toNewLine cs
+    toNewLine [] = []
+yankTitle [] = []
+
 noteCompiler :: Compiler (Item String)
 noteCompiler = do
   body <- getResourceBody
@@ -60,11 +81,17 @@ noteCompiler = do
         defaultContext
           <> listField
                "links"
-               (defaultContext <> basenameContext <> transcludeContext)
+               (defaultContext <> basenameContext)
                (return items)
   loadAndApplyTemplate "templates/base.html" context p
   where
-    f id = load (fromFilePath ("forest/" ++ id))
+    f id' =
+      compilerUnsafeIO $ do
+        let path = "forest/" ++ id' ++ ".md"
+        content <- readFile path
+        return (Item (fromFilePath path) content)
+      
+      
 
 basenameContext :: Context a
 basenameContext =
@@ -80,9 +107,9 @@ transcludeContext =
       _ -> fail "transclude should receive a single argument"
   where
     transclude id' content =
-      let title = go content
+      let title = yankTitle content
        in "<span class=\"transclusion-title\">"
-            ++ title
+            ++ trim' title
             ++ "</span> <span class=\"transclusion-link\">[["
             ++ id'
             ++ "](/"
@@ -90,25 +117,10 @@ transcludeContext =
             ++ ".html"
             ++ ")]</span>"
             ++ dropFM (drop 3 content)
-    go content@(_:content') =
-      if "title: " `isPrefixOf` content
-        then toNewLine (drop 7 content)
-        else go content'
-    go [] = []
-    toNewLine (c:cs) =
-      if c == '\n'
-        then []
-        else c : toNewLine cs
-    toNewLine [] = []
     dropFM cs =
       if take 3 cs == "---"
         then drop 3 cs
         else dropFM (drop 3 cs)
-    trim cs
-      | head cs == '"' && last cs == '"' = tail (init cs)
-      | head cs == '"' = tail cs
-      | last cs == '"' = init cs
-      | otherwise = cs
 
 site :: Rules ()
 site = do
