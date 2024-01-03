@@ -67,7 +67,6 @@ blockquote p {
     padding-right: 5px;
     border-left: var(--accent-color) 5px solid;
     background-color: var(--base-color);
-    color: var(--bg-color);
     font-family: 'Spectral', serif;
     font-size: 1.4rem;
     font-style: italic;
@@ -116,10 +115,6 @@ kbd {
     font-size: 1.3em;
     font-style: italic;
     font-weight: bold;
-}
-
-.transclusion-link {
-    font-size: 1.3em;
 }
 
 @media (max-width: 760px) {

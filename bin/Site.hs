@@ -15,6 +15,8 @@ import Text.Pandoc.SideNote (usingSideNotes)
 import Hakyll
 import Hakyll.Core.Compiler.Internal
 
+import Debug.Trace
+
 baseRules :: Rules ()
 baseRules = do
   match "css/*.css" $ do
@@ -121,17 +123,13 @@ transcludeContext =
             ++ id'
             ++ ".html"
             ++ ")]</span>"
-            ++ fst (dropFM (content, False))
+            ++ dropFM (drop 3 content)
             ++ "\n<hr>"
-    dropFM ([], b) = ([], b)
-    dropFM (cs, True) =
-      if take 3 cs == "---"
-        then (drop 3 cs, True)
-        else dropFM (drop 3 cs, True)
-    dropFM (cs, False) =
-      if take 3 cs == "---"
-        then dropFM (drop 3 cs, True)
-        else dropFM (drop 3 cs, False)
+    dropFM content@(_:cs) =
+      if take 3 content == "---"
+        then drop 3 content
+        else dropFM cs
+    dropFM [] = []
 
 
 tagsCtx :: Tags -> Context String
