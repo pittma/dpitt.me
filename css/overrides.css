@@ -1,8 +1,9 @@
 :root {
     --bg-color: rgb(255, 255, 255);
-    --base-color: rgb(195, 217, 232);
+    --base-color: rgb(215, 215, 215);
     --text-color: rgb(0, 0, 0);
-    --accent-color: rgb(9, 105, 218);
+    --link-color: rgb(0, 167, 182);
+    --accent-color: rgb(255, 184, 102);
 }
 
 body {
@@ -31,7 +32,7 @@ article {
 }
 
 a:link, a:visited {
-    color: var(--accent-color);
+    color: var(--link-color);
     background: none;
     text-shadow: none;
     text-decoration: underline;
@@ -46,14 +47,18 @@ blockquote p {
     padding-right: 5px;
     border-left: var(--accent-color) 5px solid;
     background-color: var(--base-color);
-    color: var(--bg-color);
     font-style: italic;
+}
+
+#title {
+    font-size: 4.5em;
 }
 
 .subtitle {
     margin: 0;
-    font-size: 1.3em;
-    color: var(--base-color);
+    font-size: 1.7em;
+    font-style: italic;
+    color: var(--text-color);
 }
 
 .poem {
@@ -73,14 +78,9 @@ blockquote p {
     padding-right: 5px;
     border-left: var(--accent-color) 5px solid;
     background-color: var(--base-color);
-    color: var(--bg-color);
     font-style: italic;
     margin: 0;
     width: 55%;
-}
-
-#footer {
-    font-size: 0.75em;
 }
 
 kbd {
@@ -108,8 +108,18 @@ kbd {
     font-style: italic;
     font-weight: bold;
     padding: 10px;
-    border-top: var(--accent-color) 3px solid;
-    border-bottom: var(--accent-color) 3px solid;
+    border-top: var(--base-color) 3px solid;
+    border-bottom: var(--base-color) 3px solid;
+}
+
+.transclusion-title {
+    font-size: 1.3em;
+    font-style: italic;
+    font-weight: bold;
+}
+
+.transclusion-link {
+    font-size: 1.3em;
 }
 
 @media (max-width: 760px) {

@@ -21,79 +21,67 @@
     <link rel="stylesheet" href="/tufte/tufte.css">
     <link rel="stylesheet" href="/css/overrides.css">
 
-  $if(math)$
-  <script type="text/x-mathjax-config">
-    MathJax.Hub.Config({
-    extensions: ["tex2jax.js"],
-    jax: ["input/TeX","output/HTML-CSS"],
-    "HTML-CSS": {
-    styles: {".MathJax_Preview": {visibility: "hidden"}}
-    },
-    tex2jax: {inlineMath: [["\[","\]"],["\\\(","\\\)"]]},
-    TeX: {extensions: ["AMSmath.js","AMSsymbols.js","/js/xypic.js"]}
-    });
-  </script>
+    $if(math)$
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX","output/HTML-CSS"],
+      "HTML-CSS": {
+      styles: {".MathJax_Preview": {visibility: "hidden"}}
+      },
+      tex2jax: {inlineMath: [["\[","\]"],["\\\(","\\\)"]]},
+      TeX: {extensions: ["AMSmath.js","AMSsymbols.js","/js/xypic.js"]}
+      });
+    </script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
-  $endif$
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
+    $endif$
 
   </head>
   <body>
+    <div id="content">
 
-    <div id="header">
-       <div id="navigation">
-         <!-- <b><a href="/">home</a></b> -->
-	 <!-- // -->
-         <!-- <b><a href="/about">about</a></b> -->
-	 <!-- // -->
-         <!-- <b><a href="/archive">archive</a></b> -->
-       </div>
+      <h1 id="title">$title$</h1>
+      $if(subtitle)$
+      <div class="subtitle">$subtitle$</div>
+      $endif$
+
+      $if(published)$
+      <strong>published</strong>: $published$
+      $endif$
+      $if(generated)$
+      | <strong>generated</strong>: $generated$
+      $endif$
+      $if(tags)$
+      | <strong>tagged:</strong> 
+      $tags$
+      $endif$
+      $if(origin)$
+      | <strong>origin</strong>: $origin$
+      $endif$
+ 
+      <article>
+        <section>
+          $body$
+        </section>
+      </article>
+
+      $if(links)$
+      <div id="related">
+      <h1>Related</h1>
+      <ul>
+        $for(links)$
+        <li><i>$title$</i> [<a href="$url$">$basename$</a>]</li>
+        $endfor$
+      </ul>
+      </div>
+      $endif$
+
     </div>
-
-     <div id="content">
-
-       <h1 id="title">$title$</h1>
-       $if(subtitle)$
-       <div class="subtitle">$subtitle$</div>
-       $endif$
-
-       $if(date)$
-       <strong>published on</strong>: $date$
-       $endif$
-       $if(updated)$
-       | <strong>updated</strong>: $updated$
-       $endif$
-       $if(tags)$
-       | <strong>tagged:</strong> 
-       $tags$
-       $endif$
-       $if(origin)$
-       | <strong>origin</strong>: $origin$
-       $endif$
-	 
-       <article>
-	 <section>
-           $body$
-	 </section>
-       </article>
-
-       <div id="related">
-	 <h1>Related</h1>
-	 $if(links)$
-	 <ul>
-	   $for(links)$
-	   <li>$title$ [<a href="$url$">$basename$</a>]</li>
-	   $endfor$
-	 </ul>
-	 $endif$
-       </div>
-
-     </div>
-     <div id="footer">
-       <p>© dan pittman.</p>
-       <p>I reserve the right to be wrong. Do with this what you will.</p>
-     </div>
-
+    <div id="footer">
+      © dan pittman.
+      <br>
+      I reserve the right to be wrong. Do with this what you will.</p>
+    </div>
   </body>
-
 </html>

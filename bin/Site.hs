@@ -6,6 +6,7 @@ module Site
 import Control.Monad (foldM)
 import Data.Maybe (fromMaybe, isJust)
 import Data.List (isPrefixOf)
+import Data.Time
 import System.Directory
 import System.FilePath
 import Text.Pandoc.Options
@@ -20,9 +21,6 @@ baseRules = do
     route idRoute
     compile copyFileCompiler
   match "js/*.js" $ do
-    route idRoute
-    compile copyFileCompiler
-  match "assets/*" $ do
     route idRoute
     compile copyFileCompiler
   match "tufte/*" $ do
@@ -65,8 +63,8 @@ yankTitle content@(_:content') =
     toNewLine [] = []
 yankTitle [] = []
 
-noteCompiler :: Compiler (Item String)
-noteCompiler = do
+noteCompiler :: Tags -> Compiler (Item String)
+noteCompiler tags = do
   body <- getResourceBody
   content <-
     applyAsTemplate
@@ -79,10 +77,14 @@ noteCompiler = do
   items <- mapM f links
   let context =
         defaultContext
-          <> listField
-               "links"
-               (defaultContext <> basenameContext)
-               (return items)
+          <> generatedContext
+          <> tagsField "tags" tags
+          <> (if not (null items)
+                then listField
+                       "links"
+                       (defaultContext <> basenameContext)
+                       (return items)
+                else mempty)
   loadAndApplyTemplate "templates/base.html" context p
   where
     f id' =
@@ -91,11 +93,14 @@ noteCompiler = do
         content <- readFile path
         return (Item (fromFilePath path) content)
       
-      
-
 basenameContext :: Context a
 basenameContext =
   field "basename" (return . takeBaseName . toFilePath . itemIdentifier)
+
+generatedContext :: Context a
+generatedContext =
+  field "generated" $ \_ ->
+    compilerUnsafeIO $ show . localDay . zonedTimeToLocalTime <$> getZonedTime
 
 transcludeContext :: Context a
 transcludeContext =
@@ -108,7 +113,7 @@ transcludeContext =
   where
     transclude id' content =
       let title = yankTitle content
-       in "<span class=\"transclusion-title\">"
+       in "<hr>\n<span class=\"transclusion-title\">"
             ++ trim' title
             ++ "</span> <span class=\"transclusion-link\">[["
             ++ id'
@@ -117,17 +122,32 @@ transcludeContext =
             ++ ".html"
             ++ ")]</span>"
             ++ dropFM (drop 3 content)
+            ++ "\n<hr>"
     dropFM cs =
       if take 3 cs == "---"
         then drop 3 cs
         else dropFM (drop 3 cs)
 
+
+tagsCtx :: Tags -> Context String
+tagsCtx tags = tagsField "tags" tags <> defaultContext <> basenameContext
+
 site :: Rules ()
 site = do
   baseRules
+  tags <- buildTags "forest/*" (fromCapture "tags/*/index.html")
+  tagsRules tags $ \tag pat -> do
+    let title = "Posts tagged <i>" ++ tag ++ "</i>"
+    route idRoute
+    compile $ do
+      posts <- loadAll pat
+      let context =
+            constField "title" title
+              <> listField "items" (tagsCtx tags) (return posts)
+      makeItem "" >>= loadAndApplyTemplate "templates/tags.html" context
   match "forest/dsp-0001.md" $ do
     route (constRoute "index.html")
-    compile noteCompiler
+    compile $ noteCompiler tags
   match "forest/*.md" $ do
     route (setExtension "html")
-    compile noteCompiler
+    compile $ noteCompiler tags
