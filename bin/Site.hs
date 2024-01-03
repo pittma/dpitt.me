@@ -114,19 +114,24 @@ transcludeContext =
     transclude id' content =
       let title = yankTitle content
        in "<hr>\n<span class=\"transclusion-title\">"
-            ++ trim' title
+            ++ title
             ++ "</span> <span class=\"transclusion-link\">[["
             ++ id'
             ++ "](/"
             ++ id'
             ++ ".html"
             ++ ")]</span>"
-            ++ dropFM (drop 3 content)
+            ++ fst (dropFM (content, False))
             ++ "\n<hr>"
-    dropFM cs =
+    dropFM ([], b) = ([], b)
+    dropFM (cs, True) =
       if take 3 cs == "---"
-        then drop 3 cs
-        else dropFM (drop 3 cs)
+        then (drop 3 cs, True)
+        else dropFM (drop 3 cs, True)
+    dropFM (cs, False) =
+      if take 3 cs == "---"
+        then dropFM (drop 3 cs, True)
+        else dropFM (drop 3 cs, False)
 
 
 tagsCtx :: Tags -> Context String
