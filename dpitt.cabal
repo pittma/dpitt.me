@@ -1,5 +1,5 @@
 cabal-version:      2.4
-name:               dpitt-me
+name:               dpitt
 version:            0.1.0.0
 
 author:             Dan Pittman

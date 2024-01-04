@@ -25,6 +25,9 @@ baseRules = do
   match "js/*.js" $ do
     route idRoute
     compile copyFileCompiler
+  match "images/*" $ do
+    route idRoute
+    compile copyFileCompiler
   match "tufte/*" $ do
     route idRoute
     compile copyFileCompiler
@@ -70,7 +73,7 @@ noteCompiler tags = do
   body <- getResourceBody
   content <-
     applyAsTemplate
-      (defaultContext <> basenameContext <> transcludeContext)
+      (basenameContext <> transcludeContext <> defaultContext)
       body
   p <- pandocWithSidenotes content
   let ident = itemIdentifier p
@@ -78,8 +81,7 @@ noteCompiler tags = do
   let links = maybe [] words (lookupString "related" imd)
   items <- mapM f links
   let context =
-        defaultContext
-          <> generatedContext
+        generatedContext
           <> tagsField "tags" tags
           <> (if not (null items)
                 then listField
@@ -87,6 +89,7 @@ noteCompiler tags = do
                        (defaultContext <> basenameContext)
                        (return items)
                 else mempty)
+          <> defaultContext
   loadAndApplyTemplate "templates/base.html" context p
   where
     f id' =
