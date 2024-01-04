@@ -25,6 +25,9 @@ baseRules = do
   match "js/*.js" $ do
     route idRoute
     compile copyFileCompiler
+  match "files/*" $ do
+    route idRoute
+    compile copyFileCompiler
   match "images/*" $ do
     route idRoute
     compile copyFileCompiler
