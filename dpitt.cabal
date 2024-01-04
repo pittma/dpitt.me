@@ -15,6 +15,7 @@ executable dpitt
                       optparse-applicative,
                       pandoc,
                       pandoc-sidenote,
+                      process,
                       time
     hs-source-dirs:   bin
     default-language: Haskell2010

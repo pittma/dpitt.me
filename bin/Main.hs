@@ -1,14 +1,22 @@
+{-# LANGUAGE OverloadedStrings #-}
 module Main where
 
+import Control.Monad (void)
 import Data.List
-import Hakyll
-  ( Command(Rebuild, Watch)
-  , Options(..)
-  , defaultConfiguration
-  , hakyllWithArgs
-  )
 import Options.Applicative
 import System.Directory
+import System.Process
+
+import Hakyll
+  ( Configuration
+  , Options(..)
+  , defaultConfiguration
+  , destinationDirectory
+  , hakyllWithExitCodeAndArgs
+  )
+import Hakyll.Core.Runtime ( RunMode(RunModeNormal) )
+import qualified Hakyll.Main as H
+  
 import Site (site)
 
 data Commands
@@ -47,12 +55,22 @@ printNewPath = do
       | count < 1000 = "0" ++ show count
       | otherwise = show count
 
-runHakyll :: Options -> IO ()
-runHakyll opts = hakyllWithArgs defaultConfiguration opts site
+runHakyll :: Configuration -> Options -> IO ()
+runHakyll conf opts = void $ hakyllWithExitCodeAndArgs conf opts site
 
 main = do
+  let config = defaultConfiguration {destinationDirectory = "/tmp/dpitt-site"}
   cmd <- execParser (info (mainParser <**> helper) fullDesc)
   case cmd of
     New -> printNewPath
-    Build -> runHakyll (Options False Rebuild)
-    Serve -> runHakyll (Options False (Watch "localhost" 8000 False))
+    Build -> do
+      runHakyll config (Options False H.Rebuild)
+      callCommand "cp -r /tmp/dpitt-site/* _site/"
+      callCommand "rm -rf /tmp/dpitt-site/*"
+    Serve -> do
+      runHakyll config (Options False H.Rebuild)
+      callCommand "cp -r /tmp/dpitt-site/* _site/"
+      callCommand "rm -rf /tmp/dpitt-site/*"
+      runHakyll
+        defaultConfiguration
+        (Options False (H.Watch "localhost" 8000 False))
