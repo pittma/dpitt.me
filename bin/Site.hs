@@ -125,7 +125,7 @@ transcludeContext =
             ++ title
             ++ "</span> <span class=\"transclusion-link\">[["
             ++ id'
-            ++ "](/"
+            ++ "](/forest/"
             ++ id'
             ++ ".html"
             ++ ")]</span>"
