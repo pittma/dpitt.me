@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+
+    <title>dan pittman :: tags</title>
+    <meta name="viewport" content="width=device-width">
+
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="/tufte/tufte.css">
+    <link rel="stylesheet" href="/css/overrides.css">
+
+  </head>
+  <body>
+
+    <div id="content">
+      <h1 id="title">Tags</h1>
+      <ul>
+        $for(tagList)$
+        <li><a href="/tags/$tag$/index.html">$tag$</a> ($count$)</li>
+        $endfor$
+      </ul>
+    </div>
+    <div id="footer">
+      © dan pittman.
+      <br>
+      I reserve the right to be wrong. Do with this what you will.</p>
+    </div>
+  </body>
+</html>

@@ -5,7 +5,8 @@ module Site
 
 import Control.Monad (foldM)
 import Data.Maybe (fromMaybe, isJust)
-import Data.List (isPrefixOf)
+import Data.List (isPrefixOf, sortBy)
+import Data.Ord (Down(Down), comparing)
 import Data.Time
 import System.Directory
 import System.FilePath
@@ -14,8 +15,6 @@ import Text.Pandoc.SideNote (usingSideNotes)
 
 import Hakyll
 import Hakyll.Core.Compiler.Internal
-
-import Debug.Trace
 
 baseRules :: Rules ()
 baseRules = do
@@ -56,7 +55,6 @@ trim' cs
   | head cs == '"' = tail cs
   | last cs == '"' = init cs
   | otherwise = cs
-
 
 yankTitle :: String -> String
 yankTitle content@(_:content') =
@@ -138,8 +136,24 @@ transcludeContext =
     dropFM [] = []
 
 
-tagsCtx :: Tags -> Context String
-tagsCtx tags = tagsField "tags" tags <> defaultContext <> basenameContext
+tagsContext :: Tags -> Context String
+tagsContext tags = tagsField "tags" tags <> defaultContext <> basenameContext
+
+tagListContext :: Tags -> Context a
+tagListContext tags =
+  let items = sortBy (comparing (Down . length . snd)) (tagsMap tags)
+      items' = mapM (makeItem . f) items
+   in listField "tagList" (tag' <> count') items'
+  where
+    f (tag, posts) = tag ++ "," ++ show (length posts)
+    tag' = field "tag" $ \(Item _ body) -> return (toComma body)
+    count' = field "count" $ \(Item _ body) -> return (fromComma body)
+    toComma (',':_) = []
+    toComma (c:cs) = c : toComma cs
+    fromComma (',':cs) = cs
+    fromComma (_:cs) = fromComma cs
+
+                        
 
 site :: Rules ()
 site = do
@@ -152,7 +166,7 @@ site = do
       posts <- loadAll pat
       let context =
             constField "title" title
-              <> listField "items" (tagsCtx tags) (return posts)
+              <> listField "items" (tagsContext tags) (return posts)
       makeItem "" >>= loadAndApplyTemplate "templates/tags.html" context
   match "forest/dsp-0001.md" $ do
     route (constRoute "index.html")
@@ -160,3 +174,6 @@ site = do
   match "forest/*.md" $ do
     route (setExtension "html")
     compile $ noteCompiler tags
+  match "tags.html" $ do
+    route idRoute
+    compile $ getResourceBody >>= applyAsTemplate (tagListContext tags)
