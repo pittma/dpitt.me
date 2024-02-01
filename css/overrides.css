@@ -109,6 +109,7 @@ kbd {
     padding: 10px;
     border-top: var(--base-color) 3px solid;
     border-bottom: var(--base-color) 3px solid;
+    width: 55%;
 }
 
 .transclusion-title {
