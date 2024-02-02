@@ -118,6 +118,11 @@ kbd {
     font-weight: bold;
 }
 
+pre > code {
+    width: 100%;
+    font-size: 0.95em;
+}
+
 @media (max-width: 760px) {
     .multiline-quote {
 	width: 100%;

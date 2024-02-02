@@ -16,6 +16,7 @@ executable dpitt
                       pandoc,
                       pandoc-sidenote,
                       process,
+                      random,
                       sort,
                       time
     hs-source-dirs:   bin

@@ -85,26 +85,33 @@ instructions and SIMD registers to clear those frames, adding the
 following lines to this `ret` routine.
 
 ```perl
-  vpxor        %zmm0,%zmm0,%zmm0
-  vmovdqa64    %zmm0,0x80(%rsp)
-  vmovdqa64    %zmm0,0x90(%rsp)
-  vmovdqa64    %zmm0,0xa0(%rsp)
-  vmovdqa64    %zmm0,0xb0(%rsp)
-  vmovdqa64    %zmm0,0xc0(%rsp)
-  vmovdqa64    %zmm0,0xd0(%rsp)
-  vmovdqa64    %zmm0,0xe0(%rsp)
-  vmovdqa64    %zmm0,0xf0(%rsp)
-  vmovdqa64    %zmm0,0x100(%rsp)
-  vmovdqa64    %zmm0,0x110(%rsp)
-  vmovdqa64    %zmm0,0x120(%rsp)
-  vmovdqa64    %zmm0,0x130(%rsp)
-  vmovdqa64    %zmm0,0x140(%rsp)
-  vmovdqa64    %zmm0,0x150(%rsp)
-  vmovdqa64    %zmm0,0x160(%rsp)
+vpxor        %zmm0,%zmm0,%zmm0
+# Zero-out the stack frames used for `key1`, 64 bytes at a time.
+vmovdqa64    %zmm0,0x80(%rsp)
+vmovdqa64    %zmm0,0xc0(%rsp)
+vmovdqa64    %zmm0,0x100(%rsp)
+
+# Stack usage is not divisible by 64, so we use a kmask register to
+# only mov 48 of the bytes (6 quad-words).
+mov       \$$0x3f,$$tmp1
+kmovq     $$tmp1,%k2
+vmovdqa64 %zmm0,0x140(%rsp){%k2}
 ```
 
 `vmovdqa64` moves 512-bits (64 bytes) from the full-width SIMD
-register `zmm0` to the location we specify with
-`<offset>(%rsp)`. Before those lines we self-exclusive-or `zmm0`; a
+register `zmm0` to the location we specify with `<offset>(%rsp)` where
+those 64 bytes are thought of logically as 64-bit integers aka
+quad-words. Before those lines we self-exclusive-or `zmm0`. A
 self-exclusive-or's result is always `0` because none of the bits are
-exclusive when they're or'd with themselves!
+exclusive when they're or'd with themselves. After that, we write
+zeros, 64 _bytes_ at a time to the stack. The stack usage here isn't
+evenly divisible by 64, so we use a mask register to tell this last
+instruction to only use the first 48 bytes of the register when doing
+its move. This is achieved by writing `0x3f`, or written another way
+`0b_11_1111` (6 ones), into the mask register and then including that
+mask register with our invocation.
+
+There were a few other places that needed some zeroing attention, but
+this is the most interesting part. And to answer the question I asked
+in the front matter of this post, well, it's all of them. Or at least
+it is now.
