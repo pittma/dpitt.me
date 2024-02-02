@@ -47,7 +47,13 @@ Then, in the routine labeled `ret`, [that pointer is restored to
 `rsp`](https://github.com/aws/aws-lc/blob/d9caacae8c44227baa41e970cbed0dbfd4eef9c2/crypto/fipsmodule/aes/asm/aesni-xts-avx512.pl#L1855-L1859). `ret`
 is a routine that is jumped to from several places in the main
 encryption routine upon completion. Searching for the label in its
-entirety (`L_ret_$${rndsuffix}`) in this file turns up 27 results.
+entirety (`L_ret_$${rndsuffix}`) in this file turns up 27
+results[^vz].
+
+[^vz]: `vzeroupper` is a one-pass no-operand instruction that zeros the
+    upper (i.e. most significant) half of the SIMD registers. This is
+    a good start.
+
 
 ```perl
   $$code .= <<___;
@@ -62,11 +68,7 @@ routine, but the bits and bytes written to those frames remain until
 the stack grows back into them. And to make matters worse, in this
 case, it's key material that is written into these frames. This of
 course could leave a vector of attack open for a malicious but
-intelligent attacker[^vz].
-
-[^vz]: `vzeroupper` is a one-pass no-operand instruction that zeros the
-    upper (i.e. most significant) half of the SIMD registers. This is
-    a good start.
+intelligent attacker.
 
 <div class="pull">
 What could be more in need of paranoia than a `libcrypto`

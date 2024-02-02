@@ -3,7 +3,7 @@ title: RSA for the impatient
 published: 2024-01-31
 math: true
 tagged: true
-tags: cryptography
+tags: cryptography, math
 ---
 
 _I've been asked to document the steps in an Almost Montgomery
@@ -45,14 +45,13 @@ public key. Well, our $$\phi(n) = (7 - 1)(13 - 1) = 6 \times 12 =
 \text{mod}\ \phi(n)$$** ($$d$$ is $$e$$'s multiplicative inverse
 $$\text{mod}\ \phi(n)$$).
 	 
-**NB**: this inversion, also called congruence, is what allows $$e$$
-and $$d$$ to "undo" each other, which is what allows the original
-message to be retrieved from the cipher text.  So our modulus is
-$$72$$, and our $$e$$ is $$17$$, from here we need to compute $$17$$'s
-multiplicative inverse $$\text{mod}\ 72$$, which we can do using using
-the Euclidean algorithm. Here's a small Haskell function that computes
-an inverse given the modulus and the number whose inverse we're
-searching for.
+This inversion, also called congruence, is what allows $$e$$ and $$d$$
+to "undo" each other, which is what allows the original message to be
+retrieved from the cipher text.  So our modulus is $$72$$, and our
+$$e$$ is $$17$$, from here we need to compute $$17$$'s multiplicative
+inverse $$\text{mod}\ 72$$, which we can do using using the Euclidean
+algorithm. Here's a small Haskell function that computes an inverse
+given the modulus and the number whose inverse we're searching for.
 
 ```haskell
 inv :: Int -> Int -> Int
