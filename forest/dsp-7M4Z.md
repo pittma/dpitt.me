@@ -47,7 +47,13 @@ Then, in the routine labeled `ret`, [that pointer is restored to
 `rsp`](https://github.com/aws/aws-lc/blob/d9caacae8c44227baa41e970cbed0dbfd4eef9c2/crypto/fipsmodule/aes/asm/aesni-xts-avx512.pl#L1855-L1859). `ret`
 is a routine that is jumped to from several places in the main
 encryption routine upon completion. Searching for the label in its
-entirety (`L_ret_$${rndsuffix}`) in this file turns up 27 results.
+entirety (`L_ret_$${rndsuffix}`) in this file turns up 27
+results[^vz].
+
+[^vz]: `vzeroupper` is a one-pass no-operand instruction that zeros the
+    upper (i.e. most significant) half of the vector registers. This is
+    a good start.
+
 
 ```perl
   $$code .= <<___;
@@ -62,11 +68,7 @@ routine, but the bits and bytes written to those frames remain until
 the stack grows back into them. And to make matters worse, in this
 case, it's key material that is written into these frames. This of
 course could leave a vector of attack open for a malicious but
-intelligent attacker[^vz].
-
-[^vz]: `vzeroupper` is a one-pass no-operand instruction that zeros the
-    upper (i.e. most significant) half of the SIMD registers. This is
-    a good start.
+intelligent attacker.
 
 <div class="pull">
 What could be more in need of paranoia than a `libcrypto`
@@ -80,8 +82,8 @@ this is a fair response out of context, what could be more in need of
 paranoia than a `libcrypto` implementation?
 
 So yeah, we need to zero the stack here too. Given this is all a part
-of an AVX-512 implementation, we can make clever use of the vector
-instructions and SIMD registers to clear those frames, adding the
+of an AVX-512 implementation, we can make clever use of the SIMD
+instructions and vector registers to clear those frames, adding the
 following lines to this `ret` routine.
 
 ```perl
@@ -100,7 +102,7 @@ vmovdqa64 %zmm0,0x140(%rsp){%k2}
 
 `vmovdqa64` moves 512-bits (64 bytes) from the full-width SIMD
 register `zmm0` to the location we specify with `<offset>(%rsp)` where
-those 64 bytes are thought of logically as 64-bit integers aka
+those 64 bytes are thought of logically as 64-bit integers, AKA
 quad-words. Before those lines we self-exclusive-or `zmm0`. A
 self-exclusive-or's result is always `0` because none of the bits are
 exclusive when they're or'd with themselves. After that, we write

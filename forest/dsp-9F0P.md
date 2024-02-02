@@ -3,7 +3,7 @@ title: RSA for the impatient
 published: 2024-01-31
 math: true
 tagged: true
-tags: cryptography
+tags: cryptography, math
 ---
 
 _I've been asked to document the steps in an Almost Montgomery
@@ -15,7 +15,7 @@ conventions. The hardest part of all of this has been teaching the
 FIPS assembly parser how to understand mask register syntax. Until
 now…_
 
-_I've decided to walk, step-by-step through RSA encryption, starting
+_I've decided to walk, step-by-step, through RSA encryption, starting
 with the most naive exposition possible._
 
 ---
@@ -45,14 +45,13 @@ public key. Well, our $$\phi(n) = (7 - 1)(13 - 1) = 6 \times 12 =
 \text{mod}\ \phi(n)$$** ($$d$$ is $$e$$'s multiplicative inverse
 $$\text{mod}\ \phi(n)$$).
 	 
-**NB**: this inversion, also called congruence, is what allows $$e$$
-and $$d$$ to "undo" each other, which is what allows the original
-message to be retrieved from the cipher text.  So our modulus is
-$$72$$, and our $$e$$ is $$17$$, from here we need to compute $$17$$'s
-multiplicative inverse $$\text{mod}\ 72$$, which we can do using using
-the Euclidean algorithm. Here's a small Haskell function that computes
-an inverse given the modulus and the number whose inverse we're
-searching for.
+This inversion is what allows $$e$$ and $$d$$ to "undo" each other,
+which is what allows the original message to be retrieved from the
+cipher text.  So our modulus is $$72$$, and our $$e$$ is $$17$$, from
+here we need to compute $$17$$'s multiplicative inverse $$\text{mod}\
+72$$, which we can do using using the Euclidean algorithm. Here's a
+small Haskell function that computes an inverse given the modulus and
+the number whose inverse we're searching for.
 
 ```haskell
 inv :: Int -> Int -> Int
@@ -75,7 +74,7 @@ This we can break down with the recursion of our `inv` function:
 * We hit the `otherwise` case again. This time `q = 17 / 4 = 4` so we
   recurse with `f -4 4 (1 - (4 * -4)) (17 - (4 * 4))` or `f -4 4 17
   1`.
-* still in the `otherwise` case, so we compute `q = 4 * 1 = 4` and
+* still in the `otherwise` case, so we compute `q = 4 / 1 = 4` and
   recurse with `f 17 1 (-4 - (4 * 17)) (4 - (4 * 1))` or `f 17 1 -72
   0`.
 * This time we hit the base case because `newr` is `0`, so we return
@@ -96,7 +95,7 @@ separate it again?  How do we get "dog" out of 26? It could just as
 easily be "balk": $$2 + 1 + 12 + 11$$. I think the best we can do is
 have a 3-digit code where each digit is 0-3, dividing our 6 bits into
 3 groups of 2. So why don't we send the message "213", this would be
-`10 01 11` in binary, or, numerically, 39.
+`10 01 11` in binary, or, in base 10, 39.
 
 Next we compute the cipher text, $$C = M^e\ \text{mod}\ n$$. Our
 cipher text is $$39^{17}\ \text{mod}\ 91 = 65$$.

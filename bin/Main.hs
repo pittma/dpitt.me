@@ -84,15 +84,15 @@ main = do
     New -> printNewPath
     Rebuild -> do
       runHakyll config (Options False H.Rebuild)
-      callCommand "cp -r /tmp/dpitt-site/* _site/"
+      callCommand "cp -r /tmp/dpitt-site/* _site/ || true"
       callCommand "rm -rf /tmp/dpitt-site/*"
     Build -> do
       runHakyll config (Options False (H.Build RunModeNormal))
-      callCommand "cp -r /tmp/dpitt-site/* _site/"
+      callCommand "cp -r /tmp/dpitt-site/* _site/ || true"
       callCommand "rm -rf /tmp/dpitt-site/*"
     Serve -> do
       runHakyll config (Options False (H.Build RunModeNormal))
-      callCommand "cp -r /tmp/dpitt-site/* _site/"
+      callCommand "cp -r /tmp/dpitt-site/* _site/ || true"
       callCommand "rm -rf /tmp/dpitt-site/*"
       runHakyll
         defaultConfiguration
