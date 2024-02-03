@@ -7,6 +7,7 @@ import Control.Monad (foldM)
 import Data.Maybe (fromMaybe, isJust)
 import Data.List (isPrefixOf, sortBy)
 import Data.Ord (Down(Down), comparing)
+import qualified Data.Text as T
 import Data.Time
 import System.Directory
 import System.FilePath
@@ -115,10 +116,12 @@ transcludeContext =
       [id'] ->
         compilerUnsafeIO
           $ transclude id' <$> readFile ("forest/" ++ id' ++ ".md")
-      _ -> fail "transclude should receive a single argument"
+      _otherwise -> fail "transclude should receive a single argument"
   where
     transclude id' content =
       let title = yankTitle content
+          content' = dropFM (drop 3 content)
+          content'' = T.replace "$$" "$" (T.pack content')
        in "<hr>\n<span class=\"transclusion-title\">"
             ++ title
             ++ "</span> <span class=\"transclusion-link\">[["
@@ -127,7 +130,7 @@ transcludeContext =
             ++ id'
             ++ ".html"
             ++ ")]</span>"
-            ++ dropFM (drop 3 content)
+            ++ T.unpack content''
             ++ "\n<hr>"
     dropFM content@(_:cs) =
       if take 3 content == "---"

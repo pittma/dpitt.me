@@ -18,6 +18,7 @@ executable dpitt
                       process,
                       random,
                       sort,
+                      text,
                       time
     hs-source-dirs:   bin
     default-language: Haskell2010

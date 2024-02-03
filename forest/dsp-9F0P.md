@@ -107,3 +107,35 @@ Simply do the inverse! $$M = C^d\ \text{mod}\ n = 65^{17}\ \text{mod}\
 right, via its couplets, `10 01 11`.
 
 Cool, we did it. We're cryptographers now.
+
+# Optimizations
+
+$transclude("dsp-6D8F")$
+
+CRT can be used to break the large decryption modular exponention into
+two smaller ones.
+
+Recall the equation for decryption:
+
+$$$$
+M = C^d\ \text{mod}\ N
+$$$$
+
+Where $$N$$ is the product of our two large primes, $$p$$ and
+$$q$$. We were working with $$7$$ and $$13$$, so our $$N = 7 * 13 =
+91$$. Also recall that we use Euler's totient to come up with our
+exponents. We chose an $$e$$, and then computed $$d$$ such that $$e
+\cdot d \equiv 1\ \text{mod}\ N$$. And, in the case of an $$n$$ with
+coprime factors, Euler's totient is multiplicative, formally:
+
+$$$$
+\text{coprime}(p, q) \land p \cdot q \equiv N \Rightarrow \phi(N) \equiv \phi(p) \cdot \phi(q)
+$$$$
+
+So, through this multiplicativity, we can break $$d$$ into: $$d_p$$
+and $$d_q$$:
+
+$$$$
+d_p = d\ \text{mod}\ \phi(p) = d\ \text{mod}\ (p - 1) = 17\ \text{mod}\ 6 = 5 \\
+d_q = d\ \text{mod}\ \phi(q) = d\ \text{mod}\ (q - 1) = 17\ \text{mod}\ 12 = 5
+$$$$
