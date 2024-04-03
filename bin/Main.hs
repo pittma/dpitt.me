@@ -2,6 +2,7 @@
 module Main where
 
 import Control.Monad (void)
+import Data.Bool
 import Data.Char (chr)
 import Data.List (singleton)
 import Options.Applicative
@@ -59,24 +60,27 @@ mainParser =
              "serve"
              (info serveParser (progDesc "run the server and watch for changes"))
 
+randString :: Int -> IO String
+randString len = concat <$> sequence (f len [])
+  where
+    f 0 s = s
+    f n s = f (n - 1) (bool (ranDigit : s) (ranChar : s) (even n))
+    ranDigit = show <$> (randomRIO (0, 9) :: IO Int)
+    ranChar = singleton . chr <$> randomRIO (65, 90)
+
 printNewPath :: IO ()
 printNewPath = do
-  ran1 <- ranDigit
-  ran2 <- ranChar
-  ran3 <- ranDigit
-  ran4 <- ranChar
-  let path = "forest/dsp-" ++ ran1 ++ ran2 ++ ran3 ++ ran4 ++ ".md"
+  r <- randString 4
+  let path = "forest/dsp-" ++ r ++ ".md"
   exists <- doesFileExist path
   if exists
     then printNewPath
     else putStrLn path
-  where
-    ranDigit = show <$> (randomRIO (0, 9) :: IO Int)
-    ranChar = singleton . chr <$> randomRIO (65, 90)
 
 runHakyll :: Configuration -> Options -> IO ()
 runHakyll conf opts = void $ hakyllWithExitCodeAndArgs conf opts site
 
+main :: IO ()
 main = do
   let config = defaultConfiguration {destinationDirectory = "/tmp/dpitt-site"}
   cmd <- execParser (info (mainParser <**> helper) fullDesc)
@@ -84,6 +88,7 @@ main = do
     New -> printNewPath
     Rebuild -> do
       runHakyll config (Options False H.Rebuild)
+      callCommand "rm -rf _cache"
       callCommand "cp -r /tmp/dpitt-site/* _site/ || true"
       callCommand "rm -rf /tmp/dpitt-site/*"
     Build -> do

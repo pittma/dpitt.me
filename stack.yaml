@@ -1,0 +1,10 @@
+resolver:
+  url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/21/21.yaml
+
+system-ghc: true
+
+packages:
+- .
+
+extra-deps:
+  - pandoc-sidenote-0.23.0.0

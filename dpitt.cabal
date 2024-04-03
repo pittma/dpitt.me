@@ -20,5 +20,6 @@ executable dpitt
                       sort,
                       text,
                       time
+    ghc-options:      -Wall -threaded
     hs-source-dirs:   bin
     default-language: Haskell2010

@@ -1,0 +1,439 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
+    <title>Trex Deck</title>
+    
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,700;1,400;1,700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/solarized.css">
+    <link rel="stylesheet" href="css/trex.css">
+
+    
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+      extensions: ["tex2jax.js"],
+      jax: ["input/TeX","output/HTML-CSS"],
+      "HTML-CSS": {
+      styles: {".MathJax_Preview": {visibility: "hidden"}}
+      },
+      tex2jax: {inlineMath: [["\[","\]"],["\\\(","\\\)"]]},
+      TeX: {extensions: ["AMSmath.js","AMSsymbols.js","js/xypic.js"]}
+      });
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
+  
+  </head>
+
+  <body>
+    <div id="slides">
+      
+      <section>
+	<center>
+<h1 id="rsa-for-the-impatient">RSA for the Impatient</h1>
+<h3 id="a-deep-dive-into-the-mathematics-of-rsa-encryption">A deep dive into the mathematics of RSA encryption</h3>
+(except you’ve been pushed rather than diving on your own volition.)
+</center>
+      </section>
+      
+      <section>
+	<h1 id="what-is-rsa">What is RSA?</h1>
+<ul>
+<li>Rivest–Shamir–Adleman / defined in 1977</li>
+<li>Asymmetric (involves a key-pair, one private, one public)</li>
+<li>Used in SSL to authenticate and to exchange symmetric keys</li>
+</ul>
+      </section>
+      
+      <section>
+	<h1 id="mathematical-definition">Mathematical Definition</h1>
+<p>Encryption:</p>
+<p><span class="math display">\[
+C = M^e\  \text{mod}\ n
+\]</span></p>
+<p>Decryption:</p>
+<p><span class="math display">\[
+M = C^d\ \text{mod}\ n
+\]</span></p>
+<ul>
+<li><span class="math inline">\(M\)</span> is the message</li>
+<li><span class="math inline">\(C\)</span> is the cyphertext</li>
+<li><span class="math inline">\(e\)</span> is a public exponent</li>
+<li><span class="math inline">\(d\)</span> is a private exponent</li>
+<li><span class="math inline">\(n\)</span>, the modulus, is the product of two large primes <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>.</li>
+</ul>
+      </section>
+      
+      <section>
+	<h1 id="why-it-works">Why it works</h1>
+<p>Encryption is like a lock, easy with the key, very hard without it.</p>
+<p>The bolt in this case is that <strong>factoring large numbers is hard</strong>.</p>
+      </section>
+      
+      <section>
+	<h2 id="full-operation">Full Operation</h2>
+<h3 id="i.-key-generation">I. Key generation</h3>
+<ul>
+<li>Choose two large primes <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>.</li>
+<li>Compute their product, this is <span class="math inline">\(n\)</span>.</li>
+<li>Calculate Euler’s totient function of <span class="math inline">\(n\)</span> (denoted <span class="math inline">\(\phi(n)\)</span>).</li>
+<li>Choose a public exponent <span class="math inline">\(e\)</span> such that <span class="math inline">\(1 \lt e \lt \phi(n)\)</span>, and
+that <span class="math inline">\(e\)</span> is coprime with <span class="math inline">\(\phi(n)\)</span>.</li>
+<li>Compute the private exponent <span class="math inline">\(d\)</span> such that <span class="math inline">\(d \times e =\ 1\
+\text{mod}\ \phi(n)\)</span> (<span class="math inline">\(d\)</span> is <span class="math inline">\(e\)</span>’s multiplicative inverse <span class="math inline">\(\text{mod}\
+\phi(n)\)</span>).</li>
+</ul>
+      </section>
+      
+      <section>
+	<h2 id="full-operation">Full Operation</h2>
+<h3 id="i.-key-generation">I. Key generation</h3>
+<ul>
+<li>Choose two large primes <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>.</li>
+<li>Compute their product, this is <span class="math inline">\(n\)</span>.</li>
+<li>Calculate Euler’s totient function of <span class="math inline">\(n\)</span> (denoted <span class="math inline">\(\phi(n)\)</span>).</li>
+<li>Choose a public exponent <span class="math inline">\(e\)</span> such that <span class="math inline">\(1 \lt e \lt \phi(n)\)</span>, and
+that <span class="math inline">\(e\)</span> is coprime with <span class="math inline">\(\phi(n)\)</span>.</li>
+<li>Compute the private exponent <span class="math inline">\(d\)</span> such that <span class="math inline">\(d * e =\ 1\
+\text{mod}\ \phi(n)\)</span> (<span class="math inline">\(d\)</span> is <span class="math inline">\(e\)</span>’s multiplicative inverse <span class="math inline">\(\text{mod}\
+\phi(n)\)</span>).</li>
+</ul>
+<h4 id="example">Example:</h4>
+<div class="split">
+<div class="split-inner">
+<p><span class="math display">\[
+\begin{align}
+p &amp;= 7 \\
+q &amp;= 13 \\
+n &amp;= 91 \\
+\phi(n) &amp;= (p - 1)(q - 1) \\
+\end{align}
+\]</span></p>
+</div>
+<div class="split-inner">
+<p><span class="math display">\[
+\begin{align}
+\phi(n) &amp;= 72 \\
+e &amp;= 17 \\
+e \times d &amp;= 1\ \text{mod}\ 72 \\
+d &amp;= 17
+\end{align}
+\]</span></p>
+</div>
+</div>
+      </section>
+      
+      <section>
+	<h2 id="full-operation">Full Operation</h2>
+<h3 id="ii.-encryption">II. Encryption</h3>
+<blockquote>
+<p>To encrypt a message <span class="math inline">\(M\)</span>, represent it as a number smaller than <span class="math inline">\(n\)</span>
+and compute <span class="math inline">\(C = M^e\ \text{mod}\ n\)</span>.</p>
+</blockquote>
+      </section>
+      
+      <section>
+	<h2 id="full-operation">Full Operation</h2>
+<h3 id="ii.-encryption">II. Encryption</h3>
+<blockquote>
+<p>To encrypt a message <span class="math inline">\(M\)</span>, represent it as a number smaller than <span class="math inline">\(n\)</span>
+and compute <span class="math inline">\(C = M^e\ \text{mod}\ n\)</span>.</p>
+</blockquote>
+<h4 id="example">Example</h4>
+<p>Sending the “message” <code>213</code>, a six-bit number represented as 3 2-bit
+couplets. We can represent this in base 10 as <span class="math inline">\(39\)</span>.</p>
+<p><span class="math display">\[
+\begin{align}
+C &amp;= 39^{17}\ \text{mod}\ 91 \\
+C &amp;= 65
+\end{align}
+\]</span></p>
+      </section>
+      
+      <section>
+	<h2 id="full-operation">Full Operation</h2>
+<h3 id="iii.-decryption">III. Decryption</h3>
+<p>Simply undo encryption with <span class="math inline">\(d\)</span>!</p>
+<p><span class="math display">\[
+M = C^d\ \text{mod}\ n
+\]</span></p>
+      </section>
+      
+      <section>
+	<h2 id="full-operation">Full Operation</h2>
+<h3 id="iii.-decryption">III. Decryption</h3>
+<p>Simply undo encryption with <span class="math inline">\(d\)</span>!</p>
+<p><span class="math display">\[
+M = C^d\ \text{mod}\ n
+\]</span></p>
+<h4 id="example">Example</h4>
+<p><span class="math display">\[
+65^{17}\ \text{mod}\ 91=39
+\]</span></p>
+<p>Which, we can de-numerical-ize as 213, left to right, via its
+couplets, <code>10 01 11</code>.</p>
+<p>Cool, we did it. We’re cryptographers now.</p>
+      </section>
+      
+      <section>
+	<h2 id="optimizations">Optimizations</h2>
+<h3 id="i.-chinese-remainder-theorem-crt">I. Chinese Remainder Theorem (CRT)</h3>
+<p>The Chinese Remainder Theorem states that, given a set of congruences
+such that all <span class="math inline">\(m\)</span>s are coprime:</p>
+<p><span class="math display">\[
+x \equiv a_1\ \text{mod}\ m_1 \\
+x \equiv a_2\ \text{mod}\ m_2 \\
+\vdots \\
+x \equiv a_n\ \text{mod}\ m_n \\
+\]</span></p>
+      </section>
+      
+      <section>
+	<h2 id="optimizations">Optimizations</h2>
+<h3 id="i.-chinese-remainder-theorem">I. Chinese Remainder Theorem</h3>
+<p>we can solve for <span class="math inline">\(x\)</span> with the congruence:</p>
+<p><span class="math display">\[
+x \equiv (\sum_{i=1}^n a_i \cdot M_i \cdot M_{i}^{-1})\ \text{mod}\ N
+\]</span></p>
+<ul>
+<li><span class="math inline">\(M_i\)</span> is <span class="math inline">\(\cfrac{m_1m_2 \dots m_n}{m_i}\)</span></li>
+<li><span class="math inline">\(M_{i}^{-1}\)</span> is <span class="math inline">\(M_i\)</span>’s multiplicative inverse modulo <span class="math inline">\(m_i\)</span></li>
+<li><span class="math inline">\(N\)</span> is the product of all <span class="math inline">\(m\)</span>s:</li>
+</ul>
+<p><span class="math display">\[
+\prod^n_{i=1} m_i
+\]</span></p>
+      </section>
+      
+      <section>
+	<h2 id="optimizations">Optimizations</h2>
+<h3 id="i.-chinese-remainder-theorem">I. Chinese Remainder Theorem</h3>
+<p>The CRT lets us break <span class="math inline">\(C^d\ \text{mod}\ n\)</span> into two congruences, each
+with prime moduli.</p>
+<p><span class="math display">\[
+M = C^d\ \text{mod}\ p \\
+M = C^d\ \text{mod}\ q
+\]</span></p>
+<p>Once we do this, we get a smaller exponent through Euler’s Theorem,
+which tells us that:</p>
+<p><span class="math display">\[
+a^{x\ \text{mod}\ \phi(p)} \equiv a^x\ (\text{mod}\ p)
+\]</span></p>
+<p>When <span class="math inline">\(x\)</span> and <span class="math inline">\(p\)</span> are coprime.</p>
+      </section>
+      
+      <section>
+	<h2 id="optimizations">Optimizations</h2>
+<h3 id="i.-chinese-remainder-theorem">I. Chinese Remainder Theorem</h3>
+<p>Which gives us</p>
+<p><span class="math display">\[
+M \equiv C^{d\ \text{mod}\ \phi(p)}\ (\text{mod}\ p) \\
+M \equiv C^{d\ \text{mod}\ \phi(q)}\ (\text{mod}\ q)
+\]</span></p>
+<p>Which we can then use the CRT to recombine.</p>
+      </section>
+      
+      <section>
+	<h2 id="e2e-example">E2E Example</h2>
+<h3 id="the-straight-forward-way">The straight-forward way</h3>
+<p>When</p>
+<p><span class="math display">\[
+\begin{align}
+p &amp;= 13 \\
+q &amp;= 17 \\
+M &amp;= 39 \\
+e &amp;= 19 \\
+\end{align}
+\]</span></p>
+<p><span class="math display">\[
+C = 39^{19}\ (\text{mod}\ 221)
+\]</span></p>
+<p>Which gives us <span class="math inline">\(91\)</span>.</p>
+      </section>
+      
+      <section>
+	<h2 id="e2e-example">E2E Example</h2>
+<h3 id="the-optimized-way">The optimized way</h3>
+<p>When</p>
+<p><span class="math display">\[
+\begin{align}
+p &amp;= 13 \\
+q &amp;= 17 \\
+M &amp;= 39 \\
+e &amp;= 19 \\
+\end{align}
+\]</span></p>
+<p>We have the two congruences through Euler’s Theorem and the CRT:</p>
+<p><span class="math display">\[
+C \equiv 39^7\ \text{mod}\ 13 \\
+C \equiv 39^3\ \text{mod}\ 17
+\]</span></p>
+      </section>
+      
+      <section>
+	<h2 id="e2e-example">E2E Example</h2>
+<h3 id="the-optimized-way">The optimized way</h3>
+<p>Which we recombine:</p>
+<p><span class="math display">\[
+C \equiv (39^7 \cdot 17 \cdot 10) + (39^3 \cdot 13 \cdot 4)\ (\text{mod}\ 221)
+\]</span></p>
+<p>Also giving us <span class="math inline">\(91\)</span>.</p>
+<p>We did it! We’re optimizing cryptographers now.</p>
+      </section>
+      
+      <section>
+	<h2 id="e2e-example">E2E Example</h2>
+<h3 id="who-cares">Who cares?</h3>
+<p>In the optimized example, we’re multiplying 10 (7+3) 39’s, while in
+the simple example, we’re <strong>doing it 19 times</strong>.</p>
+<p>In reality, <span class="math inline">\(e\)</span>, <span class="math inline">\(p\)</span>, and <span class="math inline">\(q\)</span> are all <strong>very large numbers</strong>.</p>
+      </section>
+      
+      <section>
+	<h2 id="advanced-optimization">Advanced Optimization</h2>
+<h3 id="montgomery-multiplication">Montgomery Multiplication</h3>
+<ul>
+<li><p>A faster way to do multiplication which prefers base 2 to base 10,
+and shines when used iteratively.</p></li>
+<li><p>Numbers are transported to “Montgomery Form” and back again for the
+final result.</p></li>
+</ul>
+      </section>
+      
+      <section>
+	<h2 id="advanced-optimization">Advanced Optimization</h2>
+<h3 id="montgomery-multiplication-initialization">Montgomery Multiplication: Initialization</h3>
+<ol type="1">
+<li><p>Choose a power of two that’s greater than <span class="math inline">\(m\)</span>, this is <span class="math inline">\(r\)</span>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>r <span class="ot">=</span> <span class="dv">2</span> <span class="op">^</span> <span class="fu">ceiling</span> (<span class="fu">logBase</span> <span class="dv">2</span> (<span class="fu">fromIntegral</span> m))</span></code></pre></div></li>
+<li><p>Square <span class="math inline">\(r\)</span>, modulo <span class="math inline">\(m\)</span>. This we’ll call <span class="math inline">\(r_2\)</span>.</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>r2 <span class="ot">=</span> r <span class="op">*</span> r <span class="ot">`mod`</span> m</span></code></pre></div></li>
+<li><p>Compute the multiplicative inverse of <span class="math inline">\(-m\ \text{mod}\ r\)</span>, this is
+<span class="math inline">\(m&#39;\)</span></p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>m&#39; <span class="ot">=</span> inv (<span class="fu">negate</span> m) r</span></code></pre></div></li>
+</ol>
+      </section>
+      
+      <section>
+	<h2 id="advanced-optimization">Advanced Optimization</h2>
+<h3 id="montgomery-multiplication-montgomery-form">Montgomery Multiplication: Montgomery Form</h3>
+<ol type="1">
+<li><p>Put <span class="math inline">\(a\)</span> into “montgomery form” by multiplying <span class="math inline">\(a * r_2\)</span>, this is
+<span class="math inline">\(a_m\)</span>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>am <span class="ot">=</span> a <span class="op">*</span> r2</span></code></pre></div></li>
+<li><p>Do a montgomery reduction of <span class="math inline">\(a\)</span>, this is <span class="math inline">\(a&#39;\)</span>. This routine we’ll
+call <span class="math inline">\(\text{reduce}\)</span>.</p>
+<ol type="1">
+<li><p>Multiply <span class="math inline">\(a_m\)</span> by <span class="math inline">\(m&#39;\ \text{mod}\ r\)</span>, I’ll call this <span class="math inline">\(a_m&#39;\)</span></p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>am&#39; <span class="ot">=</span> am <span class="op">*</span> m&#39; <span class="ot">`mod`</span> r</span></code></pre></div></li>
+<li><p>Do <span class="math inline">\(\cfrac{a_m + a_m&#39; * m}{r}\)</span>. This temp value we’ll call <span class="math inline">\(t\)</span>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>t <span class="ot">=</span> am <span class="op">+</span> am&#39; <span class="op">*</span> m <span class="ot">`div`</span> r</span></code></pre></div></li>
+<li><p>The result is <span class="math inline">\(t\)</span> if <span class="math inline">\(t &lt; m\)</span>, otherwise it’s <span class="math inline">\(t - m\)</span>.</p>
+<div class="sourceCode" id="cb4"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb4-1"><a href="#cb4-1" aria-hidden="true" tabindex="-1"></a> <span class="kw">if</span> t <span class="op">&lt;</span> m</span>
+<span id="cb4-2"><a href="#cb4-2" aria-hidden="true" tabindex="-1"></a>   <span class="kw">then</span> t</span>
+<span id="cb4-3"><a href="#cb4-3" aria-hidden="true" tabindex="-1"></a>   <span class="kw">else</span> t <span class="op">-</span> m</span></code></pre></div></li>
+</ol></li>
+</ol>
+      </section>
+      
+      <section>
+	<h2 id="advanced-optimization">Advanced Optimization</h2>
+<h3 id="montgomery-multiplication">Montgomery Multiplication</h3>
+<p><strong>Compute multiplications in montgomery form.</strong></p>
+<ol type="1">
+<li><p>Put <span class="math inline">\(b\)</span> into Montgomery form and then reduce it as well. This is
+<span class="math inline">\(b&#39;\)</span>.</p>
+<div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>bm <span class="ot">=</span> b <span class="op">*</span> r2</span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>b&#39; <span class="ot">=</span> reduce bm</span></code></pre></div></li>
+<li><p>compute <span class="math inline">\(c&#39;\)</span>, which is a reduction as well, but this time of <span class="math inline">\(a&#39; * b&#39;\)</span> instead of <span class="math inline">\(a\)</span> or <span class="math inline">\(b\)</span> times <span class="math inline">\(r_2\)</span>.,</p>
+<div class="sourceCode" id="cb2"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>c&#39; <span class="ot">=</span> reduce (a&#39; <span class="op">*</span> b&#39;)</span></code></pre></div></li>
+<li><p>Finally, the final result is one last reduction of <span class="math inline">\(c&#39;\)</span>.</p>
+<div class="sourceCode" id="cb3"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>reduce c&#39;</span></code></pre></div></li>
+</ol>
+      </section>
+      
+      <section>
+	<h2 id="who-cares">Who cares?</h2>
+<ul>
+<li><p><span class="math inline">\(r\)</span>, <span class="math inline">\(r_2\)</span>, and <span class="math inline">\(m&#39;\)</span> can all be precomputed.</p></li>
+<li><p>Instead of <span class="math inline">\(\text{mod}\ n\)</span>, the product result is divided by <span class="math inline">\(r\)</span>, a
+power of 2.</p>
+<p><strong>This is a right shift</strong>, which is much faster than
+quotient estimation.</p></li>
+<li><p>Particularly useful in exponentiation because intermediate results
+can be left in Montgomery Form.</p></li>
+</ul>
+      </section>
+      
+    </div>
+    <div id="footer">
+      <p>press <kbd>f</kbd> to enter full screen</p>
+    </div>
+    <script>
+      var curIdx = 0;
+      var slideEl = null;
+      var slides = [];
+      
+      document.addEventListener('DOMContentLoaded', function() {
+        slideEl = document.getElementById("slides");
+        slideEl.addEventListener('fullscreenchange', () => {
+          if (document.fullscreenElement != null) {
+            document.getElementById("footer").style.display = "none";
+          } else {
+            document.getElementById("footer").style.display = "block";
+          }
+        });
+        slides = slideEl.querySelectorAll('section');
+        const qp = new URLSearchParams(window.location.search);
+        const slide = parseInt(qp.get("s"));
+        if (!isNaN(slide) && slide > 0 && slide < slides.length) {
+          curIdx = slide;
+        }
+        slides[curIdx].classList.add('visible');
+      });
+      
+      document.addEventListener('keydown', function(event) {
+        switch (event.keyCode) {
+        case 27:
+          if (document.fullscreenElement != null) {
+            document.exitFullscreen();
+          }
+          document.getElementById("footer").style.display = "block";
+          break;
+        case 37:
+          nav(-1);
+          break;
+        case 39:
+          nav(1);
+          break;
+        case 70:
+          if (document.fullscreenElement == null) {
+            slideEl.requestFullscreen();
+          }
+          break;
+        default:
+        }
+      });
+      
+      function nav(dir) {
+        const newIdx = curIdx + dir;
+        if (newIdx >= 0 && newIdx < slides.length) {
+          slideEl.querySelector('section.visible').classList.remove('visible');
+          slides[newIdx].classList.add('visible');
+	  const url = window.location.pathname + '?s=' + newIdx;
+	  history.pushState({slideIndex: newIdx}, '', url); 
+          curIdx = newIdx;
+        }
+      }
+    </script>
+  </body>
+</html>

@@ -20,7 +20,7 @@ $$$$
 We can solve for $$x$$ with the equation:
 
 $$$$
-x \equiv \sum_{i=1}^n a_i \cdot M_i \cdot M_{i}^{-1}
+x \equiv (\sum_{i=1}^n a_i \cdot M_i \cdot M_{i}^{-1})\ \text{mod}\ N
 $$$$
 
 Where $$M_i$$ is $$\cfrac{m_1m_2 \dots m_n}{m_i}$$ and $$M_{i}^{-1}$$

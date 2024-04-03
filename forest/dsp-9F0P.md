@@ -4,6 +4,7 @@ published: 2024-01-31
 math: true
 tagged: true
 tags: cryptography, math
+related: dsp-5Q3M
 ---
 
 _I've been asked to document the steps in an Almost Montgomery
@@ -111,30 +112,29 @@ Cool, we did it. We're cryptographers now.
 
 $transclude("dsp-6D8F")$
 
-CRT can be used to break the large decryption modular exponention into
-two smaller ones.
-
-Recall the equation for decryption:
+When we break our encryption and decryption operations up into CRT
+form, where
 
 $$$$
-M = C^d\ \text{mod}\ N
+C = M^e\  \text{mod}\ n
 $$$$
 
-Where $$N$$ is the product of our two large primes, $$p$$ and
-$$q$$. We were working with $$7$$ and $$13$$, so our $$N = 7 * 13 =
-91$$. Also recall that we use Euler's totient to come up with our
-exponents. We chose an $$e$$, and then computed $$d$$ such that $$e
-\cdot d \equiv 1\ \text{mod}\ N$$. And, in the case of an $$n$$ with
-coprime factors, Euler's totient is multiplicative, formally:
+Becomes
 
 $$$$
-\text{coprime}(p, q) \land p \cdot q \equiv N \Rightarrow \phi(N) \equiv \phi(p) \cdot \phi(q)
+C \equiv M^e\ text{mod}\ p
+C \equiv M^e\ text{mod}\ q
 $$$$
 
-So, through this multiplicativity, we can break $$d$$ into: $$d_p$$
-and $$d_q$$:
+Because, recall, $$n = p \cdot q$$.
+
+We can now use Euler's Theorem, which tells us that
 
 $$$$
-d_p = d\ \text{mod}\ \phi(p) = d\ \text{mod}\ (p - 1) = 17\ \text{mod}\ 6 = 5 \\
-d_q = d\ \text{mod}\ \phi(q) = d\ \text{mod}\ (q - 1) = 17\ \text{mod}\ 12 = 5
+x^{e\ \text{mod}\  \phi(m)} \equiv x^e\ \text{mod}\ m
 $$$$
+
+Which reduces significantly the number of multiplications needed
+because the exponent on the left-hand side of this congruence is much
+smaller than the one one the right. Once we've done this smaller
+exponentiation, we simply use the CRT to recombine the results.

@@ -1,15 +1,12 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE OverloadedStrings, TypeApplications #-}
 module Site
   ( site
   ) where
 
-import Control.Monad (foldM)
-import Data.Maybe (fromMaybe, isJust)
 import Data.List (isPrefixOf, sortBy)
 import Data.Ord (Down(Down), comparing)
 import qualified Data.Text as T
 import Data.Time
-import System.Directory
 import System.FilePath
 import Text.Pandoc.Options
 import Text.Pandoc.SideNote (usingSideNotes)
@@ -32,6 +29,12 @@ baseRules = do
     route idRoute
     compile copyFileCompiler
   match "tufte/*" $ do
+    route idRoute
+    compile copyFileCompiler
+  match "trex/*/*" $ do
+    route idRoute
+    compile copyFileCompiler
+  match "trex/*/*/*" $ do
     route idRoute
     compile copyFileCompiler
   match "templates/*" $ compile templateCompiler
@@ -153,8 +156,10 @@ tagListContext tags =
     count' = field "count" $ \(Item _ body) -> return (fromComma body)
     toComma (',':_) = []
     toComma (c:cs) = c : toComma cs
+    toComma [] = []
     fromComma (',':cs) = cs
     fromComma (_:cs) = fromComma cs
+    fromComma [] = []
 
                         
 
@@ -170,7 +175,7 @@ site = do
       let context =
             constField "title" title
               <> listField "items" (tagsContext tags) (return posts)
-      makeItem "" >>= loadAndApplyTemplate "templates/tags.html" context
+      makeItem @String "" >>= loadAndApplyTemplate "templates/tags.html" context
   match "forest/dsp-0001.md" $ do
     route (constRoute "index.html")
     compile $ noteCompiler tags
