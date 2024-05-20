@@ -1,14 +1,14 @@
 {-# LANGUAGE OverloadedStrings, TypeApplications #-}
-module Site
-  ( site
-  ) where
+module Site where
 
 import Data.List (isPrefixOf, sortBy)
 import Data.Ord (Down(Down), comparing)
 import qualified Data.Text as T
 import Data.Time
 import System.FilePath
+import Text.Pandoc.Definition
 import Text.Pandoc.Options
+import Text.Pandoc.Walk
 import Text.Pandoc.SideNote (usingSideNotes)
 
 import Hakyll
@@ -39,6 +39,21 @@ baseRules = do
     compile copyFileCompiler
   match "templates/*" $ compile templateCompiler
 
+fencedDivs :: Pandoc -> Pandoc
+fencedDivs =
+  walk $ \block ->
+    case block of
+      (Div (x, cls, y) content) ->
+        if "note" `elem` cls
+          then note x cls y content
+          else block
+      _otherwise -> block
+  where
+    note x cls y content =
+      Div
+        (x, cls, y)
+        (Div ("", ["note-header"], []) [Plain [Str "ⓘ Note"]] : content)
+  
 pandocWithSidenotes :: Item String -> Compiler (Item String)
 pandocWithSidenotes item =
   let defWExt = writerExtensions defaultHakyllWriterOptions
@@ -50,7 +65,7 @@ pandocWithSidenotes item =
    in renderPandocWithTransform
         defaultHakyllReaderOptions
         wopts
-        usingSideNotes
+        (fencedDivs . usingSideNotes)
         item
 
 trim' :: String -> String

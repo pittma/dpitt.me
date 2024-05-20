@@ -15,6 +15,7 @@ executable dpitt
                       optparse-applicative,
                       pandoc,
                       pandoc-sidenote,
+                      pandoc-types,
                       process,
                       random,
                       sort,

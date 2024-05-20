@@ -4,6 +4,7 @@
     --text-color: rgb(0, 0, 0);
     --link-color: rgb(0, 167, 182);
     --accent-color: rgb(255, 184, 102);
+    --highlight-color: rgb(177, 117, 221);
 }
 
 body {
@@ -38,6 +39,23 @@ a:link, a:visited {
     text-decoration: underline;
 }
 
+
+.note {
+    width: 55%;
+    padding-left: 7px;
+    padding-right: 5px;
+    border-left: var(--highlight-color) 5px solid;
+}
+
+.note p {
+    margin-top: 0;
+}
+
+.note-header {
+    color: var(--highlight-color);
+    font-size: 1.5em;
+}
+
 blockquote {
     margin: 0;
 }
@@ -62,6 +80,8 @@ blockquote p {
 }
 
 .poem {
+    display: block;
+    white-space: pre;
     width: 55%;
     padding-left: 7px;
     padding-right: 5px;
@@ -70,6 +90,10 @@ blockquote p {
     font-family: 'Spectral', serif;
     font-size: 1.4rem;
     font-style: italic;
+}
+
+.poem p {
+    margin: 0;
 }
 
 .multiline-quote {
