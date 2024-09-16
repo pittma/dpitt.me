@@ -122,8 +122,8 @@ $$$$
 Becomes
 
 $$$$
-C \equiv M^e\ text{mod}\ p
-C \equiv M^e\ text{mod}\ q
+C \equiv M^e\ \text{mod}\ p \\
+C \equiv M^e\ \text{mod}\ q
 $$$$
 
 Because, recall, $$n = p \cdot q$$.
@@ -136,5 +136,5 @@ $$$$
 
 Which reduces significantly the number of multiplications needed
 because the exponent on the left-hand side of this congruence is much
-smaller than the one one the right. Once we've done this smaller
+smaller than the one the right. Once we've done this smaller
 exponentiation, we simply use the CRT to recombine the results.
