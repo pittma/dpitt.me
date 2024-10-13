@@ -1,11 +1,11 @@
 ---
-title: A Sad Story About the Meaning of 'constant time'
+title: A Sad Story About the Meaning of 'Constant Time'
 subtitle: Just when I was starting think I was getting the hang of this.
 published: 2024-10-07
 tagged: true
 tags: cryptography, math, programming
 math: true
-related: dsp-9F0P dsp-9X1T
+related: dsp-9F0P dsp-9X1T dsp-5U7X
 ---
 
 _A few weeks ago, I finally got the massive RSA OpenSSL port merged
@@ -61,7 +61,7 @@ $$$$
 \textbf{exp}(a, w) = \prod_{i=0}^{|w|} (a^{w_i})^{2^{li}}
 $$$$
 
-Which is equal to $$a^b$$.
+Which is equivalent to $$a^b$$.
 
 **Step-by-Step:**
 
