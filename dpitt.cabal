@@ -9,6 +9,7 @@ executable dpitt
     main-is:          Main.hs
     other-modules:    Site
     build-depends:    base ^>=4.17.2.0,
+                      dhall,
                       directory,
                       filepath,
                       hakyll,

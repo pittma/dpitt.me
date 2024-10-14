@@ -5,6 +5,7 @@ import Control.Monad (void)
 import Data.Bool
 import Data.Char (chr)
 import Data.List (singleton)
+import Dhall (auto, input)
 import Options.Applicative
   ( Parser
   , (<**>)
@@ -30,7 +31,7 @@ import Hakyll
 import Hakyll.Core.Runtime ( RunMode(RunModeNormal) )
 import qualified Hakyll.Main as H
   
-import Site (site)
+import Site (PittConfig, site)
 
 data Commands
   = New
@@ -78,7 +79,9 @@ printNewPath = do
     else putStrLn path
 
 runHakyll :: Configuration -> Options -> IO ()
-runHakyll conf opts = void $ hakyllWithExitCodeAndArgs conf opts site
+runHakyll conf opts = void $ do
+  cfg <- input auto "./cfg.dhall" :: IO PittConfig
+  hakyllWithExitCodeAndArgs conf opts (site cfg)
 
 main :: IO ()
 main = do

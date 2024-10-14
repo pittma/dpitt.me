@@ -1,10 +1,12 @@
-{-# LANGUAGE OverloadedStrings, TypeApplications #-}
+{-# LANGUAGE OverloadedStrings, TypeApplications, DeriveGeneric #-}
 module Site where
 
 import Data.List (isPrefixOf, sortBy)
 import Data.Ord (Down(Down), comparing)
 import qualified Data.Text as T
 import Data.Time
+import Dhall (FromDhall)
+import GHC.Generics (Generic)
 import System.FilePath
 import Text.Pandoc.Definition
 import Text.Pandoc.Options
@@ -13,6 +15,16 @@ import Text.Pandoc.SideNote (usingSideNotes)
 
 import Hakyll
 import Hakyll.Core.Compiler.Internal
+
+data PittConfig = Cfg
+  { cfg_index :: !String
+  , cfg_cv :: !String
+  } deriving (Generic)
+
+instance FromDhall PittConfig
+
+mkIndex :: PittConfig -> Pattern
+mkIndex c = fromGlob ("forest/dsp-" ++ cfg_index c ++ ".md")
 
 baseRules :: Rules ()
 baseRules = do
@@ -176,10 +188,8 @@ tagListContext tags =
     fromComma (_:cs) = fromComma cs
     fromComma [] = []
 
-                        
-
-site :: Rules ()
-site = do
+site :: PittConfig -> Rules ()
+site c = do
   baseRules
   tags <- buildTags "forest/*" (fromCapture "tags/*/index.html")
   tagsRules tags $ \tag pat -> do
@@ -191,7 +201,7 @@ site = do
             constField "title" title
               <> listField "items" (tagsContext tags) (return posts)
       makeItem @String "" >>= loadAndApplyTemplate "templates/tags.html" context
-  match "forest/dsp-0001.md" $ do
+  match (mkIndex c) $ do
     route (constRoute "index.html")
     compile $ noteCompiler tags
   match "forest/*.md" $ do
