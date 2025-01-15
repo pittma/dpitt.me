@@ -319,7 +319,7 @@ because it is a side-channel vulnerability. An attacker can determine
 the details of your secrets by watching how long it takes you to do
 stuff. If we'd done something like the loop with `break` above, this
 wouldn't be constant w/r/t time, but because it's done with a
-multiplication to jump directly to the result we're looking for. I
+multiplication to jump directly to the result we're looking for, I
 thought I was safe.
 
 **The part I didn't learn until I made a fool of myself by offering
