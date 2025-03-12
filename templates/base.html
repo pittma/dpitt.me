@@ -54,11 +54,14 @@
       | <strong>generated</strong>: $generated$
       $endif$
       $if(tagged)$
-      | <strong>tagged:</strong> 
+      | <strong>tagged</strong>:
       $tags$
       $endif$
       $if(origin)$
       | <strong>origin</strong>: $origin$
+      $endif$
+      $if(garage)$
+      | <strong><a href="/forest/$garage-note$.html">garage</a></strong>: $garage$
       $endif$
  
       <article>
@@ -82,7 +85,7 @@
     <div id="footer">
       © dan pittman.
       <br>
-      I reserve the right to be wrong. Do with this what you will.</p>
+      I reserve the right to be wrong. Do with this what you will.
     </div>
   </body>
 </html>

@@ -19,12 +19,16 @@ import Hakyll.Core.Compiler.Internal
 data PittConfig = Cfg
   { cfg_index :: !String
   , cfg_cv :: !String
+  , cfg_garage_note :: !String
   } deriving (Generic)
 
 instance FromDhall PittConfig
 
 mkIndex :: PittConfig -> Pattern
-mkIndex c = fromGlob ("forest/dsp-" ++ cfg_index c ++ ".md")
+mkIndex c = fromGlob ("forest/" ++ cfg_index c ++ ".md")
+
+baseCtx :: PittConfig -> Context String
+baseCtx c = constField "garage-note" (cfg_garage_note c) <> defaultContext
 
 baseRules :: Rules ()
 baseRules = do
@@ -100,12 +104,12 @@ yankTitle content@(_:content') =
     toNewLine [] = []
 yankTitle [] = []
 
-noteCompiler :: Tags -> Compiler (Item String)
-noteCompiler tags = do
+noteCompiler :: PittConfig -> Tags -> Compiler (Item String)
+noteCompiler c tags = do
   body <- getResourceBody
   content <-
     applyAsTemplate
-      (basenameContext <> transcludeContext <> defaultContext)
+      (basenameContext <> transcludeContext <> baseCtx c)
       body
   p <- pandocWithSidenotes content
   let ident = itemIdentifier p
@@ -118,10 +122,10 @@ noteCompiler tags = do
           <> (if not (null items)
                 then listField
                        "links"
-                       (defaultContext <> basenameContext)
+                       (baseCtx c <> basenameContext)
                        (return items)
                 else mempty)
-          <> defaultContext
+          <> baseCtx c
   loadAndApplyTemplate "templates/base.html" context p
   where
     f id' =
@@ -169,8 +173,8 @@ transcludeContext =
     dropFM [] = []
 
 
-tagsContext :: Tags -> Context String
-tagsContext tags = tagsField "tags" tags <> defaultContext <> basenameContext
+tagsContext :: PittConfig -> Tags -> Context String
+tagsContext c tags = tagsField "tags" tags <> baseCtx c <> basenameContext
 
 tagListContext :: Tags -> Context a
 tagListContext tags =
@@ -199,14 +203,14 @@ site c = do
       posts <- loadAll pat
       let context =
             constField "title" title
-              <> listField "items" (tagsContext tags) (return posts)
+              <> listField "items" (tagsContext c tags) (return posts)
       makeItem @String "" >>= loadAndApplyTemplate "templates/tags.html" context
   match (mkIndex c) $ do
     route (constRoute "index.html")
-    compile $ noteCompiler tags
+    compile $ noteCompiler c tags
   match "forest/*.md" $ do
     route (setExtension "html")
-    compile $ noteCompiler tags
+    compile $ noteCompiler c tags
   match "tags.html" $ do
     route idRoute
     compile $ getResourceBody >>= applyAsTemplate (tagListContext tags)
