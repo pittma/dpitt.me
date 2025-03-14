@@ -5,14 +5,8 @@ tagged: true
 tags: ml, ai, math, paper, transformers
 math: true
 published: 2024-05-17
+garage: open
 ---
-
-:::{.note}
-This page is a WIP, and I'm still very much learning these things. If
-you're here, take what you find below with a grain of salt. If,
-miraculously, my confidence of what is found on this page goes up,
-I'll remove this note.
-:::
 
 As I understand it, as a person with nearly zero knowledge,
 transformers are the ML/AI architecture that got us to LLMs. Also as I

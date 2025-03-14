@@ -39,22 +39,32 @@ a:link, a:visited {
     text-decoration: underline;
 }
 
-
-.note {
+.note, .insight {
     width: 55%;
-    padding-left: 7px;
-    padding-right: 5px;
-    border-left: var(--highlight-color) 5px solid;
+    padding: 15px;
+    border-radius: 10px;
 }
 
-.note p {
-    margin-top: 0;
+.note-header, .insight-header {
+    font-size: 1.5em;
+}
+
+.note {
+    background-color: rgb(235, 229, 240);
 }
 
 .note-header {
     color: var(--highlight-color);
-    font-size: 1.5em;
 }
+
+.insight {
+    background-color: rgb(233, 241, 252);
+}
+
+.insight-header {
+    color: rgb(10, 109, 221);
+}
+
 
 blockquote {
     margin: 0;

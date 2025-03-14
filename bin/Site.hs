@@ -59,16 +59,21 @@ fencedDivs :: Pandoc -> Pandoc
 fencedDivs =
   walk $ \block ->
     case block of
-      (Div (x, cls, y) content) ->
-        if "note" `elem` cls
-          then note x cls y content
-          else block
+      (Div (x, cls, y) content) -> handleDiv block x cls y content
       _otherwise -> block
   where
+    handleDiv block x cls y content
+      | "note" `elem` cls = note x cls y content
+      | "insight" `elem` cls = insight x cls y content
+      | otherwise = block
     note x cls y content =
       Div
         (x, cls, y)
         (Div ("", ["note-header"], []) [Plain [Str "ⓘ Note"]] : content)
+    insight x cls y content =
+      Div
+        (x, cls, y)
+        (Div ("", ["insight-header"], []) [Plain [Str "🧠 Insight"]] : content)
   
 pandocWithSidenotes :: Item String -> Compiler (Item String)
 pandocWithSidenotes item =
