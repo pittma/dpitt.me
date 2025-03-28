@@ -1,14 +1,14 @@
 :root {
-    --bg-color: rgb(255, 255, 255);
-    --base-color: rgb(215, 215, 215);
-    --text-color: rgb(0, 0, 0);
+    --bg-color: #192130;
+    --base-color: rgb(159, 167, 175);
+    --text-color: rgb(230, 233, 236);
     --link-color: rgb(0, 167, 182);
     --accent-color: rgb(255, 184, 102);
     --highlight-color: rgb(177, 117, 221);
 }
 
 body {
-    font-family: 'Spectral', serif;
+    font-family: 'Roboto Mono';
     color: var(--text-color);
     background-color: var(--bg-color);
     padding-left: 0;
@@ -39,6 +39,29 @@ a:link, a:visited {
     text-decoration: underline;
 }
 
+p, dl, ol, ul {
+    font-size: 16px;
+}
+
+#header {
+    text-align: center;
+}
+
+#header hr, #footer hr {
+    width: 100%;
+}
+
+#footer {
+    width: 100%;
+    text-align: center;
+    padding-bottom: 10px;
+    color: var(--base-color);
+}
+
+.sidenote, .marginnote {
+    font-size: 1em;
+}
+
 .note, .insight {
     width: 55%;
     padding: 15px;
@@ -67,26 +90,30 @@ a:link, a:visited {
 
 
 blockquote {
+    display: block;
     margin: 0;
+    width: 55%;
+    padding: 1px 3px 1px 7px;
+    border-left: var(--accent-color) 5px solid;
+    background-color: var(--base-color);
 }
 
 blockquote p {
-    padding-left: 7px;
-    padding-right: 5px;
-    border-left: var(--accent-color) 5px solid;
-    background-color: var(--base-color);
+    width: 100%;
+    font-size: 1em;
+    font-family: 'Spectral', serif;
     font-style: italic;
+    color: #000;
 }
 
 #title {
     font-size: 4.5em;
+    padding-bottom: 10px;
 }
 
 .subtitle {
-    margin: 0;
-    font-size: 1.7em;
-    font-style: italic;
-    color: var(--text-color);
+    font-size: 1.5em;
+    color: var(--base-color);
 }
 
 .poem {
@@ -97,13 +124,14 @@ blockquote p {
     padding-right: 5px;
     border-left: var(--accent-color) 5px solid;
     background-color: var(--base-color);
-    font-family: 'Spectral', serif;
-    font-size: 1.4rem;
-    font-style: italic;
 }
 
 .poem p {
     margin: 0;
+    font-size: 1.4em;
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    color: #000;
 }
 
 .multiline-quote {
@@ -192,10 +220,16 @@ table td>:last-child {
 }
 
 table tr {
-  background-color: #ffffff;
   border-top: 1px solid hsla(210,18%,87%,1);
 }
 
 table tr:nth-child(2n) {
-  background-color: #f6f8fa;
+    background-color: #191b30;
+}
+
+.quote-ref p {
+    margin-top: 0px;
+    margin-bottom: 1.4rem;
+    color: var(--base-color);
+    font-size: 1em;
 }
