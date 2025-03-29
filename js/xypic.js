@@ -16382,7 +16382,7 @@ MathJax.Hub.Register.StartupHook("HTML-CSS Xy-pic Require",function () {
       frame.id = "MathJax-frame-" + this.spanID + HTMLCSS.idPostfix;
       
       var svg;
-      var color = "black";
+      var color = "rgb(230, 233, 236)";
       svg = xypic.Graphics.createSVG(H, D, W, t, color, {
         viewBox:[0, -xypic.em2px(H + D), xypic.em2px(W), xypic.em2px(H + D)].join(" "),
         overflow:"visible"
@@ -16644,7 +16644,7 @@ MathJax.Hub.Register.StartupHook("SVG Xy-pic Require",function () {
       
       var bbox = { h:xypic.oneem, d:0, w:xypic.oneem, lw:0, rw:xypic.oneem };
       var H = bbox.h, D = bbox.d, W = bbox.w;
-      var color = "black";
+      var color = "rgb(230, 233, 236)";
       var xypicSVG = xypic.Graphics.createSVG(H, D, W, t, color, {
         viewBox:[0, -xypic.em2px(H + D), xypic.em2px(W), xypic.em2px(H + D)].join(" "),
         overflow:"visible"
@@ -16716,7 +16716,7 @@ MathJax.Hub.Register.StartupHook("SVG Xy-pic Require",function () {
       
       var bbox = { h:xypic.oneem, d:0, w:xypic.oneem, lw:0, rw:xypic.oneem };
       var H = bbox.h, D = bbox.d, W = bbox.w;
-      var color = "black";
+      var color = "rgb(230, 233, 236)";
       var xypicSVG = xypic.Graphics.createSVG(H, D, W, t, color, {
         viewBox:[0, -xypic.em2px(H + D), xypic.em2px(W), xypic.em2px(H + D)].join(" "),
         overflow:"visible"

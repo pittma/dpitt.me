@@ -89,7 +89,7 @@ p, dl, ol, ul {
 }
 
 
-blockquote {
+blockquote, .multiline-quote {
     display: block;
     margin: 0;
     width: 55%;
@@ -105,6 +105,14 @@ blockquote p {
     font-style: italic;
     color: #000;
 }
+
+.multiline-quote p, .multiline-quote ul, .multiline-quote ol {
+    font-size: 1.4em;
+    font-family: 'Spectral', serif;
+    font-style: italic;
+    color: #000;
+}
+
 
 #title {
     font-size: 4.5em;
@@ -134,23 +142,13 @@ blockquote p {
     color: #000;
 }
 
-.multiline-quote {
-    padding-left: 7px;
-    padding-right: 5px;
-    border-left: var(--accent-color) 5px solid;
-    background-color: var(--base-color);
-    font-style: italic;
-    margin: 0;
-    width: 55%;
-}
-
 kbd {
     padding: 0.1em 0.6em;
     border: 1px solid #ccc;
     font-size: 13px;
     font-family: Arial,Helvetica,sans-serif;
     background-color: #f7f7f7;
-    color: #333
+    color: #333;
     -moz-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
     -webkit-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
     box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
