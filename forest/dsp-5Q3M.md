@@ -3,7 +3,7 @@ title: RSA mathematics deep-dive talk
 subtitle: RSA for the Impatient
 tagged: true
 tags: talk, cryptography, math
-published: 03-09-2024
+published: 2024-03-09
 related: dsp-9F0P
 ---
 

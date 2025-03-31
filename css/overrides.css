@@ -66,28 +66,13 @@ p, dl, ol, ul {
     width: 55%;
     padding: 15px;
     border-radius: 10px;
+    background-color: var(--text-color);
+    color: var(--bg-color);
 }
 
 .note-header, .insight-header {
     font-size: 1.5em;
 }
-
-.note {
-    background-color: rgb(235, 229, 240);
-}
-
-.note-header {
-    color: var(--highlight-color);
-}
-
-.insight {
-    background-color: rgb(233, 241, 252);
-}
-
-.insight-header {
-    color: rgb(10, 109, 221);
-}
-
 
 blockquote, .multiline-quote {
     display: block;
@@ -95,22 +80,22 @@ blockquote, .multiline-quote {
     width: 55%;
     padding: 1px 3px 1px 7px;
     border-left: var(--accent-color) 5px solid;
-    background-color: var(--base-color);
+    background-color: var(--text-color);
 }
 
 blockquote p {
     width: 100%;
-    font-size: 1em;
+    font-size: 0.9em;
     font-family: 'Spectral', serif;
     font-style: italic;
-    color: #000;
+    color: var(--bg-color);
 }
 
 .multiline-quote p, .multiline-quote ul, .multiline-quote ol {
-    font-size: 1.4em;
+    font-size: 1.3em;
     font-family: 'Spectral', serif;
     font-style: italic;
-    color: #000;
+    color: var(--bg-color);
 }
 
 
@@ -176,6 +161,10 @@ kbd {
     font-size: 1.3em;
     font-style: italic;
     font-weight: bold;
+}
+
+.transclude-hr {
+    border-top: 1px dotted var(--text-color);
 }
 
 pre > code {

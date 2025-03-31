@@ -132,7 +132,9 @@ because there are 4 execution pipelines per physical core:
 > Characterization assumes that for each CPU core, on each clock
 > cycle, there are four pipeline slots available.
 
+:::{.quote-ref}
 [Intel TMA](https://www.intel.com/content/www/us/en/docs/vtune-profiler/cookbook/2023-0/top-down-microarchitecture-analysis-method.html)
+:::
 
 This works via the prefetcher, which can determine data dependencies.
 

@@ -1,33 +1,25 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
-
-<channel>
-  <title>dpitt.me</title>
-  <link>https://dpitt.me</link>
-  <description>dan pittman's home page</description>
-
+<feed xmlns="http://www.w3.org/2005/Atom" xml:lang="en-us">
+  <title type="html">dpitt.me</title>
+  <link href="https://dpitt.me" rel="alternate" type="text/html" title="html"/>
+  <link href="https://dpitt.me/feed.xml" rel="self" type="application/atom+xml" title="atom"/>
+  <updated>$generated$</updated>
+  <id>https://dpitt.me</id>
   $for(items)$
-  $if(description)$
-  <item>
-    <title>$title$</title>
-    <link>$url$</link>
-    <guid>$url$</guid>
-    <pubDate>$pubDate$</pubDate>
+  <entry>
+    <title type="html">$title$</title>
+    <link href="https://dpitt.me$url$" rel="alternate" type="text/html"/>
+    <published>$pubDate$</published>
+    <updated>$generated$</updated>
 
-    <description>
-      $body$
-    </description>
-    <content:encoded>
-      $body$
-    </content:encoded>
-    
-    $for(tags)$
-    <category>$tag$</category>
+    <content type="html">
+      <![CDATA[ $body$ ]]>
+    </content>
+
+    $if(tagged)$
+    $for(tags-list)$
+    <category scheme="https://dpitt.me/tags/$tag$/index.html" term="$tag$" label="$tag$"/>
     $endfor$
-  </item>
-  $endif$
+    $endif$
+  </entry>
   $endfor$
-
-</channel>
-
-</rss>
+</feed>

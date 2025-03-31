@@ -18,14 +18,12 @@ import Options.Applicative
   , subparser
   )
 import System.Directory (doesFileExist)
-import System.Process (callCommand)
 import System.Random ( randomRIO )
 
 import Hakyll
   ( Configuration
   , Options(..)
   , defaultConfiguration
-  , destinationDirectory
   , hakyllWithExitCodeAndArgs
   )
 import Hakyll.Core.Runtime ( RunMode(RunModeNormal) )
@@ -85,23 +83,14 @@ runHakyll conf opts = void $ do
 
 main :: IO ()
 main = do
-  let config = defaultConfiguration {destinationDirectory = "/tmp/dpitt-site"}
   cmd <- execParser (info (mainParser <**> helper) fullDesc)
   case cmd of
     New -> printNewPath
     Rebuild -> do
-      runHakyll config (Options False H.Rebuild)
-      callCommand "rm -rf _cache"
-      callCommand "cp -r /tmp/dpitt-site/* _site/ || true"
-      callCommand "rm -rf /tmp/dpitt-site/*"
+      runHakyll defaultConfiguration (Options False H.Rebuild)
     Build -> do
-      runHakyll config (Options False (H.Build RunModeNormal))
-      callCommand "cp -r /tmp/dpitt-site/* _site/ || true"
-      callCommand "rm -rf /tmp/dpitt-site/*"
+      runHakyll defaultConfiguration (Options False (H.Build RunModeNormal))
     Serve -> do
-      runHakyll config (Options False (H.Build RunModeNormal))
-      callCommand "cp -r /tmp/dpitt-site/* _site/ || true"
-      callCommand "rm -rf /tmp/dpitt-site/*"
       runHakyll
         defaultConfiguration
         (Options False (H.Watch "localhost" 8000 False))

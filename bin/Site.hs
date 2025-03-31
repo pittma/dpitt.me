@@ -117,7 +117,8 @@ noteCompiler c tags = do
       (basenameContext <> transcludeContext <> baseCtx c)
       body
   p <- pandocWithSidenotes content
-  let ident = itemIdentifier p
+  p' <- saveSnapshot "notes" p
+  let ident = itemIdentifier p'
   imd <- getMetadata ident
   let links = maybe [] words (lookupString "related" imd)
   items <- mapM f links
@@ -161,7 +162,7 @@ transcludeContext =
       let title = yankTitle content
           content' = dropFM (drop 3 content)
           content'' = T.replace "$$" "$" (T.pack content')
-       in "<hr>\n<span class=\"transclusion-title\">"
+       in "<hr class='transclude-hr'/>\n<span class=\"transclusion-title\">"
             ++ title
             ++ "</span> <span class=\"transclusion-link\">[["
             ++ id'
@@ -170,7 +171,7 @@ transcludeContext =
             ++ ".html"
             ++ ")]</span>"
             ++ T.unpack content''
-            ++ "\n<hr>"
+            ++ "\n<hr class='transclude-hr' />"
     dropFM content@(_:cs) =
       if take 3 content == "---"
         then drop 3 content
@@ -209,11 +210,28 @@ urlContext =
 
 tagsListField :: Context a
 tagsListField =
-  listFieldWith "tags" tagCtx $ \item -> do
-    let ident = itemIdentifier item
-    getTags ident >>= mapM makeItem
+  listFieldWith "tags-list" tagCtx $ \item ->
+    getTags (itemIdentifier item) >>= mapM makeItem
   where
     tagCtx = field "tag" (return . itemBody)
+
+pubDateField :: Context a
+pubDateField =
+  field "pubDate" $ \item -> do
+    (Just dateStr) <- getMetadataField (itemIdentifier item) "published"
+    pure (toRfc822 dateStr)
+
+generatedField :: Context a
+generatedField =
+  field "generated" $ \_ ->
+    compilerUnsafeIO
+      $ toRfc822 . show . localDay . zonedTimeToLocalTime <$> getZonedTime
+
+toRfc822 :: String -> String
+toRfc822 ds =
+  let (Just date) =
+        parseTimeM True defaultTimeLocale "%Y-%m-%d" ds :: Maybe UTCTime
+   in formatTime defaultTimeLocale rfc822DateFormat date
   
 site :: PittConfig -> Rules ()
 site c = do
@@ -240,8 +258,16 @@ site c = do
   match "feed.xml" $ do
     route idRoute
     compile $ do
-      notes <- loadAll "forest/*.md"
+      notes <- recentFirst =<< loadAllSnapshots "forest/*.md" "notes"
       let context =
             defaultContext
-              <> listField "items" (defaultContext <> urlContext) (pure notes)
+              <> generatedField
+              <> listField
+                   "items"
+                   (defaultContext
+                      <> generatedField
+                      <> urlContext
+                      <> tagsListField
+                      <> pubDateField)
+                   (pure notes)
       getResourceBody >>= applyAsTemplate context
