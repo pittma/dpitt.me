@@ -197,6 +197,24 @@ tagListContext tags =
     fromComma (_:cs) = fromComma cs
     fromComma [] = []
 
+url :: Identifier -> FilePath
+url ident =
+  let path = toFilePath ident
+      bn = takeBaseName path
+   in takeDirectory path </> (bn ++ ".html")
+
+urlContext :: Context String
+urlContext =
+  field "url" (return . url . itemIdentifier)
+
+tagsListField :: Context a
+tagsListField =
+  listFieldWith "tags" tagCtx $ \item -> do
+    let ident = itemIdentifier item
+    getTags ident >>= mapM makeItem
+  where
+    tagCtx = field "tag" (return . itemBody)
+  
 site :: PittConfig -> Rules ()
 site c = do
   baseRules
@@ -219,3 +237,11 @@ site c = do
   match "tags.html" $ do
     route idRoute
     compile $ getResourceBody >>= applyAsTemplate (tagListContext tags)
+  match "feed.xml" $ do
+    route idRoute
+    compile $ do
+      notes <- loadAll "forest/*.md"
+      let context =
+            defaultContext
+              <> listField "items" (defaultContext <> urlContext) (pure notes)
+      getResourceBody >>= applyAsTemplate context

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<rss xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0">
+
+<channel>
+  <title>dpitt.me</title>
+  <link>https://dpitt.me</link>
+  <description>dan pittman's home page</description>
+
+  $for(items)$
+  $if(description)$
+  <item>
+    <title>$title$</title>
+    <link>$url$</link>
+    <guid>$url$</guid>
+    <pubDate>$pubDate$</pubDate>
+
+    <description>
+      $body$
+    </description>
+    <content:encoded>
+      $body$
+    </content:encoded>
+    
+    $for(tags)$
+    <category>$tag$</category>
+    $endfor$
+  </item>
+  $endif$
+  $endfor$
+
+</channel>
+
+</rss>
