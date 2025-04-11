@@ -22,20 +22,28 @@
       <div id="header">
 	<h1 id="title">Tags</h1>
 	<hr />
-	<strong>updated:</strong> $generated$
+	<div id="meta">
+	  <strong>updated:</strong> $generated$
+	</div>
 	<hr />
       </div>
-      <ul>
-        $for(tagList)$
-        <li><a href="/tags/$tag$/index.html">$tag$</a> ($count$)</li>
-        $endfor$
-      </ul>
+      <section>
+        <ul>
+          $for(tagList)$
+          <li><a href="/tags/$tag$/index.html">$tag$</a> ($count$)</li>
+          $endfor$
+        </ul>
+      </section>
     </div>
     <div id="footer">
       <hr/>
+      <a href="/">home</a> | 
+      <a href="/archive.html">archive</a> | 
+      <a href="/feed.xml">feed</a>
+      <br>
       © dan pittman.
       <br>
-      I reserve the right to be wrong. Do with this what you will.</p>
+      I reserve the right to be wrong. Do with this what you will.
     </div>
   </body>
 </html>

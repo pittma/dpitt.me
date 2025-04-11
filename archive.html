@@ -3,13 +3,8 @@
   <head>
     <meta charset="utf-8">
 
-    $if(title)$
-    <title>dan pittman :: $title$</title>
-    $else$
-    <title>dpitt.me</title>
-    $endif$
+    <title>dan pittman :: archive</title>
     <meta name="viewport" content="width=device-width">
-
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -25,34 +20,34 @@
 
     <div id="content">
       <div id="header">
-	<h1 id="title">$title$</h1>
-
+	<h1 id="title">Archive</h1>
 	<hr />
-	
-	<div id="meta">
-	  <strong>updated:</strong> $generated$
-	</div>
-
+	<strong>updated:</strong> $generated$
 	<hr />
-
       </div>
       <section>
-	<ul>
-          $for(items)$
-          <li>$title$ [<a href="/forest/$basename$.html">$basename$</a>]</li>
-          $endfor$
-	</ul>
+      <ul>
+        $for(items)$
+        $if(subtitle)$
+        <li><strong>$title$</strong> [<a href="/forest/$basename$.html">$basename$</a>]
+	  <br />
+	  <span class="archive-subtitle">$subtitle$</span>
+	</li>
+        $else$
+        <li><strong>$title$</strong> [<a href="/forest/$basename$.html">$basename$</a>]</li>
+        $endif$
+        $endfor$
+      </ul>
       </section>
     </div>
     <div id="footer">
-      <hr />
-      <a href="/">home</a> | 
-      <a href="/archive.html">archive</a> | 
+      <hr/>
+      <a href="/">home</a> |
       <a href="/feed.xml">feed</a>
       <br>
       © dan pittman.
       <br>
-      I reserve the right to be wrong. Do with this what you will.
+      I reserve the right to be wrong. Do with this what you will.</p>
     </div>
   </body>
 </html>

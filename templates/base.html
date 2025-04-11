@@ -94,11 +94,18 @@
     </div>
     <div id="footer">
       <hr/>
+      $if(is-home)$
+      <a href="/archive.html">archive</a> | 
+      <a href="/feed.xml">feed</a>
+      $else$
+      <a href="/">home</a> | 
+      <a href="/archive.html">archive</a> | 
+      <a href="/feed.xml">feed</a>
+      $endif$
+      <br>
       © dan pittman.
       <br>
       I reserve the right to be wrong. Do with this what you will.
-      <br>
-      <a href="/feed.xml">atom feed</a>
     </div>
   </body>
 </html>

@@ -215,35 +215,37 @@ tagsListField =
   where
     tagCtx = field "tag" (return . itemBody)
 
-pubDateField :: Context a
-pubDateField =
+pubDateField :: String -> Context a
+pubDateField fmt =
   field "pubDate" $ \item -> do
     (Just dateStr) <- getMetadataField (itemIdentifier item) "published"
-    pure (toRfc822 dateStr)
+    pure (fmtTime fmt dateStr)
 
-generatedField :: Context a
-generatedField =
+generatedField :: String -> Context a
+generatedField fmt =
   field "generated" $ \_ ->
     compilerUnsafeIO
-      $ toRfc822 . show . localDay . zonedTimeToLocalTime <$> getZonedTime
+      $ fmtTime fmt . show . localDay . zonedTimeToLocalTime
+          <$> getZonedTime
 
-toRfc822 :: String -> String
-toRfc822 ds =
+fmtTime :: String -> String -> String
+fmtTime fmt ds =
   let (Just date) =
         parseTimeM True defaultTimeLocale "%Y-%m-%d" ds :: Maybe UTCTime
-   in formatTime defaultTimeLocale rfc822DateFormat date
+   in formatTime defaultTimeLocale fmt date
   
 site :: PittConfig -> Rules ()
 site c = do
   baseRules
   tags <- buildTags "forest/*" (fromCapture "tags/*/index.html")
   tagsRules tags $ \tag pat -> do
-    let title = "Posts tagged <i>" ++ tag ++ "</i>"
+    let title = "Posts tagged \"" ++ tag ++ "\""
     route idRoute
     compile $ do
-      posts <- loadAll pat
+      posts <- recentFirst =<< loadAll pat
       let context =
             constField "title" title
+              <> generatedContext
               <> listField "items" (tagsContext c tags) (return posts)
       makeItem @String "" >>= loadAndApplyTemplate "templates/tags.html" context
   match (mkIndex c) $ do
@@ -255,19 +257,33 @@ site c = do
   match "tags.html" $ do
     route idRoute
     compile $ getResourceBody >>= applyAsTemplate (tagListContext tags)
+  match "archive.html" $ do
+    route idRoute
+    compile $ do
+      notes <- recentFirst =<< loadAllSnapshots "forest/*.md" "notes"
+      let context =
+            defaultContext
+              <> generatedContext
+              <> listField
+                   "items"
+                   (defaultContext
+                      <> basenameContext
+                      <> pubDateField "%a, %_d %b %Y")
+                   (pure notes)
+      getResourceBody >>= applyAsTemplate context
   match "feed.xml" $ do
     route idRoute
     compile $ do
       notes <- recentFirst =<< loadAllSnapshots "forest/*.md" "notes"
       let context =
             defaultContext
-              <> generatedField
+              <> generatedField rfc822DateFormat
               <> listField
                    "items"
                    (defaultContext
-                      <> generatedField
+                      <> generatedField rfc822DateFormat
                       <> urlContext
                       <> tagsListField
-                      <> pubDateField)
+                      <> pubDateField rfc822DateFormat)
                    (pure notes)
       getResourceBody >>= applyAsTemplate context

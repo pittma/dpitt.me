@@ -109,6 +109,11 @@ blockquote p {
     color: var(--base-color);
 }
 
+.archive-subtitle {
+    color: var(--base-color);
+    font-style: italic;
+}
+
 .poem {
     display: block;
     white-space: pre;
