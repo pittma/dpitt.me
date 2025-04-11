@@ -51,22 +51,25 @@
 
         <hr/>
 
-        $if(published)$
-        <strong>published</strong>: $published$
-        $endif$
-        $if(generated)$
-        | <strong>generated</strong>: $generated$
-        $endif$
-        $if(tagged)$
-        | <strong>tagged</strong>:
-        $tags$
-        $endif$
-        $if(origin)$
-        | <strong>origin</strong>: $origin$
-        $endif$
-        $if(garage)$
-        | <strong>garage</strong>: <a href="/forest/$garage-note$.html">$garage$</a>
-        $endif$
+	<div id="meta">
+          $if(published)$
+          <span class="meta-pair"><strong>published</strong>: $published$</span>
+          $endif$
+          $if(generated)$
+          <span class="meta-pair"><strong>generated</strong>: $generated$</span>
+          $endif$
+          $if(tagged)$
+          <span class="meta-pair"><strong>tagged</strong>:
+          $tags$
+	  </span>
+          $endif$
+          $if(origin)$
+          <span class="meta-pair"><strong>origin</strong>: $origin$</span>
+          $endif$
+          $if(garage)$
+          <span class="meta-pair"><strong>garage</strong>: <a href="/forest/$garage-note$.html">$garage$</a></span>
+          $endif$
+	</div>
 
         <hr/>
 

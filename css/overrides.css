@@ -127,6 +127,18 @@ blockquote p {
     color: #000;
 }
 
+.meta-pair {
+    display: inline-block;
+}
+
+.meta-pair::before {
+    content: "| ";
+}
+
+.meta-pair:first-child::before {
+    content: "";
+}
+
 kbd {
     padding: 0.1em 0.6em;
     border: 1px solid #ccc;
@@ -172,12 +184,6 @@ pre > code {
     font-size: 0.95em;
 }
 
-@media (max-width: 760px) {
-    .multiline-quote {
-	width: 100%;
-    }
-}
-
 table {
   border-spacing: 0;
   border-collapse: collapse;
@@ -220,3 +226,16 @@ table tr:nth-child(2n) {
     color: var(--base-color);
     font-size: 1em;
 }
+
+@media (max-width: 760px) {
+    .multiline-quote, .insight, .note, blockquote {
+	width: 100%;
+    }
+    .meta-pair {
+	display: block;
+    }
+    .meta-pair::before {
+	content: "";
+    }
+}
+

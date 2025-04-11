@@ -1,0 +1,25 @@
+body {
+    background-color: #192130;
+    color: rgb(230, 233, 236);
+    font-family: 'Roboto Mono';
+}
+
+.col-outer {
+    width: 85%;
+    align: center;
+    display: flex;
+}
+
+.col-one {
+    flex: 1;
+}
+
+.fade h1,
+.fade h3 {
+    color: #dfdfdf;
+}
+
+blockquote p {
+    color: #192130;
+    font-family: 'Spectral', serif;
+}

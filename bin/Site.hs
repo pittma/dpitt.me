@@ -186,7 +186,7 @@ tagListContext :: Tags -> Context a
 tagListContext tags =
   let items = sortBy (comparing (Down . length . snd)) (tagsMap tags)
       items' = mapM (makeItem . f) items
-   in listField "tagList" (tag' <> count') items'
+   in listField "tagList" (tag' <> count') items' <> generatedContext
   where
     f (tag, posts) = tag ++ "," ++ show (length posts)
     tag' = field "tag" $ \(Item _ body) -> return (toComma body)
