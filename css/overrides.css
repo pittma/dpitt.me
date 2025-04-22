@@ -101,6 +101,7 @@ blockquote p {
 
 #title {
     font-size: 4.5em;
+    font-variant: small-caps;
     padding-bottom: 10px;
 }
 
