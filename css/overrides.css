@@ -233,6 +233,11 @@ table tr:nth-child(2n) {
     font-size: 1em;
 }
 
+.para-begin {
+    font-variant: small-caps;
+    font-size: 2em;
+}
+
 @media (max-width: 760px) {
     .multiline-quote, .insight, .note, blockquote {
 	width: 100%;
