@@ -45,7 +45,7 @@ it was. It's helpful to think of their writing like poetry because
 this is its task: expressing the inutterable, leaving the ripples of a
 vibe on the surface of thought. The strictures of writing about the
 ineffable prevented them from saying in clear terms what an
-alternative would be, but nevertheless, they spent their much of
+alternative would be, but nevertheless, they spent much of their
 careers vacillating around the idea that there was one, and that its
 pursuit was the pursuit of freedom.
 
@@ -76,8 +76,8 @@ Law of Love and the Law of Violence_ he wrote[^tolst1]:
 > rituals and profession of faith, but in a clear understanding of the
 > meaning of our life.
 
-In _On Anarchy_, he elaborates on what that he believes the pursuit of
-that meaning leads to[^tolst2].
+In _On Anarchy_, he elaborates on what he believes the pursuit of that
+meaning leads to[^tolst2].
 
 [^tolst2]: [_On
     Anarchy_](https://theanarchistlibrary.org/library/leo-tolstoy-on-anarchy)
