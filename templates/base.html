@@ -12,6 +12,10 @@
 
     <link rel="me" href="https://tilde.zone/@pittma">
 
+    <link rel="apple-touch-icon" sizes="180x180" href=/images/favicons/apple-touch-icon.png>
+    <link rel="icon" type="image/png" sizes="32x32" href=/images/favicons/favicon-32x32.png>
+    <link rel="icon" type="image/png" sizes="16x16" href=/images/favicons/favicon-16x16.png>
+
     $if(title)$
     <meta property="og:title" content="$title$">
     $endif$
@@ -19,7 +23,9 @@
     <meta property="og:description" content="$subtitle$">
     $endif$
     $if(prev-img)$
-    <meta property="og:image" content="https://dpitt.me/$prev-img$">
+    <meta property="og:image" content="https://dpitt.me/images/$prev-img$">
+    $else$
+    <meta property="og:image" content="https://dpitt.me/images/me.jpg">
     $endif$
     <meta property="og:url" content="https://dpitt.me/forest/$basename$.html">
 

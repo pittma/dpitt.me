@@ -41,7 +41,10 @@ baseRules = do
   match "files/*" $ do
     route idRoute
     compile copyFileCompiler
-  match "images/*" $ do
+  match "images/favicons/favicon.ico" $ do
+    route (constRoute "favicon.ico")
+    compile copyFileCompiler
+  match "images/**" $ do
     route idRoute
     compile copyFileCompiler
   match "tufte/*" $ do
