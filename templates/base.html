@@ -12,6 +12,17 @@
 
     <link rel="me" href="https://tilde.zone/@pittma">
 
+    $if(title)$
+    <meta property="og:title" content="$title$">
+    $endif$
+    $if(subtitle)$
+    <meta property="og:description" content="$subtitle$">
+    $endif$
+    $if(prev-img)$
+    <meta property="og:image" content="https://dpitt.me/$prev-img$">
+    $endif$
+    <meta property="og:url" content="https://dpitt.me/forest/$basename$.html">
+
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>

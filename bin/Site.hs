@@ -113,9 +113,7 @@ noteCompiler :: PittConfig -> Tags -> Compiler (Item String)
 noteCompiler c tags = do
   body <- getResourceBody
   content <-
-    applyAsTemplate
-      (basenameContext <> transcludeContext <> baseCtx c)
-      body
+    applyAsTemplate (basenameContext <> transcludeContext <> baseCtx c) body
   p <- pandocWithSidenotes content
   p' <- saveSnapshot "notes" p
   let ident = itemIdentifier p'
@@ -132,6 +130,7 @@ noteCompiler c tags = do
                        (return items)
                 else mempty)
           <> baseCtx c
+          <> basenameContext
   loadAndApplyTemplate "templates/base.html" context p
   where
     f id' =

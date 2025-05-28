@@ -68,6 +68,7 @@ Law of Love and the Law of Violence_ he wrote[^tolst1]:
 [^tolst1]: [_The Law of Love and the Law of
     Violence_](https://theanarchistlibrary.org/library/leo-tolstoy-the-law-of-violence-and-the-law-of-love?v=1627426747#toc21)
 
+
 > [T]he eternal spirit that penetrates each and every one of us in unity
 > and fills us with the ambition to attain that which we ought; it is
 > the same spirit that urges the tree to grow towards the sun, the
@@ -166,7 +167,7 @@ mountains. She sees him as having a selfish and impotent vantage on
 radicalism. After seeing a copy of Ted Kaczynski‘s manifesto on his
 bookshelf, she tells him, "I hope you place more value on human life."
 While pushing against those normative forces, yes, her student did so
-while denying the resposibilty he had to his fellow man. Why turn
+while denying the responsibilty he had to his fellow man. Why turn
 yourself inside out if you're the only one to benefit from it?
 
 Radicalism is the reification of an absolute ideology. As we get
