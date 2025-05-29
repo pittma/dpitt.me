@@ -65,8 +65,7 @@ proletariat revolution has succeeded, there will no longer need to be
 a State—is not dissimilar, structurally, to Tolstoy's vision. In _The
 Law of Love and the Law of Violence_ he wrote[^tolst1]:
 
-[^tolst1]: [_The Law of Love and the Law of
-    Violence_](https://theanarchistlibrary.org/library/leo-tolstoy-the-law-of-violence-and-the-law-of-love?v=1627426747#toc21)
+[^tolst1]: [_The Law of Love and the Law of Violence_](https://theanarchistlibrary.org/library/leo-tolstoy-the-law-of-violence-and-the-law-of-love?v=1627426747#toc21)
 
 
 > [T]he eternal spirit that penetrates each and every one of us in unity
@@ -80,8 +79,7 @@ Law of Love and the Law of Violence_ he wrote[^tolst1]:
 In _On Anarchy_, he elaborates on what he believes the pursuit of that
 meaning leads to[^tolst2].
 
-[^tolst2]: [_On
-    Anarchy_](https://theanarchistlibrary.org/library/leo-tolstoy-on-anarchy)
+[^tolst2]: [_On Anarchy_](https://theanarchistlibrary.org/library/leo-tolstoy-on-anarchy)
 
 > But what should be done, I do unmistakably know. And if you ask:
 > “What will happen?”, then I reply that good will certainly happen;

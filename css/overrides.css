@@ -248,5 +248,10 @@ table tr:nth-child(2n) {
     .meta-pair::before {
 	content: "";
     }
+
+    .margin-toggle:checked + .sidenote,
+    .margin-toggle:checked + .marginnote {
+	float: none;
+    }
 }
 
