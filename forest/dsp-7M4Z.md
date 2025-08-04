@@ -70,10 +70,8 @@ case, it's key material that is written into these frames. This of
 course could leave a vector of attack open for a malicious but
 intelligent attacker.
 
-<div class="pull">
-What could be more in need of paranoia than a `libcrypto`
-implementation?
-</div>
+<p class="pull">What could be more in need of paranoia than a
+`libcrypto` implementation?</p>
 
 When I traded emails with the original author of this XTS code—recall
 that I'm a porter not a knower—his response was that “a very paranoid

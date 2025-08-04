@@ -5,10 +5,13 @@
     --link-color: rgb(0, 167, 182);
     --accent-color: rgb(255, 184, 102);
     --highlight-color: rgb(177, 117, 221);
+    --title-font: "Roboto Mono";
+    --header-font: "Trebuchet MS";
+    --body-font: "Helvetica";
 }
 
 body {
-    font-family: 'Roboto Mono';
+    font-family: var(--body-font);
     color: var(--text-color);
     background-color: var(--bg-color);
     padding-left: 0;
@@ -16,7 +19,7 @@ body {
 }
 
 h1, h2, h3, h4, h5 {
-    color: var(--text-color);
+    font-family: var(--header-font);
 }
 
 .list-st {
@@ -40,10 +43,11 @@ a:link, a:visited {
 }
 
 p, dl, ol, ul {
-    font-size: 16px;
+    font-size: 1.2rem;
 }
 
 #header {
+    font-family: var(--title-font);
     text-align: center;
 }
 
@@ -66,8 +70,14 @@ p, dl, ol, ul {
     width: 55%;
     padding: 15px;
     border-radius: 10px;
-    background-color: var(--text-color);
-    color: var(--bg-color);
+}
+
+.insight {
+    background-color: rgba(38, 139, 210, 0.7);
+}
+
+.note {
+    background-color: rgba(42, 161, 152, 0.7);
 }
 
 .note-header, .insight-header {
@@ -176,9 +186,8 @@ kbd {
 }
 
 .transclusion-title {
-    font-size: 1.3em;
-    font-style: italic;
-    font-weight: bold;
+    font-family: var(--title-font);
+    font-size: 1.5em;
 }
 
 .transclude-hr {
