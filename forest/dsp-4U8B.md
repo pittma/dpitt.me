@@ -5,6 +5,7 @@ tagged: true
 tags: god, self, philosophy
 garage: closed
 published: 2025-05-16
+prev-img: anarch.png
 ---
 
 <span class="para-begin"> In 2009</span>, Mark Fisher published
@@ -59,6 +60,8 @@ and resulted in his excommunication. In Tolstoy's mind, the very
 ontology of the State **is** violence, while at the same time, the
 prevailing message of Christ is in dialectical opposition to that: a
 message of anti-violence, of love.
+
+<img src="/images/anarch.png" width="55%">
 
 What we would call today Trotskyist—the belief that when the
 proletariat revolution has succeeded, there will no longer need to be
@@ -153,6 +156,8 @@ for his aberrations. He knew what would happen, and tought that
 message of love and community anyway. It is through Tolstoy that I
 begin to see that Jesus' message is the missing alternative. A quiet
 revolution.
+
+---
 
 Mia Hansen-Løve's wonderful film _Things to Come_ is about this quiet
 radicalism that I'm circling here. The film follows a middle-aged high
