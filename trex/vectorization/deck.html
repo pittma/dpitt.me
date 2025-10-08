@@ -11,7 +11,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
 
     <!-- CSS -->
-    <link rel="stylesheet" href="/css/solarized.css">
+    <link rel="stylesheet" href="css/solarized.css">
     <link rel="stylesheet" href="css/trex.css">
 
     <link rel="stylesheet" href="css/overrides.css">
@@ -49,8 +49,7 @@ Using AES-XTS as a lens into vectorization techniques.
 <h1 id="cryptography-vectorization">Cryptography 🤝 Vectorization</h1>
 <p>
 </p>
-Using AES-XTS as a lens into <del>vectorization</del> parallelization
-techniques.
+Using AES-XTS as a lens into <del>vectorization</del> parallelization techniques.
 </center>
       </section>
       
@@ -116,7 +115,7 @@ transformations on the 16-byte <code>state</code> block for <span class="math in
       <section>
 	<h1 id="aes">AES</h1>
 <p>What is meant by “round”?</p>
-<p>Intel AES-NI implements a single round with <code>vaes[enc|dec]</code>:</p>
+<p>Intel VAES-NI implements a single round with <code>vaes[enc|dec]</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vpxor	(<span class="dt">$key2</span>), <span class="dt">$state</span>, <span class="dt">$state</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>vaesenc	<span class="bn">0x10</span>(<span class="dt">$key2</span>), <span class="dt">$state</span>, <span class="dt">$state</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>vaesenc	<span class="bn">0x20</span>(<span class="dt">$key2</span>), <span class="dt">$state</span>, <span class="dt">$state</span></span>
@@ -304,6 +303,18 @@ to do a computation on the elements of that vector in parallel.</p>
 <center>
 <span class="math display">\[
 \begin{bmatrix}
+  1 \\
+  2 \\
+  3 \\
+  4
+\end{bmatrix} + 
+\begin{bmatrix}
+  5 \\
+  6 \\
+  7 \\
+  8
+\end{bmatrix} =
+\begin{bmatrix}
   6  \\
   8  \\
   10 \\
@@ -443,14 +454,25 @@ T&#39;&#39; = \begin{cases}
       
       <section>
 	<h1 id="bonus-optimizations">Bonus Optimizations</h1>
-<h3 id="why-stop-at-16">Why stop at 16?</h3>
-<blockquote>
-<p>The Front-end of the pipeline on recent Intel microarchitectures
-can allocate four µOps per cycle, while the Back-end can retire
-four µOps per cycle.</p>
-</blockquote>
-<p>(<a href="https://www.intel.com/content/www/us/en/docs/vtune-profiler/cookbook/2023-0/top-down-microarchitecture-analysis-method.html">VTune TMA
-docs</a>)</p>
+<h2 id="why-four">Why four?</h2>
+<p><span class="math display">\[
+\text{Parallelism} = \text{Cycle Latency} \times \text{IPC}
+\]</span></p>
+<center>
+<img src="/images/ipc.png" width=85%>
+</center>
+<p><span class="math display">\[
+8 = 4 \times 2
+\]</span></p>
+      </section>
+      
+      <section>
+	<h1 id="bonus-optimizations">Bonus Optimizations</h1>
+<h2 id="why-four">Why four?</h2>
+<br>
+<center>
+<img src="/images/pipelines.png" width=100%>
+</center>
       </section>
       
       <section>
