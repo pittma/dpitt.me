@@ -1,5 +1,6 @@
-:fullscreen, ::backdrop {
-    background-color: rgba(255,255,255,0);
+:fullscreen,
+::backdrop {
+    background-color: rgba(255, 255, 255, 0);
 }
 
 :root {
@@ -11,25 +12,25 @@
 }
 
 body {
-    font-family: 'Spectral', serif;
+    font-family: "Spectral", serif;
     font-size: 2.5em;
     color: var(--text-color);
     background-color: var(--bg-color);
     margin: auto;
 }
 
-#slides section {
+#slides .slide section {
     display: none;
 }
 
-#slides section.visible {
-  margin: auto;
-  padding-top: 40px;
-  width: 60%;
-  height: 100%;
-  display: block;
-  justify-content: center;
-  align-items: center;
+#slides .slide section.visible {
+    margin: auto;
+    padding-top: 40px;
+    width: 60%;
+    height: 100%;
+    display: block;
+    justify-content: center;
+    align-items: center;
 }
 
 #footer {
@@ -41,7 +42,8 @@ body {
     text-align: center;
 }
 
-a:link, a:visited {
+a:link,
+a:visited {
     color: var(--link-color);
     background: none;
     text-shadow: none;
@@ -52,7 +54,9 @@ ul {
     margin: 0;
 }
 
-h1, h2, h3 {
+h1,
+h2,
+h3 {
     margin: 0;
 }
 
@@ -104,7 +108,7 @@ blockquote p {
     padding-right: 5px;
     border-left: var(--accent-color) 5px solid;
     background-color: var(--base-color);
-    font-family: 'Spectral', serif;
+    font-family: "Spectral", serif;
     font-size: 1.4rem;
     font-style: italic;
 }
@@ -123,12 +127,18 @@ kbd {
     padding: 0.1em 0.6em;
     border: 1px solid #ccc;
     font-size: 13px;
-    font-family: Arial,Helvetica,sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     background-color: #f7f7f7;
-    color: #333
-    -moz-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
-    -webkit-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
-    box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+    color: #333;
+    -moz-box-shadow:
+        0 1px 0px rgba(0, 0, 0, 0.2),
+        0 0 0 2px #ffffff inset;
+    -webkit-box-shadow:
+        0 1px 0px rgba(0, 0, 0, 0.2),
+        0 0 0 2px #ffffff inset;
+    box-shadow:
+        0 1px 0px rgba(0, 0, 0, 0.2),
+        0 0 0 2px #ffffff inset;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
@@ -149,8 +159,29 @@ kbd {
     width: 55%;
 }
 
-.transclusion-title {
-    font-size: 1.3em;
-    font-style: italic;
-    font-weight: bold;
+@media print {
+    @page {
+        size: landscape;
+        margin: 0;
+    }
+
+    body {
+        font-size: 1em;
+    }
+
+    #slides .slide section {
+        padding-top: 40px;
+        margin: auto;
+        width: 90%;
+        height: 100%;
+        display: block;
+        justify-content: center;
+        align-items: center;
+        page-break-after: always;
+        page-break-inside: avoid;
+    }
+
+    .footer {
+        display: none;
+    }
 }

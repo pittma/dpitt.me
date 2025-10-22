@@ -1,25 +1,13 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap");
+
 body {
     background-color: #192130;
     color: rgb(230, 233, 236);
-    font-family: 'Roboto Mono';
+    font-family: "Roboto Mono";
 }
 
-.col-outer {
-    width: 85%;
-    align: center;
-    display: flex;
-}
-
-.col-one {
-    flex: 1;
-}
-
-.fade h1,
-.fade h3 {
-    color: #dfdfdf;
-}
-
-blockquote p {
-    color: #192130;
-    font-family: 'Spectral', serif;
+@media print {
+    body {
+        font-size: 1.3em;
+    }
 }

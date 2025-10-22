@@ -1,71 +1,74 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Cryptography and Vectorization</title>
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <title>Cryptography and Vectorization</title>
+        
 
-    <!-- Fonts -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Roboto+Mono:ital,wght@0,100..700;1,100..700&family=Spectral:ital,wght@0,200;0,300;0,400;0,500;0,600;0,700;0,800;1,200;1,300;1,400;1,500;1,600;1,700;1,800&display=swap" rel="stylesheet">
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet"
+        />
 
-    <!-- CSS -->
-    <link rel="stylesheet" href="css/solarized.css">
-    <link rel="stylesheet" href="css/trex.css">
+        <!-- CSS -->
+        <link rel="stylesheet" href="css/solarized.css" />
+        <link rel="stylesheet" href="css/trex.css" />
+        <link rel="stylesheet" href="css/overrides.css" />
 
-    <link rel="stylesheet" href="css/overrides.css">
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX","output/HTML-CSS"],
+            "HTML-CSS": {
+            styles: {".MathJax_Preview": {visibility: "hidden"}}
+            },
+            tex2jax: {inlineMath: [["\[","\]"],["\\\(","\\\)"]]},
+            TeX: {extensions: ["AMSmath.js","AMSsymbols.js"]}
+            });
+        </script>
 
-    <script type="text/x-mathjax-config">
-      MathJax.Hub.Config({
-      extensions: ["tex2jax.js"],
-      jax: ["input/TeX","output/HTML-CSS"],
-      "HTML-CSS": {
-      styles: {".MathJax_Preview": {visibility: "hidden"}}
-      },
-      tex2jax: {inlineMath: [["\[","\]"],["\\\(","\\\)"]]},
-      TeX: {extensions: ["AMSmath.js","AMSsymbols.js"]}
-      });
-    </script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
+    </head>
 
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
-  
-  </head>
-
-  <body>
-    <div id="slides">
-      
-      <section>
-	<center>
+    <body>
+        <div id="slides">
+            
+            <div class="slide">
+                <section><center>
 <h1 id="cryptography-vectorization">Cryptography 🤝 Vectorization</h1>
 <p>
 </p>
 Using AES-XTS as a lens into vectorization techniques.
-</center>
-      </section>
-      
-      <section>
-	<center>
+</center></section>
+            </div>
+            
+            <div class="slide">
+                <section><center>
 <h1 id="cryptography-vectorization">Cryptography 🤝 Vectorization</h1>
 <p>
 </p>
 Using AES-XTS as a lens into <del>vectorization</del> parallelization techniques.
-</center>
-      </section>
-      
-      <section>
-	<h1 id="agenda">Agenda</h1>
+</center></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="agenda">Agenda</h1>
 <ul>
 <li>What is AES and how does it work?</li>
 <li>What is XTS and how does it work?</li>
 <li>Vectorization 101</li>
 <li>Vectorization in the real world</li>
 <li>Bonus optimizations</li>
-</ul>
-      </section>
-      
-      <section>
-	<h1 id="aes">AES</h1>
+</ul></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="aes">AES</h1>
 <p>AES is the <strong>Advanced Encryption Standard</strong>, defined in <a href="https://nvlpubs.nist.gov/nistpubs/fips/nist.fips.197.pdf">FIPS
 197</a>
 published in 2001.</p>
@@ -73,11 +76,11 @@ published in 2001.</p>
 <li>It is a symmetric key block cipher algorithm that works on 16-byte
 blocks.</li>
 <li>It’s the underlying encryption used in technologies like SSL/TLS.</li>
-</ul>
-      </section>
-      
-      <section>
-	<h1 id="aes">AES</h1>
+</ul></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="aes">AES</h1>
 <p>AES comes in different flavors whose distinction is the <em>size of the
 key</em>: 128, 192, or 256 bits.</p>
 <p>Before [[en|de]]cryption, keys are expanded into “round keys”, leaving
@@ -87,11 +90,11 @@ rounds</strong>:</p>
 <li>128 bits has <strong>10 rounds</strong></li>
 <li>192 bits has <strong>12 rounds</strong></li>
 <li>256 bits has <strong>14 rounds</strong></li>
-</ul>
-      </section>
-      
-      <section>
-	<h1 id="aes">AES</h1>
+</ul></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="aes">AES</h1>
 <p>What is meant by “round”?</p>
 <p>Each round has 4 transformations: <code>SubBytes</code>, <code>ShiftRows</code>,
 <code>MixColumns</code>, and <code>AddRoundKey</code>. The algorithm runs each of these
@@ -109,11 +112,11 @@ transformations on the 16-byte <code>state</code> block for <span class="math in
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>  <span class="kw">where</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a><span class="ot">    go ::</span> [<span class="dt">Word32</span>] <span class="ot">-&gt;</span> [<span class="dt">Word32</span>] <span class="ot">-&gt;</span> <span class="dt">Int</span> <span class="ot">-&gt;</span> [<span class="dt">Word32</span>]</span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>    go state ek <span class="dv">14</span> <span class="ot">=</span> matrify <span class="op">$</span> roundLast ek state</span>
-<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    go state ek i <span class="ot">=</span> go (<span class="fu">round</span> (<span class="fu">take</span> <span class="dv">4</span> ek) state) (<span class="fu">drop</span> <span class="dv">4</span> ek) (i <span class="op">+</span> <span class="dv">1</span>)</span></code></pre></div>
-      </section>
-      
-      <section>
-	<h1 id="aes">AES</h1>
+<span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>    go state ek i <span class="ot">=</span> go (<span class="fu">round</span> (<span class="fu">take</span> <span class="dv">4</span> ek) state) (<span class="fu">drop</span> <span class="dv">4</span> ek) (i <span class="op">+</span> <span class="dv">1</span>)</span></code></pre></div></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="aes">AES</h1>
 <p>What is meant by “round”?</p>
 <p>Intel VAES-NI implements a single round with <code>vaes[enc|dec]</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vpxor	(<span class="dt">$key2</span>), <span class="dt">$state</span>, <span class="dt">$state</span></span>
@@ -130,28 +133,28 @@ transformations on the 16-byte <code>state</code> block for <span class="math in
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>vaesenc	<span class="bn">0xb0</span>(<span class="dt">$key2</span>), <span class="dt">$state</span>, <span class="dt">$state</span></span>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>vaesenc	<span class="bn">0xc0</span>(<span class="dt">$key2</span>), <span class="dt">$state</span>, <span class="dt">$state</span></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a>vaesenc	<span class="bn">0xd0</span>(<span class="dt">$key2</span>), <span class="dt">$state</span>, <span class="dt">$state</span></span>
-<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>vaesenclast	<span class="bn">0xe0</span>(<span class="dt">$key2</span>), <span class="dt">$state</span>, <span class="dt">$state</span></span></code></pre></div>
-      </section>
-      
-      <section>
-	<h1 id="xts">XTS</h1>
+<span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a>vaesenclast	<span class="bn">0xe0</span>(<span class="dt">$key2</span>), <span class="dt">$state</span>, <span class="dt">$state</span></span></code></pre></div></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="xts">XTS</h1>
 <p><strong>XOR-Encrypt-XOR with Cipher Stealing</strong> (XTS) is defined in <a href="https://standards.ieee.org/ieee/1619/11552/">IEEE
 1619</a>, and is a
 <em>confidentiality only</em> AES mode of operation.</p>
-<p>It is the standard encryption used for <strong>data at rest</strong>.</p>
-      </section>
-      
-      <section>
-	<h1 id="xts">XTS</h1>
+<p>It is the standard encryption used for <strong>data at rest</strong>.</p></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="xts">XTS</h1>
 <p>XTS sits on top of AES to chain together many 16-byte blocks. In its
 simplest form, it is literally <code>XOR</code>, <code>AESEncrypt</code>, <code>XOR</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode haskell"><code class="sourceCode haskell"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>x <span class="ot">=</span> <span class="fu">zipWith</span> xor twk (<span class="fu">take</span> <span class="dv">4</span> pt)</span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>e <span class="ot">=</span> AE.encrypt_ x key</span>
-<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x&#39; <span class="ot">=</span> <span class="fu">zipWith</span> xor twk e</span></code></pre></div>
-      </section>
-      
-      <section>
-	<h1 id="xts">XTS</h1>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>x&#39; <span class="ot">=</span> <span class="fu">zipWith</span> xor twk e</span></code></pre></div></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="xts">XTS</h1>
 <p>XTS sits on top of AES to chain together many 16-byte blocks. In its
 simplest form, it is literally <code>XOR</code>, <code>AESEncrypt</code>, <code>XOR</code>:</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vpxor	<span class="dt">$tw</span>, <span class="dt">$state</span>, <span class="dt">$state</span></span>
@@ -172,11 +175,11 @@ simplest form, it is literally <code>XOR</code>, <code>AESEncrypt</code>, <code>
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>vaesenc	<span class="bn">0xd0</span>(<span class="dt">$key2</span>), <span class="dt">$state</span>, <span class="dt">$state</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>vaesenclast	<span class="bn">0xe0</span>(<span class="dt">$key2</span>), <span class="dt">$state</span>, <span class="dt">$state</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>vpxor	<span class="dt">$tw</span>, <span class="dt">$state</span>, <span class="dt">$state</span></span></code></pre></div>
-      </section>
-      
-      <section>
-	<h1 id="xts">XTS</h1>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>vpxor	<span class="dt">$tw</span>, <span class="dt">$state</span>, <span class="dt">$state</span></span></code></pre></div></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="xts">XTS</h1>
 <p>XTS’s initialization vector (IV) is also called a <strong>tweak</strong>. Between
 each block’s encryption or decryption, it gets updated.</p>
 <p><span class="math display">\[
@@ -184,27 +187,27 @@ T&#39; = \begin{cases}
   (T \ll 1) \oplus \texttt{0x87} &amp; T \gg 127 = 1 \\
   T \ll 1 &amp; \text{otherwise}
 \end{cases}
-\]</span></p>
-      </section>
-      
-      <section>
-	<h1 id="xts">XTS</h1>
+\]</span></p></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="xts">XTS</h1>
 <p>When the input length is not a multiple of 16, <strong>cipher stealing</strong> is used.</p>
 <center>
 <img src="images/cset.png" width="85%">
-</center>
-      </section>
-      
-      <section>
-	<h1 id="xts">XTS</h1>
+</center></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="xts">XTS</h1>
 <p>When the input length is not a multiple of 16, <strong>cipher stealing</strong> is used.</p>
 <center>
 <img src="images/csdt.png" width="85%">
-</center>
-      </section>
-      
-      <section>
-	<h1 id="recap">Recap</h1>
+</center></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="recap">Recap</h1>
 <ul>
 <li>AES is a baseline encryption tool, which encrypts (or decrypts)
 16-byte blocks at a time.</li>
@@ -212,21 +215,21 @@ T&#39; = \begin{cases}
 cipher for many blocks.</li>
 <li>XTS encrypts but does not authenticate and is the standard algorithm
 used for disk encryption.</li>
-</ul>
-      </section>
-      
-      <section>
-	<h1 id="algorithmic-characteristics">Algorithmic Characteristics</h1>
+</ul></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="algorithmic-characteristics">Algorithmic Characteristics</h1>
 <ul>
 <li>AES blocks themselves <strong>do not</strong> depend on one another in any way,
 they are isolated pieces of state.</li>
 <li>XTS blocks do not depend on the preceding or subsequent blocks of
 the input.</li>
-</ul>
-      </section>
-      
-      <section>
-	<h1 id="vectorization-101">Vectorization 101</h1>
+</ul></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="vectorization-101">Vectorization 101</h1>
 <p><strong>Vectorization</strong> is the idea of creating a “vector” of data from a
 set of scalars, and then using Same Instruction Multiple Data (SIMD)
 to do a computation on the elements of that vector in parallel.</p>
@@ -245,33 +248,33 @@ to do a computation on the elements of that vector in parallel.</p>
 7
 \end{bmatrix}
 \]</span>
-</center>
-      </section>
-      
-      <section>
-	<h1 id="vectorization-101">Vectorization 101</h1>
+</center></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="vectorization-101">Vectorization 101</h1>
 <p>On x86_64, the <code>%[xyz]mm</code> registers are vector registers.</p>
 <ul>
 <li><code>%xmm</code> registers can hold <strong>128 bits</strong>.</li>
 <li><code>%ymm</code> registers can hold <strong>256 bits</strong>.</li>
 <li><code>%zmm</code> registers can hold <strong>512 bits</strong>.</li>
-</ul>
-      </section>
-      
-      <section>
-	<h1 id="vectorization-101">Vectorization 101</h1>
+</ul></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="vectorization-101">Vectorization 101</h1>
 <p>Vectorized instructions are composed of a big pile of mnemonics.</p>
 <div style="margin: auto; width: 75%">
 <p><img src="images/vi.png" width="100%"></p>
-</div>
-      </section>
-      
-      <section>
-	<h1 id="vectorization-101">Vectorization 101</h1>
+</div></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="vectorization-101">Vectorization 101</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vpaddq <span class="dt">%ymm0</span>,<span class="dt">%ymm1</span>,<span class="dt">%ymm1</span></span></code></pre></div>
 <p>Where <code>%ymm0</code> and <code>%ymm1</code> contain <span class="math inline">\(\mathbf{v}\)</span> and <span class="math inline">\(\mathbf{w}\)</span> respectively:</p>
-<div class="col-outer">
-<div class="col-one">
+<div class="split">
+<div class="split-inner">
 <p><span class="math display">\[
 \mathbf{v} =
   \begin{bmatrix}
@@ -282,7 +285,7 @@ to do a computation on the elements of that vector in parallel.</p>
   \end{bmatrix} \\
 \]</span></p>
 </div>
-<div style="flex: 1;">
+<div class="split-inner">
 <p><span class="math display">\[
 \mathbf{w} =
   \begin{bmatrix}
@@ -293,11 +296,11 @@ to do a computation on the elements of that vector in parallel.</p>
   \end{bmatrix} \\
 \]</span></p>
 </div>
-</div>
-      </section>
-      
-      <section>
-	<h1 id="vectorization-101">Vectorization 101</h1>
+</div></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="vectorization-101">Vectorization 101</h1>
 <div class="sourceCode" id="cb1"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vpaddq <span class="dt">%ymm0</span>,<span class="dt">%ymm1</span>,<span class="dt">%ymm1</span></span></code></pre></div>
 <p><code>%ymm1</code> ends up holding:</p>
 <center>
@@ -321,17 +324,17 @@ to do a computation on the elements of that vector in parallel.</p>
   12
 \end{bmatrix} \\
 \]</span>
-</center>
-      </section>
-      
-      <section>
-	<h1 id="vectorization-101">Vectorization 101</h1>
+</center></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="vectorization-101">Vectorization 101</h1>
 <h3 id="data-independence">* Data Independence</h3>
-<h3 id="linearity">* Linearity</h3>
-      </section>
-      
-      <section>
-	<h1 id="vectorization-in-xts">Vectorization in XTS</h1>
+<h3 id="linearity">* Linearity</h3></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="vectorization-in-xts">Vectorization in XTS</h1>
 <p>AES blocks in XTS are <strong>independent</strong>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vbroadcasti32x4 (<span class="dt">$key1</span>), <span class="dt">$t0</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -348,11 +351,11 @@ to do a computation on the elements of that vector in parallel.</p>
 <span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-14"><a href="#cb1-14" aria-hidden="true" tabindex="-1"></a><span class="co"># Continued for 14 rounds...</span></span>
 <span id="cb1-15"><a href="#cb1-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>vmovdqu8 	 <span class="dt">$st1</span>,(<span class="dt">$output</span>)</span></code></pre></div>
-      </section>
-      
-      <section>
-	<h1 id="vectorization-in-xts">Vectorization in XTS</h1>
+<span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>vmovdqu8 	 <span class="dt">$st1</span>,(<span class="dt">$output</span>)</span></code></pre></div></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="vectorization-in-xts">Vectorization in XTS</h1>
 <p>AES blocks in XTS are <strong>independent</strong>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vbroadcasti32x4 (<span class="dt">$key1</span>), <span class="dt">$t0</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -373,11 +376,11 @@ to do a computation on the elements of that vector in parallel.</p>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a><span class="co"># Continued for 14 rounds...</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a></span>
 <span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>vmovdqu8 	 <span class="dt">$st1</span>,(<span class="dt">$output</span>)</span>
-<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>vmovdqu8 	 <span class="dt">$st2</span>,<span class="bn">0x40</span>(<span class="dt">$output</span>)</span></code></pre></div>
-      </section>
-      
-      <section>
-	<h1 id="vectorization-in-xts">Vectorization in XTS</h1>
+<span id="cb1-20"><a href="#cb1-20" aria-hidden="true" tabindex="-1"></a>vmovdqu8 	 <span class="dt">$st2</span>,<span class="bn">0x40</span>(<span class="dt">$output</span>)</span></code></pre></div></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="vectorization-in-xts">Vectorization in XTS</h1>
 <p>AES blocks in XTS are <strong>independent</strong>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vbroadcasti32x4 (<span class="dt">$key1</span>), <span class="dt">$t0</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a></span>
@@ -406,11 +409,11 @@ to do a computation on the elements of that vector in parallel.</p>
 <span id="cb1-25"><a href="#cb1-25" aria-hidden="true" tabindex="-1"></a>vmovdqu8 	 <span class="dt">$st1</span>,(<span class="dt">$output</span>)</span>
 <span id="cb1-26"><a href="#cb1-26" aria-hidden="true" tabindex="-1"></a>vmovdqu8 	 <span class="dt">$st2</span>,<span class="bn">0x40</span>(<span class="dt">$output</span>)</span>
 <span id="cb1-27"><a href="#cb1-27" aria-hidden="true" tabindex="-1"></a>vmovdqu8 	 <span class="dt">$st3</span>,<span class="bn">0x80</span>(<span class="dt">$output</span>)</span>
-<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>vmovdqu8 	 <span class="dt">$st4</span>,<span class="bn">0xc0</span>(<span class="dt">$output</span>)</span></code></pre></div>
-      </section>
-      
-      <section>
-	<h1 id="vectorization-in-xts">Vectorization in XTS</h1>
+<span id="cb1-28"><a href="#cb1-28" aria-hidden="true" tabindex="-1"></a>vmovdqu8 	 <span class="dt">$st4</span>,<span class="bn">0xc0</span>(<span class="dt">$output</span>)</span></code></pre></div></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="vectorization-in-xts">Vectorization in XTS</h1>
 <p>Tweak generation in XTS does have “some” <strong>linearity</strong>.</p>
 <p>If:</p>
 <p><span class="math display">\[
@@ -425,58 +428,58 @@ T&#39;&#39; = \begin{cases}
   (T \ll 2) \oplus \texttt{0x87} &amp; T \gg 126 = 1 \\
   T \ll 2 &amp; \text{otherwise}
 \end{cases}
-\]</span></p>
-      </section>
-      
-      <section>
-	<h1 id="vectorization-in-xts">Vectorization in XTS</h1>
+\]</span></p></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="vectorization-in-xts">Vectorization in XTS</h1>
 <p>Tweak generation in XTS does have “some” <strong>linearity</strong>.</p>
 <div class="sourceCode" id="cb1"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tweaks 0-3</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>vpsllvq const_dq3210(<span class="dt">%rip</span>),<span class="dt">%zmm0</span>,<span class="dt">%zmm4</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>vpsrlvq const_dq5678(<span class="dt">%rip</span>),<span class="dt">%zmm1</span>,<span class="dt">%zmm2</span></span>
 <span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>vpclmulqdq 	 \<span class="wa">$0</span><span class="dt">x0</span>,<span class="dt">$ZPOLY</span>,<span class="dt">%zmm2</span>,<span class="dt">%zmm3</span></span>
 <span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>vpxorq 	 <span class="dt">%zmm2</span>,<span class="dt">%zmm4</span>,<span class="dt">%zmm4</span>{<span class="dt">%k2</span>}</span>
-<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>vpxord 	 <span class="dt">%zmm4</span>,<span class="dt">%zmm3</span>,<span class="dt">%zmm9</span></span></code></pre></div>
-      </section>
-      
-      <section>
-	<h1 id="bonus-optimizations">Bonus Optimizations</h1>
-      </section>
-      
-      <section>
-	<h1 id="bonus-optimizations">Bonus Optimizations</h1>
+<span id="cb1-6"><a href="#cb1-6" aria-hidden="true" tabindex="-1"></a>vpxord 	 <span class="dt">%zmm4</span>,<span class="dt">%zmm3</span>,<span class="dt">%zmm9</span></span></code></pre></div></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="bonus-optimizations">Bonus Optimizations</h1></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="bonus-optimizations">Bonus Optimizations</h1>
 <h3 id="instruction-level-parallelization">Instruction-Level Parallelization</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a>vaesenc  <span class="dt">$t0</span>, <span class="dt">$st1</span>, <span class="dt">$st1</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>vaesenc  <span class="dt">$t0</span>, <span class="dt">$st2</span>, <span class="dt">$st2</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>vaesenc  <span class="dt">$t0</span>, <span class="dt">$st3</span>, <span class="dt">$st3</span></span>
-<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>vaesenc  <span class="dt">$t0</span>, <span class="dt">$st4</span>, <span class="dt">$st4</span></span></code></pre></div>
-      </section>
-      
-      <section>
-	<h1 id="bonus-optimizations">Bonus Optimizations</h1>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>vaesenc  <span class="dt">$t0</span>, <span class="dt">$st4</span>, <span class="dt">$st4</span></span></code></pre></div></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="bonus-optimizations">Bonus Optimizations</h1>
 <h2 id="why-four">Why four?</h2>
 <p><span class="math display">\[
 \text{Parallelism} = \text{Cycle Latency} \times \text{IPC}
 \]</span></p>
 <center>
-<img src="/images/ipc.png" width=85%>
+<img src="images/ipc.png" width=85%>
 </center>
 <p><span class="math display">\[
 8 = 4 \times 2
-\]</span></p>
-      </section>
-      
-      <section>
-	<h1 id="bonus-optimizations">Bonus Optimizations</h1>
+\]</span></p></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="bonus-optimizations">Bonus Optimizations</h1>
 <h2 id="why-four">Why four?</h2>
 <br>
 <center>
-<img src="/images/pipelines.png" width=100%>
-</center>
-      </section>
-      
-      <section>
-	<h1 id="bonus-optimizations">Bonus Optimizations</h1>
+<img src="images/pipelines.png" width=85%>
+</center></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="bonus-optimizations">Bonus Optimizations</h1>
 <h3 id="instruction-level-parallelization">Instruction-Level Parallelization</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># round 3</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>vbroadcasti32x4 <span class="bn">0x30</span>(<span class="dt">$key1</span>), <span class="dt">$t0</span></span>
@@ -496,11 +499,11 @@ T&#39;&#39; = \begin{cases}
 <span id="cb1-16"><a href="#cb1-16" aria-hidden="true" tabindex="-1"></a>vaesenc  <span class="dt">$t0</span>, <span class="dt">$st1</span>, <span class="dt">$st1</span></span>
 <span id="cb1-17"><a href="#cb1-17" aria-hidden="true" tabindex="-1"></a>vaesenc  <span class="dt">$t0</span>, <span class="dt">$st2</span>, <span class="dt">$st2</span></span>
 <span id="cb1-18"><a href="#cb1-18" aria-hidden="true" tabindex="-1"></a>vaesenc  <span class="dt">$t0</span>, <span class="dt">$st3</span>, <span class="dt">$st3</span></span>
-<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>vaesenc  <span class="dt">$t0</span>, <span class="dt">$st4</span>, <span class="dt">$st4</span></span></code></pre></div>
-      </section>
-      
-      <section>
-	<h1 id="bonus-optimizations">Bonus Optimizations</h1>
+<span id="cb1-19"><a href="#cb1-19" aria-hidden="true" tabindex="-1"></a>vaesenc  <span class="dt">$t0</span>, <span class="dt">$st4</span>, <span class="dt">$st4</span></span></code></pre></div></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="bonus-optimizations">Bonus Optimizations</h1>
 <h3 id="instruction-level-parallelization">Instruction-Level Parallelization</h3>
 <div class="sourceCode" id="cb1"><pre class="sourceCode perl"><code class="sourceCode perl"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># Tweaks 0-3</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>vpsllvq const_dq3210(<span class="dt">%rip</span>),<span class="dt">%zmm0</span>,<span class="dt">%zmm4</span></span>
@@ -514,11 +517,11 @@ T&#39;&#39; = \begin{cases}
 <span id="cb1-10"><a href="#cb1-10" aria-hidden="true" tabindex="-1"></a>vpsrlvq const_dq1234(<span class="dt">%rip</span>),<span class="dt">%zmm1</span>,<span class="dt">%zmm6</span></span>
 <span id="cb1-11"><a href="#cb1-11" aria-hidden="true" tabindex="-1"></a>vpclmulqdq 	 \<span class="wa">$0</span><span class="dt">x0</span>,<span class="dt">$ZPOLY</span>,<span class="dt">%zmm6</span>,<span class="dt">%zmm7</span></span>
 <span id="cb1-12"><a href="#cb1-12" aria-hidden="true" tabindex="-1"></a>vpxorq 	 <span class="dt">%zmm6</span>,<span class="dt">%zmm5</span>,<span class="dt">%zmm5</span>{<span class="dt">%k2</span>}</span>
-<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>vpxord 	 <span class="dt">%zmm5</span>,<span class="dt">%zmm7</span>,<span class="dt">%zmm10</span></span></code></pre></div>
-      </section>
-      
-      <section>
-	<h1 id="references">References</h1>
+<span id="cb1-13"><a href="#cb1-13" aria-hidden="true" tabindex="-1"></a>vpxord 	 <span class="dt">%zmm5</span>,<span class="dt">%zmm7</span>,<span class="dt">%zmm10</span></span></code></pre></div></section>
+            </div>
+            
+            <div class="slide">
+                <section><h1 id="references">References</h1>
 <ul>
 <li><a href="https://github.com/pittma/crypto-ref">crypto-ref</a>: reference
 implementations of AES and XTS. This is where the Haskell code
@@ -535,69 +538,74 @@ standard defining XTS mode.</li>
 this includes the expanded vectorized tweak generation discussed in
 this presentation, with comments added line-by-line explaining each
 step.</li>
-</ul>
-      </section>
-      
-    </div>
-    <div id="footer">
-      <p>press <kbd>f</kbd> to enter full screen</p>
-    </div>
-    <script>
-      var curIdx = 0;
-      var slideEl = null;
-      var slides = [];
-      
-      document.addEventListener('DOMContentLoaded', function() {
-        slideEl = document.getElementById("slides");
-        slideEl.addEventListener('fullscreenchange', () => {
-          if (document.fullscreenElement != null) {
-            document.getElementById("footer").style.display = "none";
-          } else {
-            document.getElementById("footer").style.display = "block";
-          }
-        });
-        slides = slideEl.querySelectorAll('section');
-        const qp = new URLSearchParams(window.location.search);
-        const slide = parseInt(qp.get("s"));
-        if (!isNaN(slide) && slide > 0 && slide < slides.length) {
-          curIdx = slide;
-        }
-        slides[curIdx].classList.add('visible');
-      });
-      
-      document.addEventListener('keydown', function(event) {
-        switch (event.keyCode) {
-        case 27:
-          if (document.fullscreenElement != null) {
-            document.exitFullscreen();
-          }
-          document.getElementById("footer").style.display = "block";
-          break;
-        case 37:
-          nav(-1);
-          break;
-        case 39:
-          nav(1);
-          break;
-        case 70:
-          if (document.fullscreenElement == null) {
-            slideEl.requestFullscreen();
-          }
-          break;
-        default:
-        }
-      });
-      
-      function nav(dir) {
-        const newIdx = curIdx + dir;
-        if (newIdx >= 0 && newIdx < slides.length) {
-          slideEl.querySelector('section.visible').classList.remove('visible');
-          slides[newIdx].classList.add('visible');
-	  const url = window.location.pathname + '?s=' + newIdx;
-	  history.pushState({slideIndex: newIdx}, '', url); 
-          curIdx = newIdx;
-        }
-      }
-    </script>
-  </body>
+</ul></section>
+            </div>
+            
+        </div>
+        <div id="footer">
+            <p>press <kbd>f</kbd> to enter full screen</p>
+        </div>
+        <script>
+            var curIdx = 0;
+            var slideEl = null;
+            var slides = [];
+
+            document.addEventListener("DOMContentLoaded", function () {
+                slideEl = document.getElementById("slides");
+                slideEl.addEventListener("fullscreenchange", () => {
+                    if (document.fullscreenElement != null) {
+                        document.getElementById("footer").style.display =
+                            "none";
+                    } else {
+                        document.getElementById("footer").style.display =
+                            "block";
+                    }
+                });
+                slides = slideEl.querySelectorAll("section");
+                const qp = new URLSearchParams(window.location.search);
+                const slide = parseInt(qp.get("s"));
+                if (!isNaN(slide) && slide > 0 && slide < slides.length) {
+                    curIdx = slide;
+                }
+                slides[curIdx].classList.add("visible");
+            });
+
+            document.addEventListener("keydown", function (event) {
+                switch (event.keyCode) {
+                    case 27:
+                        if (document.fullscreenElement != null) {
+                            document.exitFullscreen();
+                        }
+                        document.getElementById("footer").style.display =
+                            "block";
+                        break;
+                    case 37:
+                        nav(-1);
+                        break;
+                    case 39:
+                        nav(1);
+                        break;
+                    case 70:
+                        if (document.fullscreenElement == null) {
+                            slideEl.requestFullscreen();
+                        }
+                        break;
+                    default:
+                }
+            });
+
+            function nav(dir) {
+                const newIdx = curIdx + dir;
+                if (newIdx >= 0 && newIdx < slides.length) {
+                    slideEl
+                        .querySelector("section.visible")
+                        .classList.remove("visible");
+                    slides[newIdx].classList.add("visible");
+                    const url = window.location.pathname + "?s=" + newIdx;
+                    history.pushState({ slideIndex: newIdx }, "", url);
+                    curIdx = newIdx;
+                }
+            }
+        </script>
+    </body>
 </html>
