@@ -1,0 +1,34 @@
+@import url("https://fonts.googleapis.com/css2?family=Lato:ital,wght@0,100;0,300;0,400;0,700;0,900;1,100;1,300;1,400;1,700;1,900&family=Libre+Caslon+Text:ital,wght@0,400;0,700;1,400&display=swap");
+
+:root {
+    --color-cream: #f6f5f1;
+    --color-black: #353534;
+    --color-hl: rgb(149, 4, 97);
+}
+
+body {
+    font-family: "Lato", sans-serif;
+    color: var(--color-black);
+    background-color: var(--color-cream);
+}
+
+h1,
+h2,
+h3,
+h4 {
+    font-family: "Libre Caslon Text", serif;
+}
+
+.hl {
+    color: var(--color-hl);
+}
+
+@media print {
+    body {
+        font-size: 1.8em;
+    }
+    h1,
+    h2 {
+        margin-top: 30px;
+    }
+}

@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        
+        <title>Post-Quantum Cryptography for Normal People</title>
+        
+
+        <!-- Fonts -->
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+        <link
+            href="https://fonts.googleapis.com/css2?family=Spectral:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+            rel="stylesheet"
+        />
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="css/solarized.css" />
+        <link rel="stylesheet" href="css/trex.css" />
+        <link rel="stylesheet" href="css/overrides.css" />
+
+        <script type="text/x-mathjax-config">
+            MathJax.Hub.Config({
+            extensions: ["tex2jax.js"],
+            jax: ["input/TeX","output/HTML-CSS"],
+            "HTML-CSS": {
+            styles: {".MathJax_Preview": {visibility: "hidden"}}
+            },
+            tex2jax: {inlineMath: [["\[","\]"],["\\\(","\\\)"]]},
+            TeX: {extensions: ["AMSmath.js","AMSsymbols.js"]}
+            });
+        </script>
+
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.3/MathJax.js"></script>
+    </head>
+
+    <body>
+        <div id="slides">
+            
+            <div class="slide">
+                <section><center>
+<h1 id="post-quantum-cryptography-for-normal-people">Post-Quantum Cryptography for Normal People</h1>
+<span class="hl">The qubits are coming, we have to be ready.</span>
+</center></section>
+            </div>
+            
+            <div class="slide">
+                <section><h2 id="whats-wrong-with-classical-cryptography">What’s Wrong with Classical Cryptography?</h2>
+<p>RSA’s hardness is dependent on the difficulty in prime-factoring large numbers.
+Keypairs are derived from large primes <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>, which are on the order of
+<span class="math inline">\(2^{1024}\)</span> (in the least, for RSA-2048).</p>
+<h3 id="key-generation">Key Generation</h3>
+<p>Generate <span class="math inline">\(e\)</span> and <span class="math inline">\(d\)</span>, encryption and decryption keys respectively.</p>
+<p><span class="math display">\[
+n = pq \\
+\text{Choose an } e \text{ s.t.} 1 &lt; e &lt; \varphi(n) \text{ and} \gcd(e, \varphi(n)) = 1 \\
+d = e^{-1} \mod \varphi(n)
+\]</span></p></section>
+            </div>
+            
+            <div class="slide">
+                <section><h2 id="whats-wrong-with-classical-cryptography">What’s Wrong with Classical Cryptography?</h2>
+<p>RSA’s hardness is dependent on the difficulty in prime-factoring large numbers.
+Keypairs are derived from large primes <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>, which are on the order of
+<span class="math inline">\(2^{1024}\)</span> (in the least, for RSA-2048).</p>
+<p>Because:</p>
+<p><span class="math display">\[
+\varphi(n) = (p - 1)(q - 1)
+\]</span></p>
+<p>To know <span class="math inline">\(d\)</span>, we have to know <span class="math inline">\(p\)</span> and <span class="math inline">\(q\)</span>, but only <span class="math inline">\(n\)</span> is made public.</p></section>
+            </div>
+            
+            <div class="slide">
+                <section><h2 id="whats-wrong-with-classical-cryptography">What’s Wrong with Classical Cryptography?</h2>
+<p>A quantum computer can trivially find the <span class="hl"><strong>order</strong></span> <span class="math inline">\(r\)</span>
+of a randomly chosen <span class="math inline">\(1 &lt; a &lt; n\)</span>:</p>
+<p><span class="math display">\[
+a^r \equiv 1 \mod n
+\]</span></p>
+<p>We know that <span class="math inline">\(n\)</span> divides <span class="math inline">\(a^r - 1\)</span>, so <span class="math inline">\(n\)</span> also divides (via the <span class="hl"><strong>difference of squares</strong></span>):</p>
+<p><span class="math display">\[
+(a^{r/2} - 1)(a^{r/2} + 1)
+\]</span></p>
+<p>So we compute <span class="math inline">\(\gcd(a^{r/2} \pm 1, n)\)</span>. If the result is nontrivial, which it is
+very likely to be, we have a factor of <span class="math inline">\(n\)</span> and the private key can be cracked.</p></section>
+            </div>
+            
+            <div class="slide">
+                <section><h2 id="whats-wrong-with-classical-cryptography">What’s Wrong with Classical Cryptography?</h2>
+<p>Cracking an asymmetric exchange means the symmetric key that was shared between
+parties is leaked.</p></section>
+            </div>
+            
+            <div class="slide">
+                <section><h2 id="whats-wrong-with-classical-cryptography">What’s Wrong with Classical Cryptography?</h2>
+<p>Cracking an asymmetric exchange means the symmetric key that was shared between
+parties is leaked.</p>
+<p>This means that <em>all</em> encrypted traffic between those parties can be read as if
+it’s in plaintext.</p></section>
+            </div>
+            
+            <div class="slide">
+                <section><h2 id="whats-wrong-with-classical-cryptography">What’s Wrong with Classical Cryptography?</h2>
+<p>Cracking an asymmetric exchange means the symmetric key that was shared between
+parties is leaked.</p>
+<p>This means that <em>all</em> encrypted traffic between those parties can be read as if
+it’s in plaintext.</p>
+<p><span class="hl"><strong>Why that matters now:</strong></span> Harvest Now, Decrypt Later (HNDL)</p></section>
+            </div>
+            
+        </div>
+        <div id="footer">
+            <p>press <kbd>f</kbd> to enter full screen</p>
+        </div>
+        <script>
+            var curIdx = 0;
+            var slideEl = null;
+            var slides = [];
+
+            document.addEventListener("DOMContentLoaded", function () {
+                slideEl = document.getElementById("slides");
+                slideEl.addEventListener("fullscreenchange", () => {
+                    if (document.fullscreenElement != null) {
+                        document.getElementById("footer").style.display =
+                            "none";
+                    } else {
+                        document.getElementById("footer").style.display =
+                            "block";
+                    }
+                });
+                slides = slideEl.querySelectorAll("section");
+                const qp = new URLSearchParams(window.location.search);
+                const slide = parseInt(qp.get("s"));
+                if (!isNaN(slide) && slide > 0 && slide < slides.length) {
+                    curIdx = slide;
+                }
+                slides[curIdx].classList.add("visible");
+            });
+
+            document.addEventListener("keydown", function (event) {
+                switch (event.keyCode) {
+                    case 27:
+                        if (document.fullscreenElement != null) {
+                            document.exitFullscreen();
+                        }
+                        document.getElementById("footer").style.display =
+                            "block";
+                        break;
+                    case 37:
+                        nav(-1);
+                        break;
+                    case 39:
+                        nav(1);
+                        break;
+                    case 70:
+                        if (document.fullscreenElement == null) {
+                            slideEl.requestFullscreen();
+                        }
+                        break;
+                    default:
+                }
+            });
+
+            function nav(dir) {
+                const newIdx = curIdx + dir;
+                if (newIdx >= 0 && newIdx < slides.length) {
+                    slideEl
+                        .querySelector("section.visible")
+                        .classList.remove("visible");
+                    slides[newIdx].classList.add("visible");
+                    const url = window.location.pathname + "?s=" + newIdx;
+                    history.pushState({ slideIndex: newIdx }, "", url);
+                    curIdx = newIdx;
+                }
+            }
+        </script>
+    </body>
+</html>

@@ -181,11 +181,6 @@ kbd {
         page-break-inside: avoid;
     }
 
-    h1,
-    h2 {
-        margin-top: 30px;
-    }
-
     .footer {
         display: none;
     }
