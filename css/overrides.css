@@ -18,7 +18,11 @@ body {
     margin: auto;
 }
 
-h1, h2, h3, h4, h5 {
+h1,
+h2,
+h3,
+h4,
+h5 {
     font-family: var(--header-font);
 }
 
@@ -35,14 +39,18 @@ article {
     padding: 0;
 }
 
-a:link, a:visited {
+a:link,
+a:visited {
     color: var(--link-color);
     background: none;
     text-shadow: none;
     text-decoration: underline;
 }
 
-p, dl, ol, ul {
+p,
+dl,
+ol,
+ul {
     font-size: 1.2rem;
 }
 
@@ -51,7 +59,8 @@ p, dl, ol, ul {
     text-align: center;
 }
 
-#header hr, #footer hr {
+#header hr,
+#footer hr {
     width: 100%;
 }
 
@@ -62,11 +71,13 @@ p, dl, ol, ul {
     color: var(--base-color);
 }
 
-.sidenote, .marginnote {
+.sidenote,
+.marginnote {
     font-size: 1em;
 }
 
-.note, .insight {
+.note,
+.insight {
     width: 55%;
     padding: 15px;
     border-radius: 10px;
@@ -80,11 +91,13 @@ p, dl, ol, ul {
     background-color: rgba(42, 161, 152, 0.7);
 }
 
-.note-header, .insight-header {
+.note-header,
+.insight-header {
     font-size: 1.5em;
 }
 
-blockquote, .multiline-quote {
+blockquote,
+.multiline-quote {
     display: block;
     margin: 0;
     width: 55%;
@@ -96,18 +109,19 @@ blockquote, .multiline-quote {
 blockquote p {
     width: 100%;
     font-size: 0.9em;
-    font-family: 'Spectral', serif;
+    font-family: "Spectral", serif;
     font-style: italic;
     color: var(--bg-color);
 }
 
-.multiline-quote p, .multiline-quote ul, .multiline-quote ol {
+.multiline-quote p,
+.multiline-quote ul,
+.multiline-quote ol {
     font-size: 1.3em;
-    font-family: 'Spectral', serif;
+    font-family: "Spectral", serif;
     font-style: italic;
     color: var(--bg-color);
 }
-
 
 #title {
     font-size: 4.5em;
@@ -138,7 +152,7 @@ blockquote p {
 .poem p {
     margin: 0;
     font-size: 1.4em;
-    font-family: 'Spectral', serif;
+    font-family: "Spectral", serif;
     font-style: italic;
     color: #000;
 }
@@ -159,12 +173,18 @@ kbd {
     padding: 0.1em 0.6em;
     border: 1px solid #ccc;
     font-size: 13px;
-    font-family: Arial,Helvetica,sans-serif;
+    font-family: Arial, Helvetica, sans-serif;
     background-color: #f7f7f7;
     color: #333;
-    -moz-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
-    -webkit-box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
-    box-shadow: 0 1px 0px rgba(0, 0, 0, 0.2),0 0 0 2px #ffffff inset;
+    -moz-box-shadow:
+        0 1px 0px rgba(0, 0, 0, 0.2),
+        0 0 0 2px #ffffff inset;
+    -webkit-box-shadow:
+        0 1px 0px rgba(0, 0, 0, 0.2),
+        0 0 0 2px #ffffff inset;
+    box-shadow:
+        0 1px 0px rgba(0, 0, 0, 0.2),
+        0 0 0 2px #ffffff inset;
     -moz-border-radius: 3px;
     -webkit-border-radius: 3px;
     border-radius: 3px;
@@ -200,35 +220,35 @@ pre > code {
 }
 
 table {
-  border-spacing: 0;
-  border-collapse: collapse;
-  display: block;
-  width: max-content;
-  max-width: 100%;
-  overflow: auto;
+    border-spacing: 0;
+    border-collapse: collapse;
+    display: block;
+    width: max-content;
+    max-width: 100%;
+    overflow: auto;
 }
 
 td,
 th {
-  padding: 0;
+    padding: 0;
 }
 
 table th {
-  font-weight: 600;
+    font-weight: 600;
 }
 
 table th,
 table td {
-  padding: 6px 13px;
-  border: 1px solid #d0d7de;
+    padding: 6px 13px;
+    border: 1px solid #d0d7de;
 }
 
-table td>:last-child {
-  margin-bottom: 0;
+table td > :last-child {
+    margin-bottom: 0;
 }
 
 table tr {
-  border-top: 1px solid hsla(210,18%,87%,1);
+    border-top: 1px solid hsla(210, 18%, 87%, 1);
 }
 
 table tr:nth-child(2n) {
@@ -247,20 +267,27 @@ table tr:nth-child(2n) {
     font-size: 2em;
 }
 
+img.para-centered-image {
+    width: 50%;
+    margin-left: 25%;
+}
+
 @media (max-width: 760px) {
-    .multiline-quote, .insight, .note, blockquote {
-	width: 100%;
+    .multiline-quote,
+    .insight,
+    .note,
+    blockquote {
+        width: 100%;
     }
     .meta-pair {
-	display: block;
+        display: block;
     }
     .meta-pair::before {
-	content: "";
+        content: "";
     }
 
     .margin-toggle:checked + .sidenote,
     .margin-toggle:checked + .marginnote {
-	float: none;
+        float: none;
     }
 }
-

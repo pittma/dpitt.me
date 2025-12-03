@@ -63,10 +63,9 @@ message of anti-violence, of love.
 
 <img src="/images/anarch.png" width="55%">
 
-What we would call today Trotskyist—the belief that when the
-proletariat revolution has succeeded, there will no longer need to be
-a State—is not dissimilar, structurally, to Tolstoy's vision. In _The
-Law of Love and the Law of Violence_ he wrote[^tolst1]:
+What we would call today Trotskyist—the belief in permanent revolution—is not
+dissimilar, structurally, to Tolstoy's vision. In _The Law of Love and the Law
+of Violence_ he wrote[^tolst1]:
 
 [^tolst1]: [_The Law of Love and the Law of Violence_](https://theanarchistlibrary.org/library/leo-tolstoy-the-law-of-violence-and-the-law-of-love?v=1627426747#toc21)
 
@@ -201,4 +200,3 @@ us to individuate, there is revolution in community.
 ::::{.quote-ref}
 _On Anarchy_, Leo Tolstoy, 1900
 ::::
-
